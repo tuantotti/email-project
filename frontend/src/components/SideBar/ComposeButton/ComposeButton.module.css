@@ -1,0 +1,36 @@
+.compose {
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  background: none;
+  padding: 16px 10px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  width: 140px;
+  justify-content: space-evenly;
+  background-color: #C1E7FF;
+  transition: all 0.1s linear;
+}
+
+.compose:hover {
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+}
+
+.compose > span {
+  font-size: 40px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.compose > h3 {
+  font-family: 'Google Sans', Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  margin: 0px 10px;
+  color: #3c4043;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.compose > img {
+  width: 20px;
+}

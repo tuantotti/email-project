@@ -1,0 +1,67 @@
+.mailDetailContainer {
+  background-color: white;
+  padding: 10px 16px;
+  margin-top: 10px;
+  border-radius: 18px;
+  min-height: 400px;
+}
+
+.navigate {
+  display: flex;
+}
+.navigate > svg {
+  margin-right: 20px;
+}
+
+.navigate > button > img {
+  width: 20px;
+}
+
+.navigate > button {
+  background: none;
+  border: none;
+  margin-right: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+.description {
+}
+.label {
+  margin-top: 25px;
+  margin-left: 15px;
+}
+
+.mailTitle {
+  padding-left: 44px;
+  font-size: 25px;
+  color: #1f1f1f;
+  font-weight: 400;
+  margin: 30px 0;
+}
+
+.mailAddressContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.mailAvatar {
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.mailAuthor {
+  font-size: 14px;
+  color: #1f1f1f;
+  font-weight: 700;
+}
+
+.mailAddress, .mailTime, .mailAddressDestination {
+  font-size: 12px;
+  color: #5e5e5e;
+  font-weight: 400;
+}
+
+.mailAddressDestination {
+  margin: 3px 0;
+}

@@ -1,0 +1,50 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headchecker > input {
+  margin-left: 26px;
+  margin-right: 10px;
+}
+
+.headchecker > button {
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+  margin: 0px 10px;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.headchecker > button > img {
+  width: 14px;
+}
+
+.navigate {
+  display: flex;
+  margin-top: 15px;
+}
+.navigate > svg {
+  margin-right: 30px;
+}
+
+.navigate > button {
+  background: none;
+  border: none;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.headchecker {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.mailAmount {
+  color: #5e5e5e;
+  height: min-content;
+}
