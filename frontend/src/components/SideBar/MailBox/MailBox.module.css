@@ -1,0 +1,175 @@
+.form {
+  width: 600px;
+  position: fixed;
+  right: 50px;
+  bottom: 0;
+  z-index: 1;
+  background: white;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  box-shadow: 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%), 0px 5px 5px -3px rgb(0 0 0 / 20%);
+}
+
+.formArea {
+  padding: 20px;
+  padding-bottom: 5px;
+
+}
+
+.formItems {
+  width: 80%;
+  display: block;
+  padding: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.616);
+  border: none;
+
+  outline: 2px solid green;
+
+  font-weight: bolder;
+  font-size: large;
+}
+
+.formButton {
+  width: 100%;
+  display: block;
+  padding: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.616);
+  outline: 2px solid green;
+  font-weight: bolder;
+  font-size: large;
+}
+
+.formButton:hover {
+  background-color: #1bb8305d;
+  font-size: larger;
+  color: green;
+  font-weight: bolder;
+
+  ;
+}
+
+.textArea {
+  display: block;
+  width: 100%;
+  font-size: large;
+  resize: none;
+  height: 200px;
+  min-height: 2em;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.616);
+  outline: 2px solid green;
+}
+
+.mailBoxHeader {
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px 10px 16px;
+  margin: 0px;
+  background-color: #F2F6FC;
+}
+
+.newMail {
+  color: #041E49;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.content {
+  padding: 0 16px;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.input {
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.input::placeholder {
+  font-size: 14px;
+  color: #747775;
+}
+
+.mailBoxFooter {
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  background: white;
+}
+
+.sendButton,
+.attachButton {
+  background-color: #0A58D0;
+  color: white;
+  border: none;
+  border-radius: 18px;
+  width: 105px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+
+.sendButton:hover {
+  box-shadow: 0 1px 2px 0 rgb(26 115 232 / 45%), 0 1px 3px 1px rgb(26 115 232 / 30%);
+  background-color: #0a59d0f3;
+}
+
+.attachButton {
+  background-color: white;
+  color: rgb(10, 88, 208);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.attachButton:hover {
+  box-shadow: rgba(10, 88, 208, 0.16) 0px 10px 36px 0px, rgba(10, 88, 208, 0.06) 0px 0px 0px 1px;
+}
+
+.footerIcon {
+  width: 20px;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.fileAttachGroup {
+  margin-bottom: 76px;
+}
+
+.file {
+  background-color: #F5F5F5;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px;
+  margin-bottom: 8px
+}
+
+.fileName {
+  display: flex;
+  align-items: center;
+}
+
+.fileName>h3 {
+  color: #1155CC;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+.fileName>span {
+  color: #444746;
+  font-size: 14px;
+  font-weight: bold;
+}

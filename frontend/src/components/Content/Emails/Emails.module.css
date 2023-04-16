@@ -1,0 +1,120 @@
+.list {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  box-sizing: hr-box;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+.list:hover {
+  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+}
+
+.hr {
+  border-top: 1px solid #E1E7EE;
+}
+
+.svg {
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+}
+
+.svgStar {
+  fill: red;
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+.company {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.company>h3 {
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-left: 20px;
+  flex-grow: 1;
+}
+
+.company>h4 {
+  flex-grow: 3;
+}
+
+.company>p {
+  padding-right: 10px;
+}
+
+.hideIcons>button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 30px;
+  margin-right: 20px;
+}
+
+.button {
+  margin-left: 10px;
+  background: none;
+  border: none;
+
+}
+
+.button:hover {
+  background: inherit;
+}
+
+
+
+.btnLeft {
+  width: 30px;
+  height: 25px;
+
+}
+
+
+.middle {
+  display: grid;
+  grid-template-columns: 135px auto;
+
+}
+
+.middle>h3 {
+  margin-left: 40px;
+}
+
+.middle>h4 {
+  margin-left: 100px;
+}
+
+.mailLineContainer {
+  display: flex;
+  align-items: center;
+}
+
+.mailAuthor {
+  margin: 0;
+  width: 200px;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.mailTitle {
+  font-size: 14px;
+}
+
+.isRead {
+  background-color: #F2F6FC;
+}

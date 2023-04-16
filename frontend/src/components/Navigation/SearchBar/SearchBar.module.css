@@ -1,0 +1,35 @@
+.search {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #EAF1FB;
+  border: none;
+  border-radius: 8px;
+}
+
+.searchIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+}
+
+.input {
+  display: block;
+  border: none;
+  width: 100%;
+  outline: none;
+  font-size: large;
+  background: #EAF1FB;
+}
+
+.input::placeholder {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form {
+  width: 50%;
+  flex-grow: 1;
+  margin-right: 150px;
+}
+
