@@ -37,6 +37,9 @@ public class Mail {
     @Column(name = "received_date")
     private Date receivedDate;
 
-    @Column(name = "received_date")
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "is_read")
     private boolean is_read;
 }
