@@ -5,10 +5,7 @@ import com.email.project.backend.entity.Mail;
 import com.email.project.backend.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,20 @@ public class MailController {
         List<Mail> mailList = mailService.getMail(MailStatus.valueOf(status));
 
         return ResponseEntity.ok(mailList);
+    }
+
+    @DeleteMapping("/remove/{id}")
+    public void removeMail(@RequestParam int id) {
+        mailService.removeMail(id);
+    }
+
+    @DeleteMapping("/restore/{id}")
+    public void restoreMail(@RequestParam int id) {
+        mailService.restoreMail(id);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteMail(@RequestParam int id) {
+        mailService.deleteMail(id);
     }
 }

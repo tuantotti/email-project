@@ -32,4 +32,16 @@ public class MailService {
 
         return mailList;
     }
+
+    public void removeMail(int id) {
+        mailRepository.updateStatusById("inactive", id);
+    }
+
+    public void restoreMail(int id) {
+        mailRepository.updateStatusById("active", id);
+    }
+
+    public void deleteMail(int id) {
+        mailRepository.deleteById(id);
+    }
 }
