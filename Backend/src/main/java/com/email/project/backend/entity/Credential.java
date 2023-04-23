@@ -15,11 +15,10 @@ public class Credential {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
     private String email;
     private String password;
 
-    @OneToOne(mappedBy = "credentials")
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }

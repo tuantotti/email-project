@@ -36,7 +36,7 @@ public class User {
 
     private boolean active;
 
-    @OneToOne(mappedBy = "users")
+    @OneToOne(mappedBy = "user")
     private Credential credential;
 
 }
