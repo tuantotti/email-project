@@ -17,7 +17,7 @@ import java.util.Date;
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "first_name")
@@ -36,7 +36,7 @@ public class User {
 
     private boolean active;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade=CascadeType.ALL)
     private Credential credential;
 
 }

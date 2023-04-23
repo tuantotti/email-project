@@ -14,7 +14,7 @@ import java.util.Date;
 @Table(name = "mail")
 public class Mail {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String subject;
