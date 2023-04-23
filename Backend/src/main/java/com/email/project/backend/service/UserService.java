@@ -13,10 +13,11 @@ public class UserService {
     UserRepository _userRepository;
 
     public UserView getUserInfo(int id){
-        var user = _userRepository.getReferenceById(id);
-        var res = new UserView();
-        res.loadFromUser(user);
-        return res;
+        var user = _userRepository.getUserViewById(id);
+        return user;
+//        var res = new UserView();
+//        res.loadFromUser(user);
+//        return res;
     }
 
     public void update(User user){
