@@ -1,6 +1,5 @@
 package com.email.project.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,16 +10,15 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "credentials")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler", "user"})
 public class Credential {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String email;
     private String password;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 }
