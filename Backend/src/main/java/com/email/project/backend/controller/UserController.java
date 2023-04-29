@@ -1,5 +1,6 @@
 package com.email.project.backend.controller;
 
+import com.email.project.backend.dto.UserCreateDto;
 import com.email.project.backend.dto.UserView;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.service.UserService;
@@ -16,8 +17,7 @@ public class UserController {
         this._userService = userService;
     }
 
-    @GetMapping
-    @RequestMapping("{id}")
+    @GetMapping("{id}")
     public UserView getProfile(@PathVariable(name = "id") int id) {
         try {
             var user = _userService.getUserInfo(id);
@@ -28,14 +28,12 @@ public class UserController {
         }
     }
 
-    @PostMapping
-    @RequestMapping("/edit/{id}")
+    @PostMapping("/edit/{id}")
     public void editProfile(User user) {
 
     }
 
-    @PostMapping
-    @RequestMapping("/create")
+    @PostMapping("/create")
     public User createProfile(@RequestBody User user) {
         try {
             _userService.create(user);
@@ -46,8 +44,18 @@ public class UserController {
         }
     }
 
-    @PostMapping
-    @RequestMapping("/inactive/{id}")
+    @PostMapping("/signup")
+    public UserCreateDto signup(@RequestBody UserCreateDto userCreateDto) {
+        try {
+            _userService.create(userCreateDto);
+            return userCreateDto;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @PostMapping("/inactive/{id}")
     public boolean inactiveProfile(@PathVariable(name = "id") int id) {
         try {
             _userService.inActive(id);
@@ -58,8 +66,7 @@ public class UserController {
         }
     }
 
-    @PostMapping
-    @RequestMapping("/active/{id}")
+    @PostMapping("/active/{id}")
     public boolean activeProfile(@PathVariable(name = "id") int id) {
         try {
             _userService.active(id);
