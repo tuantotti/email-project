@@ -1,10 +1,12 @@
 package com.email.project.backend.controller;
 
+import com.email.project.backend.dto.CredentialDto;
 import com.email.project.backend.dto.UserCreateDto;
 import com.email.project.backend.dto.UserView;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,17 +40,6 @@ public class UserController {
         try {
             _userService.create(user);
             return user;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @PostMapping("/signup")
-    public UserCreateDto signup(@RequestBody UserCreateDto userCreateDto) {
-        try {
-            _userService.create(userCreateDto);
-            return userCreateDto;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

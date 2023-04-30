@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mail")
+@RequestMapping("/api/mail")
 public class MailController {
     private MailService mailService;
 

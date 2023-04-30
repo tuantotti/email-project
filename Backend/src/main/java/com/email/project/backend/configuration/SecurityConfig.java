@@ -39,18 +39,23 @@ public class SecurityConfig {
         http
                 .csrf()
                 .disable()
+
                 .authorizeHttpRequests()
-                .requestMatchers("/v1/api/user/login", "/v1/api/user/signup", "/v1/api/test")
+                .requestMatchers("/api/login", "/api/signup")
                 .permitAll()
-                .requestMatchers("/v1/api/mail/**")
+
+                .requestMatchers("/v1/api/mail/**", "/v1/api/user/**")
                 .hasAnyRole(ROLE_USER)
                 .anyRequest()
                 .authenticated()
                 .and()
+
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authenticationProvider(getAuthenticationProvider())
+
+                .authenticationProvider(authenticationProvider())
+
                 .addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -62,16 +67,16 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider getAuthenticationProvider() {
+    public AuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setPasswordEncoder(getPasswordEncoder());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
         authenticationProvider.setUserDetailsService(userDetailsService);
 
         return authenticationProvider;
     }
 
     @Bean
-    public PasswordEncoder getPasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

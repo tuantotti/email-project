@@ -1,34 +1,44 @@
 package com.email.project.backend.service;
 
+import com.email.project.backend.dto.JwtResponse;
+import com.email.project.backend.dto.CredentialDto;
 import com.email.project.backend.dto.UserCreateDto;
 import com.email.project.backend.dto.UserView;
 import com.email.project.backend.entity.Credential;
 import com.email.project.backend.entity.User;
+import com.email.project.backend.entity.security.UserDetailsImpl;
 import com.email.project.backend.repository.CredentialRepository;
 import com.email.project.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 @Slf4j
 public class UserService {
 
-    private UserRepository _userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository _userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    private CredentialRepository credentialRepository;
+    private final CredentialRepository credentialRepository;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
-    public UserService(UserRepository _userRepository, PasswordEncoder passwordEncoder, CredentialRepository credentialRepository) {
+    public UserService(UserRepository _userRepository, PasswordEncoder passwordEncoder, CredentialRepository credentialRepository, JwtService jwtService, AuthenticationManager authenticationManager) {
         this._userRepository = _userRepository;
         this.passwordEncoder = passwordEncoder;
         this.credentialRepository = credentialRepository;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
     }
 
     public UserView getUserInfo(int id) {
@@ -55,7 +65,7 @@ public class UserService {
         _userRepository.save(user);
     }
 
-    public void create(UserCreateDto userCreateDto) {
+    public JwtResponse create(UserCreateDto userCreateDto) {
         User user = User.builder()
                 .firstName(userCreateDto.getFirstName())
                 .lastName(userCreateDto.getLastName())
@@ -74,11 +84,19 @@ public class UserService {
 
         try {
             credentialRepository.save(credential);
+            UserDetails userDetails = new UserDetailsImpl(credential);
+            String accessToken = jwtService.generateAccessToken(userDetails);
+            String refreshToken = jwtService.generateRefreshToken(userDetails);
+
+            return new JwtResponse(accessToken, refreshToken);
+
         } catch (DataAccessException e) {
             log.error(e.getMessage());
         } catch (Exception e) {
             log.error(e.getMessage());
         }
+
+        return new JwtResponse();
     }
 
     public void inActive(int id) {
@@ -98,4 +116,15 @@ public class UserService {
     }
 
 
+    public JwtResponse authenticate(CredentialDto credentialDto) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(credentialDto.getEmail(), credentialDto.getPassword())
+        );
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String accessToken = jwtService.generateAccessToken(userDetails);
+        String refreshToken = jwtService.generateRefreshToken(userDetails);
+
+        return new JwtResponse(accessToken, refreshToken);
+    }
 }

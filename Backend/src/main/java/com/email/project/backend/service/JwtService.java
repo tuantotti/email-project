@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Service
@@ -14,7 +15,7 @@ public class JwtService {
     @Value("${jwt.secret.key}")
     private String secretKey;
 
-    private final long JWT_EXP = 7 * 3600 * 24 * 1000;
+    private final long JWT_EXP_ACCESS = 7 * 3600 * 24 * 1000;
     private final long JWT_EXP_REFRESH = 1000 * 3600 * 24 * 365;
 
     public String extractUsernameFromToken(String token) {
@@ -26,21 +27,29 @@ public class JwtService {
         return username;
     }
 
-    public String generateToken(UserDetails userDetails) {
+    private String generateToken(UserDetails userDetails, long expiration) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + JWT_EXP);
+        Date expiryDate = new Date(now.getTime() + expiration);
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .signWith(SignatureAlgorithm.HS512, secretKey.getBytes(StandardCharsets.UTF_8))
                 .compact();
+    }
+
+    public String generateAccessToken(UserDetails userDetails) {
+        return generateToken(userDetails, JWT_EXP_ACCESS);
+    }
+
+    public String generateRefreshToken(UserDetails userDetails) {
+        return generateToken(userDetails, JWT_EXP_REFRESH);
     }
 
     private Claims parseToken(String token) {
         return Jwts.parser()
-                .setSigningKey(secretKey)
+                .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
                 .parseClaimsJwt(token)
                 .getBody();
     }
