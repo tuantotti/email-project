@@ -2,17 +2,22 @@ package com.email.project.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+
+import static jakarta.persistence.FetchType.EAGER;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
 @Table(name = "users")
 @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class User {
@@ -38,5 +43,8 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Credential credential;
+
+    @ManyToMany(fetch = EAGER)
+    private Collection<Role> roles=new ArrayList<>();
 
 }
