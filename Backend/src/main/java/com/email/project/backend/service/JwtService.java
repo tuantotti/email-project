@@ -28,11 +28,15 @@ public class JwtService {
     }
 
     private String generateToken(UserDetails userDetails, long expiration) {
+        return generateToken(userDetails.getUsername(), expiration);
+    }
+
+    private String generateToken(String username, long expiration) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
 
         return Jwts.builder()
-                .setSubject(userDetails.getUsername())
+                .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, secretKey.getBytes(StandardCharsets.UTF_8))
@@ -43,14 +47,22 @@ public class JwtService {
         return generateToken(userDetails, JWT_EXP_ACCESS);
     }
 
+    public String generateAccessToken(String username) {
+        return generateToken(username, JWT_EXP_ACCESS);
+    }
+
     public String generateRefreshToken(UserDetails userDetails) {
         return generateToken(userDetails, JWT_EXP_REFRESH);
+    }
+
+    public String generateRefreshToken(String username) {
+        return generateToken(username, JWT_EXP_REFRESH);
     }
 
     private Claims parseToken(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
 

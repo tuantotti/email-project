@@ -13,6 +13,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+import static com.email.project.backend.constant.Constant.PUBLIC_ENDPOINT;
+
 public class AuthorizationFilter extends OncePerRequestFilter {
     private JwtService jwtService;
     private UserDetailsService userDetailsService;
@@ -24,6 +26,10 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        if (isPassFilter(request.getServletPath())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         String username;
         String accessToken;
         String tokenHeader = request.getHeader("Authorization");
@@ -44,5 +50,9 @@ public class AuthorizationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+
+    private boolean isPassFilter(String servletPath) {
+        return PUBLIC_ENDPOINT.stream().anyMatch(endpoint -> servletPath.contains(endpoint));
     }
 }

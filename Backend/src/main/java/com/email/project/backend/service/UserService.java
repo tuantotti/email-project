@@ -1,12 +1,13 @@
 package com.email.project.backend.service;
 
-import com.email.project.backend.dto.JwtResponse;
 import com.email.project.backend.dto.CredentialDto;
+import com.email.project.backend.dto.JwtView;
 import com.email.project.backend.dto.UserCreateDto;
 import com.email.project.backend.dto.UserView;
 import com.email.project.backend.entity.Credential;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
+import com.email.project.backend.exception.UserAlreadyExistException;
 import com.email.project.backend.repository.CredentialRepository;
 import com.email.project.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -65,7 +66,11 @@ public class UserService {
         _userRepository.save(user);
     }
 
-    public JwtResponse create(UserCreateDto userCreateDto) {
+    public JwtView create(UserCreateDto userCreateDto) {
+        if (credentialRepository.findByEmail(userCreateDto.getEmail()).isPresent()) {
+            log.error("user " + userCreateDto.getEmail() + " already exists");
+            throw new UserAlreadyExistException(userCreateDto.getEmail());
+        }
         User user = User.builder()
                 .firstName(userCreateDto.getFirstName())
                 .lastName(userCreateDto.getLastName())
@@ -88,7 +93,7 @@ public class UserService {
             String accessToken = jwtService.generateAccessToken(userDetails);
             String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-            return new JwtResponse(accessToken, refreshToken);
+            return new JwtView(accessToken, refreshToken);
 
         } catch (DataAccessException e) {
             log.error(e.getMessage());
@@ -96,7 +101,7 @@ public class UserService {
             log.error(e.getMessage());
         }
 
-        return new JwtResponse();
+        return new JwtView();
     }
 
     public void inActive(int id) {
@@ -116,7 +121,7 @@ public class UserService {
     }
 
 
-    public JwtResponse authenticate(CredentialDto credentialDto) {
+    public JwtView authenticate(CredentialDto credentialDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(credentialDto.getEmail(), credentialDto.getPassword())
         );
@@ -125,6 +130,28 @@ public class UserService {
         String accessToken = jwtService.generateAccessToken(userDetails);
         String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-        return new JwtResponse(accessToken, refreshToken);
+        return new JwtView(accessToken, refreshToken);
+    }
+
+    public JwtView refreshToken(JwtView jwtView) {
+        boolean isExpiredAccessToken = jwtService.validateToken(jwtView.getAccessToken());
+        boolean isExpiredRefreshToken = jwtService.validateToken(jwtView.getRefreshToken());
+        String username = jwtService.extractUsernameFromToken(jwtView.getAccessToken());
+        if (isExpiredAccessToken && !isExpiredRefreshToken) {
+            var newAccessToken = jwtService.generateAccessToken(username);
+
+            return JwtView.builder()
+                    .accessToken(newAccessToken)
+                    .refreshToken(jwtView.getRefreshToken())
+                    .build();
+        }
+
+        String accessToken = jwtService.generateAccessToken(username);
+        String refreshToken = jwtService.generateRefreshToken(username);
+
+        return JwtView.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
     }
 }

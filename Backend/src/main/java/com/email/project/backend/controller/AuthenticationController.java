@@ -1,8 +1,9 @@
 package com.email.project.backend.controller;
 
 import com.email.project.backend.dto.CredentialDto;
-import com.email.project.backend.dto.JwtResponse;
+import com.email.project.backend.dto.JwtView;
 import com.email.project.backend.dto.UserCreateDto;
+import com.email.project.backend.exception.UserAlreadyExistException;
 import com.email.project.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,20 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<JwtResponse> signup(@RequestBody UserCreateDto userCreateDto) {
-        JwtResponse jwtResponse = userService.create(userCreateDto);
-        return ResponseEntity.ok(jwtResponse);
+    public ResponseEntity<JwtView> signup(@RequestBody UserCreateDto userCreateDto) {
+        JwtView jwtView = userService.create(userCreateDto);
+        return ResponseEntity.ok(jwtView);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody CredentialDto credentialDto) {
-        JwtResponse jwtResponse = userService.authenticate(credentialDto);
-        return ResponseEntity.ok(jwtResponse);
+    public ResponseEntity<JwtView> login(@RequestBody CredentialDto credentialDto) {
+        JwtView jwtView = userService.authenticate(credentialDto);
+        return ResponseEntity.ok(jwtView);
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<JwtView> refreshToken(@RequestBody JwtView jwtView) {
+        JwtView response = userService.refreshToken(jwtView);
+        return ResponseEntity.ok(response);
     }
 }

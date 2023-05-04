@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/login", "/api/signup")
                 .permitAll()
 
-                .requestMatchers("/v1/api/mail/**", "/v1/api/user/**")
+                .requestMatchers("/v1/api/mail/**", "/v1/api/user/**", "/api/refresh-token")
                 .hasAnyRole(ROLE_USER)
                 .anyRequest()
                 .authenticated()
