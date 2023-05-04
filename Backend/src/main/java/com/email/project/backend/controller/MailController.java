@@ -2,6 +2,7 @@ package com.email.project.backend.controller;
 
 import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
+import com.email.project.backend.entity.Mail;
 import com.email.project.backend.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,15 @@ public class MailController {
         MailDto sentMail = mailService.sendMail(mailDto);
 
         return ResponseEntity.ok(sentMail);
+    }
+
+    @PutMapping("/status")
+    public void updateMailStatus(@RequestBody Mail mail) {
+        mailService.updateMailStatus(mail);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteMail(@RequestParam int id) {
+        mailService.deleteMail(id);
     }
 }
