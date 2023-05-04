@@ -50,7 +50,7 @@ public class JwtService {
     private Claims parseToken(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
 

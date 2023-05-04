@@ -5,6 +5,7 @@ import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.entity.Mail;
 import com.email.project.backend.repository.MailRepository;
 import lombok.extern.slf4j.Slf4j;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class MailService {
     public List<MailDto> getMail(MailStatus mailStatus) {
         List<MailDto> mailDtoList = new ArrayList<>();
         try {
-            List<Mail> mailList = mailRepository.getMailByStatus(mailStatus.toString());
+            List<Mail> mailList = mailRepository.getMailByStatus(mailStatus);
             mailDtoList = mailList.stream().map(mail -> mail.toDto()).toList();
         } catch (DataAccessException e) {
             log.error(e.getMessage());
@@ -59,13 +60,8 @@ public class MailService {
         return sentMail;
     }
 
-    public void removeMail(int id) {
-        mailRepository.updateStatusById("inactive", id);
-    }
-
-    public void restoreMail(int id) {
-        mailRepository.updateStatusById("active", id);
-    }
+    @Transactional
+    public void updateMailStatus(Mail mail) {mailRepository.updateStatusById(mail.getId(), mail.getStatus());}
 
     public void deleteMail(int id) {
         mailRepository.deleteById(id);
