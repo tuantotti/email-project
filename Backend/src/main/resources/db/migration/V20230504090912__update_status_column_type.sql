@@ -1,0 +1,2 @@
+
+ALTER TABLE mail MODIFY status enum('INBOX', 'SENT', 'STARRED', 'SPAM', 'TRASH', 'DELETED') ;

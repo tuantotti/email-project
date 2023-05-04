@@ -1,5 +1,6 @@
 package com.email.project.backend.dto;
 
+import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.entity.Mail;
 import lombok.*;
 import org.springframework.util.StringUtils;
@@ -24,7 +25,7 @@ public class MailDto {
     private List<String> fileNames;
     private Date sendDate;
     private Date receivedDate;
-    private String status;
+    private MailStatus status;
     private boolean is_read;
 
     public Mail toEntity() {

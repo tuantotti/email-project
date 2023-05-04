@@ -1,5 +1,6 @@
 package com.email.project.backend.entity;
 
+import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,7 +45,7 @@ public class Mail {
     private Date receivedDate;
 
     @Column(name = "status")
-    private String status;
+    private MailStatus status;
 
     @Column(name = "is_read")
     private boolean is_read;
