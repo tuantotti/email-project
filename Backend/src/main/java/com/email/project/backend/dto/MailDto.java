@@ -1,63 +1,49 @@
-package com.email.project.backend.entity;
+package com.email.project.backend.dto;
 
-import com.email.project.backend.dto.MailDto;
-import jakarta.persistence.*;
+import com.email.project.backend.entity.Mail;
 import lombok.*;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
 
 import static com.email.project.backend.constant.Constant.SPLIT_STRING;
 
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Setter
-@Getter
-@Entity
-@Table(name = "mail")
-public class Mail {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class MailDto {
     private String subject;
     private String body;
-    @Column(name = "from_address")
     private String fromAddress;
-
-    @Column(name = "to_address")
     private String toAddress;
-
-    @Column(name = "cc_address")
     private String ccAddress;
-
-    @Column(name = "bcc_address")
     private String bccAddress;
-
-    @Column(name = "file_names")
-    private String fileNames;
-
-    @Column(name = "sent_date")
+    private List<String> fileNames;
     private Date sendDate;
-
-    @Column(name = "received_date")
     private Date receivedDate;
-
-    @Column(name = "status")
     private String status;
-
-    @Column(name = "is_read")
     private boolean is_read;
 
-    public MailDto toDto() {
-        return MailDto.builder()
-                .fromAddress(fromAddress)
+    public Mail toEntity() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (String name : fileNames) {
+            stringBuilder.append(name + SPLIT_STRING);
+        }
+
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        String fileNameConcat = stringBuilder.toString();
+        return Mail.builder()
                 .toAddress(toAddress)
+                .fromAddress(fromAddress)
                 .bccAddress(bccAddress)
                 .ccAddress(ccAddress)
                 .subject(subject)
                 .body(body)
-                .fileNames(List.of(fileNames.split(SPLIT_STRING)))
+                .fileNames(fileNameConcat)
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
                 .is_read(is_read)
