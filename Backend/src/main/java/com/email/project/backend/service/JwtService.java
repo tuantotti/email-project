@@ -16,7 +16,7 @@ public class JwtService {
     private String secretKey;
 
     private final long JWT_EXP_ACCESS = 7 * 3600 * 24 * 1000;
-    private final long JWT_EXP_REFRESH = 1000 * 3600 * 24 * 365;
+    private final long JWT_EXP_REFRESH = 1000L * 3600 * 24 * 365;
 
     public String extractUsernameFromToken(String token) {
         Claims claims = parseToken(token);

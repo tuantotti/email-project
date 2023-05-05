@@ -16,8 +16,8 @@ import java.util.List;
 @Service
 @Slf4j
 public class MailService {
-    private MailRepository mailRepository;
-    private FileService fileService;
+    private final MailRepository mailRepository;
+    private final FileService fileService;
 
     @Autowired
     public MailService(MailRepository mailRepository, FileService fileService) {
@@ -40,28 +40,13 @@ public class MailService {
     }
 
     public MailDto sendMail(MailDto mailDto) {
-        Mail mail = mailDto.toEntity();
-//        boolean isUpload = fileService.uploadFileToSystem(mailDto.getFileBytes());
-        boolean isUpload = false;
-
-        MailDto sentMail = new MailDto();
-        try {
-            if (isUpload) {
-                Mail savedmail = mailRepository.save(mail);
-                sentMail = savedmail.toDto();
-            } else {
-                log.error("Can not upload file to system");
-            }
-        } catch (DataAccessException e) {
-            log.error(e.getMessage());
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-        return sentMail;
+        return null;
     }
 
     @Transactional
-    public void updateMailStatus(Mail mail) {mailRepository.updateStatusById(mail.getId(), mail.getStatus());}
+    public void updateMailStatus(Mail mail) {
+        mailRepository.updateStatusById(mail.getId(), mail.getStatus());
+    }
 
     public void deleteMail(int id) {
         mailRepository.deleteById(id);

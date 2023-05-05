@@ -1,18 +1,15 @@
 package com.email.project.backend.controller;
 
-import com.email.project.backend.dto.CredentialDto;
-import com.email.project.backend.dto.UserCreateDto;
 import com.email.project.backend.dto.UserView;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    private UserService _userService;
+    private final UserService _userService;
 
     @Autowired
     public UserController(UserService userService) {

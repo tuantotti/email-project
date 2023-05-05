@@ -10,7 +10,7 @@ import java.nio.file.Path;
 
 @Service
 public class FileService {
-    private Config config;
+    private final Config config;
 
     @Autowired
     public FileService(Config config) {

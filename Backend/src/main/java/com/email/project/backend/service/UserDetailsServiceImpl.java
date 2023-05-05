@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private CredentialRepository credentialRepository;
+    private final CredentialRepository credentialRepository;
 
     @Autowired
     public UserDetailsServiceImpl(CredentialRepository credentialRepository) {
@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Credential> credentialOptional = credentialRepository.findByEmail(username);
-        if (credentialOptional.isPresent()) {
+        if (!credentialOptional.isPresent()) {
             throw new UsernameNotFoundException(username);
         }
 

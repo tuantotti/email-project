@@ -16,8 +16,8 @@ import java.io.IOException;
 import static com.email.project.backend.constant.Constant.PUBLIC_ENDPOINT;
 
 public class AuthorizationFilter extends OncePerRequestFilter {
-    private JwtService jwtService;
-    private UserDetailsService userDetailsService;
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
 
     public AuthorizationFilter(JwtService jwtService, UserDetailsService userDetailsService) {
         this.jwtService = jwtService;

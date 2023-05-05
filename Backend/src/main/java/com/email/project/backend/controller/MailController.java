@@ -4,16 +4,18 @@ import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.entity.Mail;
 import com.email.project.backend.service.MailService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Mail API", description = "The api for mail operation")
 @RestController
 @RequestMapping("/api/mail")
 public class MailController {
-    private MailService mailService;
+    private final MailService mailService;
 
     @Autowired
     public MailController(MailService mailService) {
@@ -21,8 +23,8 @@ public class MailController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MailDto>> getMail(@RequestParam String status) {
-        List<MailDto> mailDtoList = mailService.getMail(MailStatus.valueOf(status));
+    public ResponseEntity<List<MailDto>> getMail(@RequestParam MailStatus status) {
+        List<MailDto> mailDtoList = mailService.getMail(status);
 
         return ResponseEntity.ok(mailDtoList);
     }
@@ -40,7 +42,7 @@ public class MailController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMail(@RequestParam int id) {
+    public void deleteMail(@PathVariable int id) {
         mailService.deleteMail(id);
     }
 }

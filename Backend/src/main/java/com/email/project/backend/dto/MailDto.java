@@ -3,7 +3,6 @@ package com.email.project.backend.dto;
 import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.entity.Mail;
 import lombok.*;
-import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
