@@ -49,3 +49,7 @@
   border-bottom-right-radius: 18px;
   border-top-right-radius: 18px;
 }
+
+.isSelected {
+  font-weight: 800;
+}
