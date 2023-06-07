@@ -1,7 +1,20 @@
-To run project: 
-- dowload mysql (server, workbench)
-- create user 
-  + name: root
-  + password: 12345
-  + create database: emaildb
-- run project to migrate database
+## **Run project**
+### Run project using Docker
+Make sure you are at **Backend** folder
+Build project
+```
+./gradlew build
+```
+**Run project**
+
+```
+docker-compose up
+```
+
+**Shutdown**
+
+```
+docker-compose down
+```
+
+### Run project with local properties
