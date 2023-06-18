@@ -1,20 +1,11 @@
-## **Run project**
-### Run project using Docker
-Make sure you are at **Backend** folder
+## **Run backend without docker**
+Make sure you are at **Backend** folder.
+Create new user in mysql (username=tuantotti, password=12345). It will use for run **local**
+```mysql
+CREATE USER 'tuantotti'@'localhost' IDENTIFIED BY '12345';
+```
 Build project
 ```
 ./gradlew build
 ```
-**Run project**
-
-```
-docker-compose up
-```
-
-**Shutdown**
-
-```
-docker-compose down
-```
-
-### Run project with local properties
+ Or run immediately by choose run in IntelliJ

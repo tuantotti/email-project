@@ -29,8 +29,21 @@ services:
       - mysql
     networks:
       - backend
+      - frontend
+  react-web:
+    build: 
+      context: frontend
+      dockerfile: Dockerfile
+    container_name: email-web
+    ports:
+      - "4001:3000"
+    depends_on:
+      - server
+    networks:
+      - frontend
 networks:
   backend:
+  frontend:
 
 volumes:
   mysql-data:
