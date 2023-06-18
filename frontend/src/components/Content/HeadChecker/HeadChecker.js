@@ -13,7 +13,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { emptySelected } from "../../../redux/action/mailSelectAct";
 import { deleteMultiple } from "../../../redux/action/search";
-import { usePageContext } from "../Content";
 import more from "../Images/more.png";
 import refresh from "../Images/refresh.png";
 import classes from "./HeadChecker.module.css";
@@ -59,7 +58,6 @@ function HeadChecker() {
     dispatch(emptySelected());
   }
 
-  const obj = usePageContext();
   return (
     <div className={classes.head}>
       <div className={classes.headchecker}>
@@ -71,11 +69,11 @@ function HeadChecker() {
         {checked}
       </div>
       <div className={classes.headchecker}>
-        <span className={classes.mailAmount}>{(obj.currentPage-1)*20+1}-{obj.currentPage*20} trong số 2.000</span>
-        <button onClick={obj.goToPreviousPage}>
+        <span className={classes.mailAmount}>{} trong số 2.000</span>
+        <button onClick={() => {}}>
           <ArrowBackIosIcon className={classes.headSvg}/>
         </button>
-        <button onClick={obj.goToNextPage}>
+        <button onClick={() => {}}>
          <ArrowForwardIosIcon className={classes.headSvg}/>
         </button>
       </div>

@@ -2,12 +2,11 @@ import React from "react";
 import Email from "../Emails/Email";
 import classes from "./Pagination.module.css"
 
-function Pagination({ data, dataLimit, currentPage,path }) {
+function Pagination({ data, dataLimit, currentPage, path }) {
   const getPaginatedData = () => {
     const startIndex = currentPage * dataLimit - dataLimit;
     const endIndex = startIndex + dataLimit;
     const newData = Object.values(data);
-    console.log(newData)
     return newData.slice(startIndex, endIndex);
   };
 
