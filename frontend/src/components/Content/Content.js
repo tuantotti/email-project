@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Navbar from "../../components/Navigation/Navbar";
+import SideBar from "../../components/SideBar/SideBar";
+import { getMails } from "../../redux/slices/getMailsSlice";
 import classes from "./Content.module.css";
 import HeadChecker from "./HeadChecker/HeadChecker";
 import Message from "./MessageShow/MessageShow";
@@ -8,7 +11,6 @@ import Pagination from "./Pagination/Pagination";
 import SendMail from "./SendMail/SendMail";
 import Snooze from "./Snooze/Snooze";
 import Starred from "./Starred/Starred";
-import { getMails } from "../../redux/slices/getMailsSlice";
 
 
 function Content() {
@@ -23,58 +25,77 @@ function Content() {
   const goToPreviousPage = () => {
     return setCurrentPage(currentPage > 1 ? currentPage - 1 : currentPage);
   };
-  
+
   useEffect(() => {
     dispatch(getMails())
   }, [])
-  return (
-    <div className={classes.container}>
+  return true ? (<div className="App">
+    < Navbar />
+    <div className="body">
+      <SideBar />
+      <div className={classes.container}>
+        <HeadChecker />
+        <hr />
+        <Routes>
+          <Route index element={<Navigate to="inbox" />} />
+          <Route path="/inbox/:mailId" element={<Message />} />
 
+          <Route
+            path="/starred"
+            element={
+              <>
+                <Starred />
+              </>
+            }
+          />
 
-      <Switch>
-        <Route path="/inbox/:mailId">
-          <Message />
-        </Route>
+          <Route
+            path="/drafts"
+            element={
+              <>
+                <h1>Drafts</h1>
+              </>
+            }
+          />
 
-        <Route path="/starred">
-          <HeadChecker />
-          <hr />
-          <Starred />
-        </Route>
+          <Route
+            path="/snoozed"
+            element={
+              <>
+                <Snooze />
+              </>
+            }
+          />
 
-        <Route path="/drafts">
-          <HeadChecker />
-          <hr />
-          <h1>Drafts</h1>
-        </Route>
+          <Route
+            path="/sent"
+            element={
+              <>
+                <SendMail />
+              </>
+            }
+          />
 
-        <Route path="/snoozed">
-          <HeadChecker />
-          <hr />
-          <Snooze />
-        </Route>
-
-        <Route path="/sent">
-          <HeadChecker />
-          <hr />
-          <SendMail />
-        </Route>
-
-        <Route path="/inbox">
-          <div className={classes.mainContent}>
-            <HeadChecker />
-            <hr />
-            <Pagination
-              data={mails}
-              dataLimit={20}
-              currentPage={currentPage}
-              path="/inbox"
-            />
-          </div>
-        </Route>
-      </Switch>
+          <Route
+            path="/inbox"
+            element={
+              <div className={classes.mainContent}>
+                <Pagination
+                  data={mails}
+                  dataLimit={20}
+                  currentPage={currentPage}
+                  path="/inbox"
+                />
+              </div>
+            }
+          />
+        </Routes>
+      </div>
     </div>
-  );
+  </div >) : (
+    <Navigate to="signin" />
+  )
+
 }
 
 export default Content;
