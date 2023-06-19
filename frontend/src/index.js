@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { createStore } from "redux";
-import allReducers from "./redux/reducers/allReducer";
 import { Provider } from "react-redux";
+import App from './App';
+import './index.css';
 import { store } from './redux/store';
-
+import reportWebVitals from './reportWebVitals';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+  <Provider store={store}>
+    <App />
+    <ToastContainer />
+  </Provider>
   // {/* </React.StrictMode> */}
 );
 

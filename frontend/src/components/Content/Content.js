@@ -16,6 +16,7 @@ import Starred from "./Starred/Starred";
 function Content() {
   const dispatch = useDispatch()
   const mails = useSelector(state => state.getMailsReducer.mails)
+  const accessToken = useSelector(state => state.authenticationSlice.accessToken)
   const [currentPage, setCurrentPage] = useState(1);
 
   const goToNextPage = () => {
@@ -29,7 +30,7 @@ function Content() {
   useEffect(() => {
     dispatch(getMails())
   }, [])
-  return true ? (<div className="App">
+  return accessToken ? (<div className="App">
     < Navbar />
     <div className="body">
       <SideBar />
