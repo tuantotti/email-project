@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React, { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   addToSelected,
   remFromSelected
@@ -13,7 +13,7 @@ import classes from "./Emails.module.css";
 
 
 function Email({ id, company, description, subject, time, path, email_address, isRead }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [showOnHover, setShowOnHover] = useState(false);
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ function Email({ id, company, description, subject, time, path, email_address, i
 
   function showMail(e) {
     dispatch(sendMessageData(id, company, description, subject, time, email_address, isRead));
-    history.push("/inbox/"+id);
+    navigate("/inbox/"+id);
   }
 
   function handleDelete(e) {

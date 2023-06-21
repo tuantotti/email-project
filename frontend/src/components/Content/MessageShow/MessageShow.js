@@ -10,16 +10,16 @@ import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import avatarDefault from "../Images/avatar_default.png";
 
 export default function Message(props) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { mailId } = useParams();
   const mailData = useSelector((state) => state.showMessage);
   function navigateBack() {
-    history.push("/inbox");
+    navigate("/inbox");
   }
   const randomDate = () => {
     const startDate = new Date('2022-01-01');
@@ -34,7 +34,7 @@ export default function Message(props) {
     return randomDate.toLocaleDateString('en-US', options);
   }
 
-  const navigate = (
+  const Navigate = (
     <div className="navigate">
       <button onClick={navigateBack}>
         <ArrowBackIcon className="navigate_back" />
@@ -53,7 +53,7 @@ export default function Message(props) {
 
   return (
     <div className="mailDetailContainer">
-      {navigate}
+      {Navigate}
       <h2 className="mailTitle">{mailData.description}</h2>
       <div className="mailAddressContainer">
         <img alt="mailAvatar" className="mailAvatar" src={avatarDefault} />

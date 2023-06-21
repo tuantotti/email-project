@@ -1,0 +1,96 @@
+.signin-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.signin-container {
+    max-width: 360px;
+    width: 100%;
+    padding: 48px 40px 36px;
+    border: 1px solid #DADCE0;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+.email-address-container,
+.signin-container-header,
+.password-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all linear 0.5s;
+}
+
+.password-container {
+    position: absolute;
+    bottom: 40px;
+    width: calc(100% - 80px);
+}
+
+.signin-text {
+    color: #202124;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 16px 0 8px 0;
+}
+
+.signin-subtext {
+    color: #202124;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.forgot-email {
+    margin-right: auto;
+    color: #1A73E8;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.email-address-bottom-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.create-account-text {
+    color: #1A73E8;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+.welcome-group {
+    min-width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #DADCE0;
+    border-radius: 20px;
+    padding: 2px 8px;
+    cursor: pointer;
+    transition: all linear 0.1s;
+}
+
+.welcome-group:hover {
+    background-color: #F7F8F8;
+}
+
+.welcome-group_email-address {
+    color: #3c4043;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 6px;
+}
+
+.move-to-left {
+    transform: translateX(-150%);
+}
+
+.move-to-right {
+    transform: translateX(150%);
+}

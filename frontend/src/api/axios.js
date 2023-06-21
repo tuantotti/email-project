@@ -1,12 +1,12 @@
 import axios from "axios";
 import { getAccessToken } from "../utils/localStorage";
+import API from "./api";
 const axiosInstance = axios.create({
-    baseURL: 'localhost:8080',
+    baseURL: API.BASE_API_URL,
     timeout: 5000,
     headers: {
         "Content-Type": "application/json",
     },
-    withCredentials: true,
 });
 axiosInstance.interceptors.request.use((request) => {
     const accessToken = getAccessToken();
