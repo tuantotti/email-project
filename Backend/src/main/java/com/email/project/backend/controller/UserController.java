@@ -1,6 +1,7 @@
 package com.email.project.backend.controller;
 
-import com.email.project.backend.dto.UserView;
+import com.email.project.backend.dto.user.UserEdit;
+import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,12 @@ public class UserController {
     }
 
     @PostMapping("/edit/{id}")
-    public void editProfile(User user) {
-
+    public void editProfile(@PathVariable(name = "id") int id, UserEdit userEdit) {
+        try {
+            _userService.update(id, userEdit);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @PostMapping("/create")
