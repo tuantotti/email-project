@@ -8,10 +8,13 @@ import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -25,18 +28,19 @@ public class MailService {
         this.fileService = fileService;
     }
 
-    public List<MailDto> getMail(MailStatus mailStatus) {
-        List<MailDto> mailDtoList = new ArrayList<>();
+    public Page<MailDto> getMail(MailStatus mailStatus, Pageable pageable) {
+        Page<MailDto> mailDtos = new PageImpl<>(new ArrayList<>());
         try {
-            List<Mail> mailList = mailRepository.getMailByStatus(mailStatus);
-            mailDtoList = mailList.stream().map(mail -> mail.toDto()).toList();
+            Optional<Page<Mail>> mailPage = mailRepository.getMailByStatus(mailStatus, pageable);
+            if (mailPage.isPresent())
+                mailDtos = mailPage.get().map(mail -> mail.toDto());
         } catch (DataAccessException e) {
             log.error(e.getMessage());
         } catch (Exception e) {
             log.error(e.getMessage());
         }
 
-        return mailDtoList;
+        return mailDtos;
     }
 
     public MailDto sendMail(MailDto mailDto) {
