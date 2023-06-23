@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class JwtView {
 
-    @JsonProperty("x-access-token")
+    @JsonProperty("x_access_token")
     private String accessToken;
-    @JsonProperty("x-refresh-token")
+    @JsonProperty("x_refresh_token")
     private String refreshToken;
 }
