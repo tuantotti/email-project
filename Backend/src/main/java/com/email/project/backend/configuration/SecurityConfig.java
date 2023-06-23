@@ -20,11 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 import static com.email.project.backend.constant.Constant.ROLE_USER;
 
@@ -49,11 +46,6 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/api/mail/**", "/api/user/**", "/api/refresh-token"
-                )
-                .hasRole(ROLE_USER)
-
-                .requestMatchers(
                         "/api/login", "/api/signup", "/error",
                         "/swagger-ui/**", "/swagger-ui.html", "/swagger-resources", "/swagger-resources/**",
                         "/v2/api-docs",
@@ -64,6 +56,11 @@ public class SecurityConfig {
                         "/webjars/**"
                 )
                 .permitAll()
+
+                .requestMatchers(
+                        "/api/mail/**", "/api/user/**", "/api/refresh-token"
+                )
+                .hasRole(ROLE_USER)
 
                 .anyRequest()
                 .authenticated()
@@ -104,15 +101,17 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+        config.setAllowedOriginPatterns(List.of("*"));
         config.setAllowCredentials(true);
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
         // Don't do this in production, use a proper list  of allowed origins
         source.registerCorsConfiguration("/**", config);
-        config.setAllowedOriginPatterns(Collections.singletonList("*"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
         return new CorsFilter(source);
     }
 }

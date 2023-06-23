@@ -1,6 +1,7 @@
 const API = {
-    BASE_API_URL: 'https://65e4-2402-800-61b3-4e29-b500-d46d-da86-dd3.ngrok-free.app',
-    LOGIN: '/api/login'
+    BASE_API_URL: 'https://e4ea-2402-800-61b3-4e29-7c6f-5f8f-8187-8c9d.ngrok-free.app',
+    LOGIN: '/api/login',
+    SIGN_UP: '/api/signup',
 }
 
 export default API

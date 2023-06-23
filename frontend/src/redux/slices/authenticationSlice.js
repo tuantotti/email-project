@@ -20,6 +20,31 @@ export const signInThunk = createAsyncThunk(
   }
 );
 
+export const signUpThunk = createAsyncThunk(
+  "auth/signup",
+  async ({
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    password
+  }) => {
+    console.log("signUpThunk")
+    try {
+      const response = await axiosInstance.post(API.SIGN_UP, {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        password
+      });
+      return response.data;
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+);
+
 
 export const authenticationSlice = createSlice({
   name: "authentication",
@@ -43,29 +68,52 @@ export const authenticationSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(signInThunk.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(signInThunk.fulfilled, (state, action) => {
-      state.loading = false;
-      state.accessToken = action.payload['x-access-token'];
-      setAccessToken(state.accessToken);
-    });
-    builder.addCase(signInThunk.rejected, (state, action) => {
-      console.log(action)
-      state.loading = false;
-      state.error = true;
-      toast.error('Something wrong! Please try again!', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+    builder
+      .addCase(signInThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(signInThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.accessToken = action.payload['x-access-token'];
+        setAccessToken(state.accessToken);
+      })
+      .addCase(signInThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        toast.error('Something wrong! Please try again!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
-    });
+    builder
+      .addCase(signUpThunk.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(signUpThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.accessToken = action.payload['x-access-token'];
+        setAccessToken(state.accessToken);
+      })
+      .addCase(signUpThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        toast.error('Something wrong! Please try again!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
 
   },
 });
