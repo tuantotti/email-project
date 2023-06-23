@@ -1,4 +1,4 @@
-package com.email.project.backend.dto;
+package com.email.project.backend.dto.user;
 
 import com.email.project.backend.entity.User;
 import lombok.Getter;

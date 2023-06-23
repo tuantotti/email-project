@@ -8,12 +8,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
-import static com.email.project.backend.constant.Constant.PUBLIC_ENDPOINT;
 
 public class AuthorizationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
@@ -26,10 +25,6 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        if (isPassFilter(request.getServletPath())) {
-            filterChain.doFilter(request, response);
-            return;
-        }
         String username;
         String accessToken;
         String tokenHeader = request.getHeader("Authorization");
@@ -44,16 +39,13 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                     // Create Authentication object and set in SecurityContext, after that the current user is authenticated
                     UsernamePasswordAuthenticationToken authenticationToken
                             = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    WebAuthenticationDetails webAuthenticationDetails = new WebAuthenticationDetailsSource().buildDetails(request);
+                    authenticationToken.setDetails(webAuthenticationDetails);
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken); // --> user is authenticated
                 }
             }
         }
 
         filterChain.doFilter(request, response);
-    }
-
-    private boolean isPassFilter(String servletPath) {
-        return PUBLIC_ENDPOINT.stream().anyMatch(endpoint -> servletPath.contains(endpoint));
     }
 }
