@@ -19,10 +19,16 @@ public class JwtService {
     private final long JWT_EXP_REFRESH = 1000L * 3600 * 24 * 365;
 
     public String extractUsernameFromToken(String token) {
-        Claims claims = parseToken(token);
-        String username = String.valueOf(claims.getSubject());
+        String username;
+        try {
+            Claims claims = parseToken(token);
+            username = String.valueOf(claims.getSubject());
+        } catch (Exception e) {
+            username = null;
+            log.error(e.getMessage());
+        }
         if (username == null) {
-            log.error("Can't extract username");
+            log.error("Can't extract username with token " + token);
         }
         return username;
     }

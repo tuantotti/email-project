@@ -3,7 +3,8 @@ package com.email.project.backend.service;
 import com.email.project.backend.dto.CredentialDto;
 import com.email.project.backend.dto.JwtView;
 import com.email.project.backend.dto.UserCreateDto;
-import com.email.project.backend.dto.UserView;
+import com.email.project.backend.dto.user.UserEdit;
+import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.Credential;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
@@ -52,7 +53,9 @@ public class UserService {
         return res;
     }
 
-    public void update(User user) {
+    public void update(int id, UserEdit userEdit) throws Exception {
+        var user = _userRepository.getReferenceById(id);
+        userEdit.applyToUser(user);
         _userRepository.save(user);
     }
 

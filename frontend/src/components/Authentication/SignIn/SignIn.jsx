@@ -11,11 +11,12 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import TextField from '@mui/material/TextField';
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { signInThunk } from '../../../redux/slices/authenticationSlice';
 import "./SignIn.css";
 
 function SignIn() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const accessToken = useSelector(state => state.authenticationSlice.accessToken)
     const loading = useSelector(state => state.authenticationSlice.loading)
@@ -32,6 +33,10 @@ function SignIn() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    const handleNavigateSignUp = () => {
+        navigate('/signup')
+    }
 
     const handleSignIn = () => {
         dispatch(signInThunk({ email, password }))
@@ -80,7 +85,7 @@ function SignIn() {
                     <span className="forgot-email">Forgot email?</span>
 
                     <div className="email-address-bottom-group">
-                        <span className="create-account-text">Create account</span>
+                        <span className="create-account-text" onClick={handleNavigateSignUp}>Create account</span>
                         <Button
                             variant="contained"
                             sx={{ bgcolor: "#1A73E8" }}
