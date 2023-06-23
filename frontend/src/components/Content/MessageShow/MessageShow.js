@@ -1,24 +1,25 @@
-import { React } from "react";
-import "./MessageShow.css";
 import ArchiveIcon from "@material-ui/icons/Archive";
-import ReportIcon from "@material-ui/icons/Report";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MarkunreadIcon from "@material-ui/icons/Markunread";
-import WatchLaterIcon from "@material-ui/icons/WatchLater";
-import LabelIcon from "@material-ui/icons/Label";
-import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
-import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { useNavigate, useParams } from "react-router-dom";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
+import DeleteIcon from "@material-ui/icons/Delete";
+import LabelIcon from "@material-ui/icons/Label";
+import MarkunreadIcon from "@material-ui/icons/Markunread";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import ReportIcon from "@material-ui/icons/Report";
+import WatchLaterIcon from "@material-ui/icons/WatchLater";
+import { React, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import avatarDefault from "../Images/avatar_default.png";
+import "./MessageShow.css";
 
 export default function Message(props) {
   const navigate = useNavigate();
   const { mailId } = useParams();
   const mailData = useSelector((state) => state.showMessage);
-  function navigateBack() {
+
+  const navigateBack = () => {
     navigate("/inbox");
   }
   const randomDate = () => {
@@ -51,23 +52,26 @@ export default function Message(props) {
     </div>
   );
 
+  useEffect(() => { 
+    console.log("🚀 ~ file: MessageShow.js:56 ~ useEffect ~ useEffect ~ mailId:", mailId)
+  }, [])
   return (
     <div className="mailDetailContainer">
       {Navigate}
-      <h2 className="mailTitle">{mailData.description}</h2>
+      <h2 className="mailTitle">{mailData?.description}</h2>
       <div className="mailAddressContainer">
         <img alt="mailAvatar" className="mailAvatar" src={avatarDefault} />
         <div>
-          <span className="mailAuthor">{mailData.company_Name}</span>
+          <span className="mailAuthor">{mailData?.company_Name}</span>
           <span>{" "}</span>
-          <span className="mailAddress">{"<"}{mailData.email_address}{">"}</span>
+          <span className="mailAddress">{"<"}{mailData?.email_address}{">"}</span>
           <h3 className="mailAddressDestination">đến {false ? "tôi" : "<test@gmail.com>"}</h3>
-          <h3 className="mailTime">{mailData.time}{" "}{randomDate()}</h3>
+          <h3 className="mailTime">{mailData?.time}{" "}{randomDate()}</h3>
         </div>
       </div>
       <br />
       <br />
-      <p className="description">{mailData.subject}</p>
+      <p className="description">{mailData?.subject}</p>
     </div>
   );
 }

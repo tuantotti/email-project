@@ -8,7 +8,8 @@
 }
 
 .list:hover {
-  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+  /* box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%); */
+  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 4px 4px rgb(60 64 67 / 15%)
 }
 
 .hr {
@@ -117,4 +118,8 @@
 
 .isRead {
   background-color: #F2F6FC;
+}
+
+.fontWeightLight {
+  font-weight: 300;
 }

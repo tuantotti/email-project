@@ -61,8 +61,8 @@ function Email({ id, company, description, subject, time, path, email_address, i
         </div>
         <div className={classes.company}>
           <div className={classes.mailLineContainer} >
-            <h3 className={classes.mailAuthor}>{company}</h3>
-            <h3 className={classes.mailTitle}>{description}</h3>
+            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead })}>{company}</h3>
+            <h3 className={classNames(classes.mailTitle, { [classes.fontWeightLight]: isRead })}>{description}</h3>
           </div>
           {showOnHover && (
             <div className={classes.hideIcons}>
@@ -72,7 +72,7 @@ function Email({ id, company, description, subject, time, path, email_address, i
             </div>
           )}
           {!showOnHover && (
-            <p>{time}</p>
+            <p className={classNames({ [classes.fontWeightLight]: isRead })}>{time}</p>
           )}
         </div>
       </div>

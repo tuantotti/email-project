@@ -3,12 +3,12 @@
   justify-content: space-between;
 }
 
-.headchecker > input {
+.headchecker>input {
   margin-left: 26px;
   margin-right: 10px;
 }
 
-.headchecker > button {
+.headchecker>button {
   cursor: pointer;
   padding: 6px;
   background: none;
@@ -18,7 +18,7 @@
   cursor: pointer;
 }
 
-.headchecker > button > img {
+.headchecker>button>img {
   width: 14px;
 }
 
@@ -26,11 +26,12 @@
   display: flex;
   margin-top: 15px;
 }
-.navigate > svg {
+
+.navigate>svg {
   margin-right: 30px;
 }
 
-.navigate > button {
+.navigate>button {
   background: none;
   border: none;
   margin-right: 20px;
@@ -46,5 +47,6 @@
 
 .mailAmount {
   color: #5e5e5e;
-  height: min-content;
+  display: flex;
+  align-items: center;
 }

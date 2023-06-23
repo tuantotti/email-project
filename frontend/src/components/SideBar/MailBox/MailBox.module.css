@@ -1,5 +1,6 @@
 .form {
   width: 600px;
+  height: 600px;
   position: fixed;
   right: 50px;
   bottom: 0;
@@ -99,6 +100,11 @@
   color: #747775;
 }
 
+.scrollContent {
+  max-height: 440px;
+  overflow-y: scroll;
+}
+
 .mailBoxFooter {
   padding: 12px 0;
   display: flex;
@@ -106,6 +112,7 @@
   position: fixed;
   bottom: 0;
   background: white;
+  width: calc(600px - 32px);
 }
 
 .sendButton,
@@ -153,6 +160,7 @@
   background-color: #F5F5F5;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 4px;
   margin-bottom: 8px
 }
@@ -172,4 +180,5 @@
   color: #444746;
   font-size: 14px;
   font-weight: bold;
+  min-width: 80px;
 }

@@ -69,7 +69,7 @@ function HeadChecker() {
         {checked}
       </div>
       <div className={classes.headchecker}>
-        <span className={classes.mailAmount}>{} trong số 2.000</span>
+        <span className={classes.mailAmount}>{20} trong số 2.000</span>
         <button onClick={() => {}}>
           <ArrowBackIosIcon className={classes.headSvg}/>
         </button>

@@ -10,9 +10,9 @@ const initialState = {
 
 export const getMailsThunk = createAsyncThunk(
     "getMails",
-    async () => {
+    async ({status}) => {
         try {
-            const response = await axiosInstance.get("/api/mails");
+            const response = await axiosInstance.get(`api/mail?status=${status}`);
             console.log(response)
             return response.data.mails;
         } catch (err) {

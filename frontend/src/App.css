@@ -6,7 +6,6 @@
   display: grid;
   grid-template-columns: 296px 1fr;
   background-color: #f6f8fc;
-  min-height: 100vh;
   height: 100%;
 }
 
@@ -15,8 +14,8 @@ hr {
 }
 
 .ql-editor {
-  max-height: 400px;
-  height: 400px;
+  max-height: 300px !important;
+  height: 300px !important;
   overflow-y: scroll;
 }
 .quill {
