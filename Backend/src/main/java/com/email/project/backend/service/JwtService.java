@@ -28,7 +28,7 @@ public class JwtService {
             log.error(e.getMessage());
         }
         if (username == null) {
-            log.error("Can't extract username with token " + token);
+            log.warn("Can't extract username with token " + token);
         }
         return username;
     }
@@ -70,6 +70,20 @@ public class JwtService {
                 .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    public boolean isExpired(String token) {
+        boolean isExpire = false;
+        try {
+            Claims claims = parseToken(token);
+            Date currentDate = new Date();
+            // check expiration date is before current date
+            isExpire = claims.getExpiration().before(currentDate);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        return isExpire;
     }
 
     public boolean validateToken(String token) {

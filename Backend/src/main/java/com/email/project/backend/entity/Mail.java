@@ -35,9 +35,6 @@ public class Mail {
     @Column(name = "bcc_address")
     private String bccAddress;
 
-    @Column(name = "file_names")
-    private String fileNames;
-
     @Column(name = "sent_date")
     private Date sendDate;
 
@@ -50,6 +47,9 @@ public class Mail {
     @Column(name = "is_read")
     private boolean is_read;
 
+    @OneToMany(mappedBy = "mail")
+    private List<FileData> fileDataList;
+
     public MailDto toDto() {
         return MailDto.builder()
                 .fromAddress(fromAddress)
@@ -58,7 +58,7 @@ public class Mail {
                 .ccAddress(ccAddress)
                 .subject(subject)
                 .body(body)
-                .fileNames(List.of(fileNames.split(SPLIT_STRING)))
+                .fileDataList(fileDataList)
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
                 .is_read(is_read)

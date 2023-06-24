@@ -97,9 +97,8 @@ public class UserService {
             credentialRepository.save(credential);
             UserDetails userDetails = new UserDetailsImpl(credential);
             String accessToken = jwtService.generateAccessToken(userDetails);
-            String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-            return new JwtView(accessToken, refreshToken);
+            return new JwtView(accessToken);
 
         } catch (DataAccessException e) {
             log.error(e.getMessage());
@@ -136,33 +135,28 @@ public class UserService {
 
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String accessToken = jwtService.generateAccessToken(userDetails);
-            String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-            return new JwtView(accessToken, refreshToken);
+            return new JwtView(accessToken);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong username or password");
         }
     }
 
     public JwtView refreshToken(JwtView jwtView) {
-        boolean isExpiredAccessToken = jwtService.validateToken(jwtView.getAccessToken());
-        boolean isExpiredRefreshToken = jwtService.validateToken(jwtView.getRefreshToken());
+        boolean isExpiredAccessToken = jwtService.isExpired(jwtView.getAccessToken());
         String username = jwtService.extractUsernameFromToken(jwtView.getAccessToken());
-        if (isExpiredAccessToken && !isExpiredRefreshToken) {
-            var newAccessToken = jwtService.generateAccessToken(username);
-
-            return JwtView.builder()
-                    .accessToken(newAccessToken)
-                    .refreshToken(jwtView.getRefreshToken())
-                    .build();
+        String newAccessToken = jwtView.getAccessToken();
+        if (isExpiredAccessToken) {
+            newAccessToken = jwtService.generateAccessToken(username);
+        }
+        if (isExpiredAccessToken) {
+            newAccessToken = jwtService.generateAccessToken(username);
         }
 
-        String accessToken = jwtService.generateAccessToken(username);
-        String refreshToken = jwtService.generateRefreshToken(username);
-
-        return JwtView.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
+        JwtView res = JwtView.builder()
+                .accessToken(newAccessToken)
                 .build();
+
+        return res;
     }
 }

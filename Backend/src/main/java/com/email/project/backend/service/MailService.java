@@ -2,6 +2,7 @@ package com.email.project.backend.service;
 
 import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
+import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
 import com.email.project.backend.repository.MailRepository;
 import jakarta.transaction.Transactional;
@@ -14,26 +15,58 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.Date;
+import java.util.List;
 
 @Service
 @Slf4j
 public class MailService {
     private final MailRepository mailRepository;
-    private final FileService fileService;
+    private final StorageService storageService;
 
     @Autowired
-    public MailService(MailRepository mailRepository, FileService fileService) {
+    public MailService(MailRepository mailRepository, StorageService storageService) {
         this.mailRepository = mailRepository;
-        this.fileService = fileService;
+        this.storageService = storageService;
     }
 
     public Page<MailDto> getMail(MailStatus mailStatus, Pageable pageable) {
         Page<MailDto> mailDtos = new PageImpl<>(new ArrayList<>());
         try {
-            Optional<Page<Mail>> mailPage = mailRepository.getMailByStatus(mailStatus, pageable);
-            if (mailPage.isPresent())
-                mailDtos = mailPage.get().map(mail -> mail.toDto());
+//            Optional<Page<Mail>> mailPage = mailRepository.getMailByStatus(mailStatus, pageable);
+//            if (mailPage.isPresent())
+//                mailDtos = mailPage.get().map(mail -> mail.toDto());
+            List<FileData> fileDataList = List.of(new FileData(), new FileData(), new FileData());
+            MailDto mailDto = MailDto.builder()
+                    .toAddress("tuan.nv198269@sis.hust.edu.vn")
+                    .fromAddress("dat.dt1234@gmail.com")
+                    .ccAddress("")
+                    .bccAddress("")
+                    .body("Hello")
+                    .subject("Hello")
+                    .fileDataList(fileDataList)
+                    .receivedDate(new Date())
+                    .sendDate(new Date())
+                    .is_read(false)
+                    .status(MailStatus.INBOX)
+                    .build();
+
+            MailDto mailDto2 = MailDto.builder()
+                    .toAddress("tuan.nv198269@sis.hust.edu.vn")
+                    .fromAddress("dat.dt1234@gmail.com")
+                    .ccAddress("")
+                    .bccAddress("")
+                    .body("Hello")
+                    .subject("Hello")
+                    .fileDataList(fileDataList)
+                    .receivedDate(new Date())
+                    .sendDate(new Date())
+                    .is_read(false)
+                    .status(MailStatus.INBOX)
+                    .build();
+
+            List<MailDto> list = List.of(mailDto, mailDto2);
+            mailDtos = new PageImpl<>(list);
         } catch (DataAccessException e) {
             log.error(e.getMessage());
         } catch (Exception e) {

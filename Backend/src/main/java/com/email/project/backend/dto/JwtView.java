@@ -14,6 +14,4 @@ public class JwtView {
 
     @JsonProperty("x-access-token")
     private String accessToken;
-    @JsonProperty("x-refresh-token")
-    private String refreshToken;
 }
