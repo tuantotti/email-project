@@ -3,6 +3,7 @@ package com.email.project.backend.dto;
 import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,16 +17,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MailDto {
+    @Nullable
     private String subject;
     private String body;
     private String fromAddress;
     private String toAddress;
+    @Nullable
     private String ccAddress;
+    @Nullable
     private String bccAddress;
     private Date sendDate;
     private Date receivedDate;
     private MailStatus status;
     private List<FileData> fileDataList;
+    @Nullable
     private boolean is_read;
 
     public Mail toEntity() {
