@@ -1,5 +1,6 @@
 package com.email.project.backend.controller;
 
+import com.email.project.backend.dto.Response;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.User;
@@ -18,55 +19,57 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public UserView getProfile(@PathVariable(name = "id") int id) {
+    public Response<UserView> getProfile(@PathVariable(name = "id") int id) {
         try {
             var user = _userService.getUserInfo(id);
-            return user;
+            return Response.ok(user);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return Response.fail("Something went wrong!");
         }
     }
 
     @PostMapping("/edit/{id}")
-    public void editProfile(@PathVariable(name = "id") int id, UserEdit userEdit) {
+    public Response<UserView> editProfile(@PathVariable(name = "id") int id, UserEdit userEdit) {
         try {
-            _userService.update(id, userEdit);
+            User user = _userService.update(id, userEdit);
+            return Response.ok(user.toUserView(), "User edited successfully!");
         } catch (Exception e) {
             e.printStackTrace();
+            return Response.fail();
         }
     }
 
-    @PostMapping("/create")
-    public User createProfile(@RequestBody User user) {
-        try {
-            _userService.create(user);
-            return user;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    @PostMapping("/create")
+//    public Response<UserView> createProfile(@RequestBody User user) {
+//        try {
+//            User newUser = _userService.create(user);
+//            return Response.ok(newUser.toUserView(), "User created successfully!");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
     @PostMapping("/inactive/{id}")
-    public boolean inactiveProfile(@PathVariable(name = "id") int id) {
+    public Response<Object> inactiveProfile(@PathVariable(name = "id") int id) {
         try {
             _userService.inActive(id);
-            return true;
+            return Response.ok(null, "Inactive!");
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return Response.fail();
         }
     }
 
     @PostMapping("/active/{id}")
-    public boolean activeProfile(@PathVariable(name = "id") int id) {
+    public Response<Object> activeProfile(@PathVariable(name = "id") int id) {
         try {
             _userService.active(id);
-            return true;
+            return Response.ok(null, "Active!");
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return Response.fail();
         }
     }
 }

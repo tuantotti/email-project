@@ -53,13 +53,13 @@ public class UserService {
         return res;
     }
 
-    public void update(int id, UserEdit userEdit) throws Exception {
+    public User update(int id, UserEdit userEdit) throws Exception {
         var user = _userRepository.getReferenceById(id);
         userEdit.applyToUser(user);
-        _userRepository.save(user);
+        return _userRepository.save(user);
     }
 
-    public void create(User user) {
+    public User create(User user) {
         user.setActive(true);
         user.setCreateAt(new Date());
 
@@ -69,7 +69,7 @@ public class UserService {
         credential.setUser(user);
         user.setCredential(credential);
 
-        _userRepository.save(user);
+        return _userRepository.save(user);
     }
 
     public JwtView create(UserCreateDto userCreateDto) {
@@ -110,20 +110,22 @@ public class UserService {
         }
     }
 
-    public void inActive(int id) {
+    public User inActive(int id) {
         var user = _userRepository.getReferenceById(id);
         if (user.isActive()) {
             user.setActive(false);
             _userRepository.save(user);
         }
+        return user;
     }
 
-    public void active(int id) {
+    public User active(int id) {
         var user = _userRepository.getReferenceById(id);
         if (!user.isActive()) {
             user.setActive(true);
             _userRepository.save(user);
         }
+        return user;
     }
 
 

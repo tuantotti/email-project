@@ -2,6 +2,7 @@ package com.email.project.backend.controller;
 
 import com.email.project.backend.dto.CredentialDto;
 import com.email.project.backend.dto.JwtView;
+import com.email.project.backend.dto.Response;
 import com.email.project.backend.dto.UserCreateDto;
 import com.email.project.backend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,20 +37,20 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "400", description = "User already exists", content = {@Content(mediaType = "application/json")})
     })
     @PostMapping("/signup")
-    public ResponseEntity<JwtView> signup(@RequestBody UserCreateDto userCreateDto) {
+    public Response<JwtView> signup(@RequestBody UserCreateDto userCreateDto) {
         JwtView jwtView = userService.create(userCreateDto);
-        return ResponseEntity.ok(jwtView);
+        return Response.ok(jwtView);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtView> login(@RequestBody CredentialDto credentialDto) {
+    public Response<JwtView> login(@RequestBody CredentialDto credentialDto) {
         JwtView jwtView = userService.authenticate(credentialDto);
-        return ResponseEntity.ok(jwtView);
+        return Response.ok(jwtView);
     }
 
     @PostMapping("/refresh-token")
-    public ResponseEntity<JwtView> refreshToken(@RequestBody JwtView jwtView) {
+    public Response<JwtView> refreshToken(@RequestBody JwtView jwtView) {
         JwtView response = userService.refreshToken(jwtView);
-        return ResponseEntity.ok(response);
+        return Response.ok(response);
     }
 }
