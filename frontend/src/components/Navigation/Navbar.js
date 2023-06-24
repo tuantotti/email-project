@@ -4,7 +4,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { ThemeProvider } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useClickOutSide from "../../hooks/useClickOutside";
@@ -15,6 +15,7 @@ import menu from "./Images/menu.png";
 import classes from "./Navbar.module.css";
 import SearchBar from "./SearchBar/SearchBar";
 import { logout } from '../../redux/slices/authenticationSlice';
+import { getUserInformation } from '../../redux/slices/getUserInfoSlice';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -24,7 +25,11 @@ function Navbar() {
   const handleLogout = () => {
     dispatch(logout())
   }
-  
+
+  useEffect(() => {
+    dispatch(getUserInformation())
+  }, [])
+
   return (
     <ThemeProvider theme={navbarTheme}>
       <div className={classes.navbar}>

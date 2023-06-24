@@ -14,11 +14,13 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import TextField from '@mui/material/TextField';
 import { useFormik } from "formik";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import * as Yup from "yup";
 import headerImg from "../../../assets/img/personal-infor-header.png";
 import personalInformationTheme from "../../../theme/PersonalInformation.theme";
 import "./PersonalInformation.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInformation } from '../../../redux/slices/getUserInfoSlice';
 
 const ModalProfilePicture = ({ setShowModal, setSelectedFile, previewImage, setPreviewImage }) => {
     const inputRef = useRef(null);
@@ -59,6 +61,8 @@ const ModalProfilePicture = ({ setShowModal, setSelectedFile, previewImage, setP
 }
 
 function PersonalInformation() {
+    const dispatch = useDispatch();
+    const { user } = useSelector(state => state.getUserInfoSlice.user)
     const [showModal, setShowModal] = useState(false)
     const [showExtentName, setShowExtentName] = useState(false);
     const [showExtentEmail, setShowExtentEmail] = useState(false);
@@ -87,15 +91,15 @@ function PersonalInformation() {
 
     const formik = useFormik({
         initialValues: {
-            firstName: "Nguyen Van",
-            lastName: "A",
-            email: "nguyenvana_hanoi@gmail.com",
-            phoneNumber: "0912345678",
+            firstName: user?.firstName ||"Nguyen Van",
+            lastName: user?.lastName || "A",
+            email: user?.email || "nguyenvana_hanoi@gmail.com",
+            phoneNumber: user?.phoneNumber || "0912345678",
             password: "",
             confirmPassword: "",
         },
         validationSchema,
-        onSubmit: (values, { resetForm }) => {
+        onSubmit: (values) => {
             const formValues = {
                 firstName: values.firstName,
                 lastName: values.lastName,
@@ -114,6 +118,9 @@ function PersonalInformation() {
         event.preventDefault();
     };
 
+    useEffect(() => {
+        dispatch(getUserInformation())
+    }, [])
     return (
         <ThemeProvider theme={personalInformationTheme}>
             <form className="personal-info__container" onSubmit={formik.handleSubmit} id="form">
