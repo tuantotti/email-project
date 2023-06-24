@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { send } from "../../../redux/action/send";
 import ClearIcon from '@material-ui/icons/Clear';
-import attachIcon from "../Images/attach_icon.png"
-import classes from "./MailBox.module.css";
-import ReactQuill, { Quill } from 'react-quill';
+import React, { useRef, useState } from "react";
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useDispatch } from "react-redux";
+import { sendMailThunk } from "../../../redux/slices/sendMailSlice";
+import attachIcon from "../Images/attach_icon.png";
+import classes from "./MailBox.module.css";
 
 
 const modules = {
@@ -26,8 +26,11 @@ const modules = {
 }
 
 function MailBox({ hide }) {
+  const dispatch = useDispatch();
   const fileInputRef = useRef(null);
-  const [value, setValue] = useState("")
+  const [toAddress, setToAddress] = useState("")
+  const [subject, setSubject] = useState("")
+  const [body, setBody] = useState("")
   const [files, setFiles] = useState(null);
 
   const handleAttachIconClick = () => {
@@ -37,7 +40,7 @@ function MailBox({ hide }) {
   const handleFileSelect = () => {
     const files = fileInputRef.current.files;
     setFiles(Array.from(files))
-    console.log(files); 
+    console.log(files);
   };
 
   const bytesToKB = (bytes) => {
@@ -48,6 +51,15 @@ function MailBox({ hide }) {
     setFiles(prevFiles => prevFiles.filter((file, i) => i !== idx))
   }
 
+  const handleSendMail = () => {
+    if (toAddress) {
+      dispatch(sendMailThunk({
+        toAddress,
+        subject,
+        body
+      }))
+    }
+  }
 
   return (<div className={classes.form}>
     <div className={classes.mailBoxHeader}>
@@ -56,17 +68,17 @@ function MailBox({ hide }) {
     </div>
     <div className={classes.content}>
       <div className={classes.inputGroup}>
-        <input className={classes.input} placeholder="Người nhận" />
+        <input className={classes.input} placeholder="Người nhận" value={toAddress} onChange={(e) => setToAddress(e.target.value)} />
       </div>
       <hr></hr>
       <div className={classes.inputGroup}>
-        <input className={classes.input} placeholder="Tiêu đề" />
+        <input className={classes.input} placeholder="Tiêu đề" value={subject} onChange={(e) => setSubject(e.target.value)} />
       </div>
       <hr></hr>
       {/* <br />
       <div dangerouslySetInnerHTML={{ __html: value }}></div> */}
       <br />
-      <ReactQuill theme="snow" value={value} onChange={setValue} modules={modules} />
+      <ReactQuill theme="snow" value={body} onChange={setBody} modules={modules} />
       <div className={classes.fileAttachGroup}>
         {files?.length ? files?.map((file, idx) => (
           <div className={classes.file}>
@@ -79,7 +91,7 @@ function MailBox({ hide }) {
         )) : null}
       </div>
       <div className={classes.mailBoxFooter}>
-        <button className={classes.sendButton}>Gửi</button>
+        <button className={classes.sendButton} onClick={handleSendMail}>Gửi</button>
         <button className={classes.attachButton} onClick={handleAttachIconClick} >
           Đính kèm
           <img alt="attach_icon" src={attachIcon} className={classes.footerIcon} />
