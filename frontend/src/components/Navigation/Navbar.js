@@ -1,28 +1,30 @@
-import React from "react";
-import classes from "./Navbar.module.css";
-import glogo from "./Images/gmail_logo.png";
-import menu from "./Images/menu.png";
-import SearchBar from "./SearchBar/SearchBar";
-import IconButton from '@mui/material/IconButton';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import LogoutIcon from '@mui/icons-material/Logout';
-import Avatar from '@mui/material/Avatar';
-import man from "./Images/man.png";
-import { useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
-import navbarTheme from "../../theme/Navbar.theme";
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import useClickOutSide from "../../hooks/useClickOutside";
-import { removeAccessToken } from "../../utils/localStorage";
+import navbarTheme from "../../theme/Navbar.theme";
+import glogo from "./Images/gmail_logo.png";
+import man from "./Images/man.png";
+import menu from "./Images/menu.png";
+import classes from "./Navbar.module.css";
+import SearchBar from "./SearchBar/SearchBar";
+import { logout } from '../../redux/slices/authenticationSlice';
 
 function Navbar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { show, setShow, nodeRef } = useClickOutSide();
 
   const handleLogout = () => {
-    removeAccessToken();
-    navigate('/signin')
+    dispatch(logout())
   }
+  
   return (
     <ThemeProvider theme={navbarTheme}>
       <div className={classes.navbar}>
