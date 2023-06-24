@@ -38,6 +38,18 @@ public class StorageService {
         }
     }
 
+    public boolean deleteFileFromFileSystem(String fileName) {
+        boolean isDeleted = false;
+        try {
+            Files.delete(Path.of(folderPath + fileName));
+            isDeleted = true;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            return isDeleted;
+        }
+    }
+
     public boolean uploadFileToSystem(MultipartFile file) {
         String filePath = folderPath + file.getOriginalFilename();
         FileData comingFile = FileData.builder()

@@ -4,10 +4,7 @@ import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
 import jakarta.annotation.Nullable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +19,7 @@ public class MailDto {
     private String body;
     private String fromAddress;
     private String toAddress;
+    //    private List<MultipartFile> files;
     @Nullable
     private String ccAddress;
     @Nullable

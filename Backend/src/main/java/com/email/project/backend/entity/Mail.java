@@ -47,7 +47,7 @@ public class Mail {
     @Column(name = "is_read")
     private boolean is_read;
 
-    @OneToMany(mappedBy = "mail")
+    @OneToMany(mappedBy = "mail", cascade = CascadeType.ALL)
     private List<FileData> fileDataList;
 
     public MailDto toDto() {
