@@ -1,83 +1,97 @@
-import ArchiveIcon from "@material-ui/icons/Archive";
+import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
-import DeleteIcon from "@material-ui/icons/Delete";
-import LabelIcon from "@material-ui/icons/Label";
-import MarkunreadIcon from "@material-ui/icons/Markunread";
+import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
+import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
+import MarkEmailReadOutlinedIcon from '@mui/icons-material/MarkEmailReadOutlined';
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ReportIcon from "@material-ui/icons/Report";
-import WatchLaterIcon from "@material-ui/icons/WatchLater";
-import React, { useState } from "react";
+import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
+import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import Checkbox from '@mui/material/Checkbox';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { emptySelected } from "../../../redux/action/mailSelectAct";
-import { deleteMultiple } from "../../../redux/action/search";
-import more from "../Images/more.png";
-import refresh from "../Images/refresh.png";
+import { useParams } from "react-router-dom";
+import more from "../../../assets/img/more.png";
+import refresh from "../../../assets/img/refresh.png";
+import { getMailsThunk, handleMasterCheckboxChange, nextPage, prevPage } from "../../../redux/slices/getMailsSlice";
 import classes from "./HeadChecker.module.css";
 
 function HeadChecker() {
+  const status = useParams()['*'].toUpperCase();
   const dispatch = useDispatch();
-  const selectedMails = useSelector((state) => state.mailSelectRed);
-  const notChecked = (
-    <div className="navigate">
-      <button>
-        <img src={refresh} alt="refresh" />
-      </button>
-      <button>
-        <img src={more} alt="more" />
-      </button>
-    </div>
-  );
-  const [checked, setCheckBox] = useState(notChecked);
-  const navigate = (
-    <div className="navigate">
-      <ReportIcon />
-      <ArchiveIcon />
-      <DeleteIcon onClick={deleteMul} />
-      <MarkunreadIcon />
-      <WatchLaterIcon />
-      <AssignmentTurnedInIcon />
-      <CreateNewFolderIcon />
-      <LabelIcon />
-      <MoreVertIcon />
-    </div>
-  );
-  function showIcons(e) {
-    if (e.target.checked === true) {
-      setCheckBox(navigate);
-    } else {
-      setCheckBox(notChecked);
+  const { masterChecked, mailSelected, page, size, totalPages, loading } = useSelector((state) => state.getMailsSlice);
+
+  const showIcons = (e) => {
+    dispatch(handleMasterCheckboxChange(e.target.checked))
+  }
+
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      dispatch(nextPage());
+      dispatch(getMailsThunk({ status, page: page + 1, size }))
     }
   }
 
+  const handlePrevPage = () => {
+    if (page > 1) {
+      dispatch(prevPage());
+      dispatch(getMailsThunk({ status, page: page - 1, size }))
+    }
+  }
 
-  function deleteMul() {
-    dispatch(deleteMultiple(selectedMails));
-    dispatch(emptySelected());
+  const handleSpamEmail = () => {
+    console.log("🚀 ~ file: HeadChecker.js:76 ~ handleSpamEmail ~ mailSelected:", mailSelected.map((i) => i.id))
+  }
+
+  const handleDeleteEmails = () => {
+    console.log("🚀 ~ file: HeadChecker.js:76 ~ handleDeleteEmails ~ mailSelected:", mailSelected.map((i) => i.id))
+  }
+
+  const handleRefreshMail = (page, size) => {
+    dispatch(getMailsThunk({ status, page, size }))
   }
 
   return (
-    <div className={classes.head}>
-      <div className={classes.headchecker}>
-        <input
-          className={classes.checbox}
-          type="checkbox"
-          onClick={showIcons}
-        />
-        {checked}
+      <div className={classes.head}>
+        <div className={classes.headchecker}>
+
+          <Checkbox
+            className={classes.checbox}
+            type="checkbox"
+            onClick={showIcons}
+            checked={masterChecked}
+          />
+          {masterChecked || mailSelected.length ? <div className="navigate">
+            <ReportOutlinedIcon className={classes.pointer} onClick={handleSpamEmail} />
+            <DeleteOutlinedIcon className={classes.pointer} onClick={handleDeleteEmails} />
+            <ArchiveOutlinedIcon className={classes.pointer}/>
+            <MarkEmailReadOutlinedIcon className={classes.pointer}/>
+            <WatchLaterOutlinedIcon className={classes.pointer}/>
+            <AssignmentTurnedInOutlinedIcon className={classes.pointer}/>
+            <CreateNewFolderOutlinedIcon className={classes.pointer}/>
+            <LabelOutlinedIcon className={classes.pointer}/>
+            <MoreVertIcon className={classes.pointer}/>
+          </div> : <div className="navigate">
+            <button onClick={() => handleRefreshMail(page, size)}>
+              <img src={refresh} alt="refresh" />
+            </button>
+            <button>
+              <img src={more} alt="more" />
+            </button>
+          </div>}
+        </div>
+        <div className={classes.headchecker}>
+          <span className={classes.mailAmount}>{(page - 1) * size + 1} - {page * size} trong số {totalPages * size}</span>
+          <button onClick={handlePrevPage} disabled={loading}>
+            <ArrowBackIosIcon className={classes.headSvg} />
+          </button>
+          <button onClick={handleNextPage} disabled={loading}>
+            <ArrowForwardIosIcon className={classes.headSvg} />
+          </button>
+        </div>
       </div>
-      <div className={classes.headchecker}>
-        <span className={classes.mailAmount}>{20} trong số 2.000</span>
-        <button onClick={() => {}}>
-          <ArrowBackIosIcon className={classes.headSvg}/>
-        </button>
-        <button onClick={() => {}}>
-         <ArrowForwardIosIcon className={classes.headSvg}/>
-        </button>
-      </div>
-    </div>
   );
 }
 

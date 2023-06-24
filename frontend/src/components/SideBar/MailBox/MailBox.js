@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { send } from "../../../redux/action/send";
 import ClearIcon from '@material-ui/icons/Clear';
 import attachIcon from "../Images/attach_icon.png"
 import classes from "./MailBox.module.css";
