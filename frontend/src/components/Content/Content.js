@@ -39,7 +39,7 @@ function Content() {
     < Navbar />
     <div className="body">
       <SideBar />
-      <div>
+      <div style={{marginRight: '20px'}}>
         {!mailId && <HeadChecker />}
         <hr />
         <Routes>

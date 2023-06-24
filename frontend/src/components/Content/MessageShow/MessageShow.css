@@ -264,3 +264,7 @@
   background-position: -222px -132px;
   background-size: 311px 150px;
 }
+
+.pointer {
+  cursor: pointer;
+}

@@ -5,7 +5,7 @@
 
 .body {
   display: grid;
-  grid-template-columns: 296px 1fr;
+  grid-template-columns: 280px 1fr;
   background-color: #f6f8fc;
   height: 100vh;
 }

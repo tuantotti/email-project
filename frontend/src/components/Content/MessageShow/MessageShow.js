@@ -1,25 +1,25 @@
-import ArchiveIcon from "@material-ui/icons/Archive";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
-import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
-import DeleteIcon from "@material-ui/icons/Delete";
-import LabelIcon from "@material-ui/icons/Label";
-import MarkunreadIcon from "@material-ui/icons/Markunread";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ReportIcon from "@material-ui/icons/Report";
-import WatchLaterIcon from "@material-ui/icons/WatchLater";
+import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
+import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurnedInOutlined';
+import CreateNewFolderOutlinedIcon from '@mui/icons-material/CreateNewFolderOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
+import MarkEmailReadOutlinedIcon from '@mui/icons-material/MarkEmailReadOutlined';
+import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
+import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import moment from "moment";
 import { React, useEffect } from "react";
 import { useSelector } from "react-redux";
-import moment from "moment";
 import { useNavigate, useParams } from "react-router-dom";
 import avatarDefault from "../../../assets/img/avatar_default.png";
+import IconArchive from "../../../assets/img/icon_archive.png";
+import IconImage from "../../../assets/img/icon_image.png";
+import IconPdf from "../../../assets/img/icon_pdf.png";
+import IconScript from "../../../assets/img/icon_script.png";
+import IconText from "../../../assets/img/icon_text.png";
+import IconVideo from "../../../assets/img/icon_video.png";
 import "./MessageShow.css";
-import IconArchive from "../../../assets/img/icon_archive.png"
-import IconImage from "../../../assets/img/icon_image.png"
-import IconPdf from "../../../assets/img/icon_pdf.png"
-import IconScript from "../../../assets/img/icon_script.png"
-import IconText from "../../../assets/img/icon_text.png"
-import IconVideo from "../../../assets/img/icon_video.png"
 
 
 export default function Message(props) {
@@ -47,15 +47,15 @@ export default function Message(props) {
       <button onClick={navigateBack}>
         <ArrowBackIcon className="navigate_back" />
       </button>
-      <ReportIcon />
-      <DeleteIcon />
-      <ArchiveIcon />
-      <MarkunreadIcon />
-      <WatchLaterIcon />
-      <AssignmentTurnedInIcon />
-      <CreateNewFolderIcon />
-      <LabelIcon />
-      <MoreVertIcon />
+      <ReportOutlinedIcon className="pointer"/>
+      <DeleteOutlinedIcon className="pointer"/>
+      <ArchiveOutlinedIcon className="pointer" />
+      <MarkEmailReadOutlinedIcon className="pointer" />
+      <WatchLaterOutlinedIcon className="pointer" />
+      <AssignmentTurnedInOutlinedIcon className="pointer" />
+      <CreateNewFolderOutlinedIcon className="pointer" />
+      <LabelOutlinedIcon className="pointer" />
+      <MoreVertIcon className="pointer" />
     </div>
   );
 
@@ -122,7 +122,7 @@ export default function Message(props) {
           <span className="mailAuthor">{mailData?.company_Name}</span>
           <span>{" "}</span>
           <span className="mailAddress">{"<"}{mailData?.email_address}{">"}</span>
-          <h3 className="mailAddressDestination">đến {false ? "Me" : "<test@gmail.com>"}</h3>
+          <h3 className="mailAddressDestination">to {true ? "Me" : "<test@gmail.com>"}</h3>
           <h3 className="mailTime">{handleTime(mailData?.time)}</h3>
         </div>
       </div>
