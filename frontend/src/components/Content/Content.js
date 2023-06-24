@@ -11,6 +11,7 @@ import Pagination from "./Pagination/Pagination";
 import SendMail from "./SendMail/SendMail";
 import Snooze from "./Snooze/Snooze";
 import Starred from "./Starred/Starred";
+import PersonalInformation from "./PersonalInformation/PersonalInformation";
 
 
 function Content() {
@@ -35,12 +36,13 @@ function Content() {
     <div className="body">
       <SideBar />
       <div className={classes.container}>
-        <HeadChecker />
+        {/* <HeadChecker /> */}
         <hr />
         <Routes>
           <Route index element={<Navigate to="inbox" />} />
           <Route path="/inbox/:mailId" element={<Message />} />
 
+          <Route path="/personal-information" element={<PersonalInformation />} />
           <Route
             path="/starred"
             element={
