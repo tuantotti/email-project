@@ -164,7 +164,6 @@ public class UserService {
     }
 
     /**
-     *
      * @return get the username of request
      */
     public static String getCurrentUsername() {

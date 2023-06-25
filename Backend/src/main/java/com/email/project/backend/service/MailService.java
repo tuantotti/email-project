@@ -4,6 +4,7 @@ import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.dto.SendMailDto;
 import com.email.project.backend.entity.Mail;
+import com.email.project.backend.entity.User;
 import com.email.project.backend.repository.FileDataRepository;
 import com.email.project.backend.repository.MailRepository;
 import com.email.project.backend.repository.UserRepository;
@@ -52,8 +53,17 @@ public class MailService {
         try {
             String email = UserService.getCurrentUsername();
             Optional<Page<Mail>> mailPage = mailRepository.getMailByToAddressAndStatus(email, mailStatus, pageable);
-            if (mailPage.isPresent())
-                return mailPage.get().map(mail -> mail.toDto());
+            if (mailPage.isPresent()) {
+                Page<MailDto> mailDtos = mailPage.get().map(mail -> mail.toDto());
+                mailDtos.forEach(mailDto -> {
+                    Optional<User> fromUserOptional = userRepository.getUserByEmail(mailDto.getFromAddress());
+                    if (fromUserOptional.isPresent()) {
+                        mailDto.setFromName(fromUserOptional.get().getFirstName() + " " + fromUserOptional.get().getLastName());
+                    }
+                });
+
+                return mailDtos;
+            }
         } catch (DataAccessException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
