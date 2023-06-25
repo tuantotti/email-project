@@ -8,8 +8,6 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
-import static com.email.project.backend.constant.Constant.SPLIT_STRING;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -35,9 +33,6 @@ public class Mail {
     @Column(name = "bcc_address")
     private String bccAddress;
 
-    @Column(name = "file_names")
-    private String fileNames;
-
     @Column(name = "sent_date")
     private Date sendDate;
 
@@ -45,10 +40,14 @@ public class Mail {
     private Date receivedDate;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private MailStatus status;
 
     @Column(name = "is_read")
     private boolean is_read;
+
+    @OneToMany(mappedBy = "mail", cascade = CascadeType.ALL)
+    private List<FileData> fileDataList;
 
     public MailDto toDto() {
         return MailDto.builder()
@@ -58,7 +57,7 @@ public class Mail {
                 .ccAddress(ccAddress)
                 .subject(subject)
                 .body(body)
-                .fileNames(List.of(fileNames.split(SPLIT_STRING)))
+                .fileDataList(fileDataList)
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
                 .is_read(is_read)
