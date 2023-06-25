@@ -15,7 +15,8 @@ import IconText from "../../../assets/img/icon_text.png"
 import IconVideo from "../../../assets/img/icon_video.png"
 import { handleChildCheckboxChange } from "../../../redux/slices/getMailsSlice";
 
-function Email({ index, id, company, description, subject, time, email_address, isRead, isStarred }) {
+function Email({ index, id, subject, body, fromAddress, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }) {
+  const isStarred = status.includes("STARRED")
   const navigate = useNavigate();
   const checkBoxRef = useRef();
   const dispatch = useDispatch();
@@ -23,13 +24,13 @@ function Email({ index, id, company, description, subject, time, email_address, 
   const path = useParams()['*']
   const [showOnHover, setShowOnHover] = useState(false);
   const [starred, setStarred] = useState(() => isStarred && 1)
-  const listFile = [
+  // const fileDataList = [
     // { name: 'report.txt' },
     // { name: 'Cambridge Ielts 11.zip' },
     // { name: 'Cambridge Ielts 17.pdf' },
     // { name: 'Speaking Part II.mp4' },
     // { name: 'abcdefghbcaed.png' },
-  ];
+  // ];
 
   const handlingShowOnOver = (e) => {
     e.stopPropagation();
@@ -106,9 +107,9 @@ function Email({ index, id, company, description, subject, time, email_address, 
         onMouseEnter={handlingShowOnOver}
         onMouseLeave={handlingShowOnOut}
         onMouseOver={handlingShowOnOver}
-        className={classNames(classes.list, { [classes.isRead]: isRead, [classes.containFile]: listFile.length, [classes.flexStart]: listFile.length })}
+        className={classNames(classes.list, { [classes.isRead]: isRead, [classes.containFile]: fileDataList.length, [classes.flexStart]: fileDataList.length })}
       >
-        <div className={classes.check}>
+        <div className={classes.check} style={fileDataList.length ? {} : {marginTop: 0}}>
           <Checkbox
             ref={checkBoxRef}
             onChange={handleSelectMail}
@@ -124,18 +125,18 @@ function Email({ index, id, company, description, subject, time, email_address, 
         <div
           onClick={showMail}
           className={classes.company} >
-          <div className={classNames(classes.mailLineContainer, { [classes.flexStart]: listFile.length })} >
-            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead })}>{company}</h3>
+          <div className={classNames(classes.mailLineContainer, { [classes.flexStart]: fileDataList.length })} >
+            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead })}>{fromAddress}</h3>
             <div className={classes.groupContainFile}>
               <div className={classes.flexItem}>
-                <h3 className={classNames(classes.mailTitle, { [classes.fontWeightLight]: isRead })}>{description}</h3>
+                <h3 className={classNames(classes.mailTitle, { [classes.fontWeightLight]: isRead })}>{subject}</h3>
                 {!showOnHover && (
-                  <p className={classNames(classes.mailTime, { [classes.fontWeightLight]: isRead })}>{handleTime(time)}</p>
+                  <p className={classNames(classes.mailTime, { [classes.fontWeightLight]: isRead })}>{handleTime(sendDate)}</p>
                 )}
               </div>
 
-              {listFile.length ? <div className={classes.fileGroup}>
-                {listFile.map((item, idx) => {
+              {fileDataList.length ? <div className={classes.fileGroup}>
+                {fileDataList.map((item, idx) => {
                   if (idx <= 2) {
                     return (<div className={classes.fileItem}>
                       <img src={handleFileType(item.name)} className={classes.fileIcon} />
@@ -143,8 +144,8 @@ function Email({ index, id, company, description, subject, time, email_address, 
                     </div>)
                   }
                 })}
-                {listFile.length > 3 ? <div className={classNames(classes.fileItem, classes.fileOthers)}>
-                  <span className={classes.fileName}>+{listFile.length - 3}</span>
+                {fileDataList.length > 3 ? <div className={classNames(classes.fileItem, classes.fileOthers)}>
+                  <span className={classes.fileName}>+{fileDataList.length - 3}</span>
                 </div> : <></>}
               </div> : <></>}
             </div>

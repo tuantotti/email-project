@@ -22,14 +22,18 @@ function Pagination({ data, dataLimit, currentPage, path }) {
             index={i}
             key={d.id}
             id={d.id}
-            company={d.company_Name}
-            description={d.description}
             subject={d.subject}
-            time={d.time}
-            email_address={d.email_address}
-            isRead={d.isRead}
+            body={d.body}
+            fromAddress={d.fromAddress}
+            toAddress={d.toAddress}
+            ccAddress={d.ccAddress}
+            bccAddress={d.bccAddress}
+            sendDate={d.sendDate}
+            receivedDate={d.receivedDate}
+            status={d.status}
+            fileDataList={d.fileDataList}
+            isRead={d._read}
             isStarred={d.isStarred}
-            path={path}
           />
         );
       })}

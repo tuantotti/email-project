@@ -16,12 +16,11 @@ import Starred from "./Starred/Starred";
 
 
 function Content() {
-  const dispatch = useDispatch()
   const { mails, loading } = useSelector(state => state.getMailsSlice)
   const accessToken = useSelector(state => state.authenticationSlice.accessToken)
   const [path, mailId] = useParams()['*'].split('/');
   const mainContent = (children) => {
-    return mails && mails.length ? <div className='mainContent'>
+    return <div className='mainContent' style={mails.length ? {} : { padding: 0 }}>
       {loading && <Box sx={{
         position: 'absolute',
         top: 0,
@@ -32,14 +31,14 @@ function Content() {
       </Box>}
       {loading && <div className="overlay"></div>}
       {children}
-    </div> : <></>
+    </div>
   }
 
   return accessToken ? (<div className="App">
     < Navbar />
     <div className="body">
       <SideBar />
-      <div style={{marginRight: '20px'}}>
+      <div style={{ marginRight: '20px' }}>
         {!mailId && <HeadChecker />}
         <hr />
         <Routes>

@@ -1,16 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import dataFake from "../../email.json";
 import axiosInstance from '../../api/axios'
+import API from "../../api/api";
 
 const initialState = {
-    mails: dataFake.slice(0, 30),
+    mails: [],
     loading: false,
     error: false,
     page: 1,
-    size: 20,
+    size: 2,
     totalPages: 10,
     masterChecked: false,
-    childChecked: dataFake.slice(0, 30).map(() => false),
+    childChecked: [],
     mailSelected: [],
 }
 
@@ -18,8 +19,7 @@ export const getMailsThunk = createAsyncThunk(
     "getMails",
     async ({ status, page, size }) => {
         try {
-            const response = await axiosInstance.get(`/api/mail?status=${status}&page=${page}&size=${size}`);
-            console(response.data)
+            const response = await axiosInstance.get(`${API.GET_MAIL}?status=${status}&page=${page - 1}&size=${size}`);
             return response.data;
         } catch (err) {
             throw new Error("Error!");
@@ -31,9 +31,6 @@ export const getMailsSlice = createSlice({
     name: "getMails",
     initialState,
     reducers: {
-        getMails: (state) => {
-            state.mails = dataFake;
-        },
         nextPage: (state) => {
             state.page++;
         },
@@ -80,11 +77,12 @@ export const getMailsSlice = createSlice({
             })
             .addCase(getMailsThunk.fulfilled, (state, action) => {
                 state.loading = false;
-                // state.mails = action.payload.content;
-                // state.totalPages = action.payload.totalPages;
+                state.mails = action.payload.content;
+                state.childChecked = action.payload.content.map(() => false);
+                state.totalPages = action.payload.totalPages;
             });
     },
 });
 
-export const { getMails, nextPage, prevPage, setPage, handleMasterCheckboxChange, handleChildCheckboxChange } = getMailsSlice.actions;
+export const { nextPage, prevPage, setPage, handleMasterCheckboxChange, handleChildCheckboxChange } = getMailsSlice.actions;
 export default getMailsSlice.reducer;

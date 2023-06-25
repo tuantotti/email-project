@@ -21,7 +21,7 @@ import classes from "./HeadChecker.module.css";
 function HeadChecker() {
   const status = useParams()['*'].toUpperCase();
   const dispatch = useDispatch();
-  const { masterChecked, mailSelected, page, size, totalPages, loading } = useSelector((state) => state.getMailsSlice);
+  const { mails, masterChecked, mailSelected, page, size, totalPages, loading } = useSelector((state) => state.getMailsSlice);
 
   const showIcons = (e) => {
     dispatch(handleMasterCheckboxChange(e.target.checked))
@@ -54,44 +54,44 @@ function HeadChecker() {
   }
 
   return (
-      <div className={classes.head}>
-        <div className={classes.headchecker}>
+    <div className={classes.head}>
+      <div className={classes.headchecker}>
 
-          <Checkbox
-            className={classes.checbox}
-            type="checkbox"
-            onClick={showIcons}
-            checked={masterChecked}
-          />
-          {masterChecked || mailSelected.length ? <div className="navigate">
-            <ReportOutlinedIcon className={classes.pointer} onClick={handleSpamEmail} />
-            <DeleteOutlinedIcon className={classes.pointer} onClick={handleDeleteEmails} />
-            <ArchiveOutlinedIcon className={classes.pointer}/>
-            <MarkEmailReadOutlinedIcon className={classes.pointer}/>
-            <WatchLaterOutlinedIcon className={classes.pointer}/>
-            <AssignmentTurnedInOutlinedIcon className={classes.pointer}/>
-            <CreateNewFolderOutlinedIcon className={classes.pointer}/>
-            <LabelOutlinedIcon className={classes.pointer}/>
-            <MoreVertIcon className={classes.pointer}/>
-          </div> : <div className="navigate">
-            <button onClick={() => handleRefreshMail(page, size)}>
-              <img src={refresh} alt="refresh" />
-            </button>
-            <button>
-              <img src={more} alt="more" />
-            </button>
-          </div>}
-        </div>
-        <div className={classes.headchecker}>
-          <span className={classes.mailAmount}>{(page - 1) * size + 1} - {page * size} trong số {totalPages * size}</span>
-          <button onClick={handlePrevPage} disabled={loading}>
-            <ArrowBackIosIcon className={classes.headSvg} />
+        <Checkbox
+          className={classes.checbox}
+          type="checkbox"
+          onClick={showIcons}
+          checked={masterChecked}
+        />
+        {masterChecked || mailSelected.length ? <div className="navigate">
+          <ReportOutlinedIcon className={classes.pointer} onClick={handleSpamEmail} />
+          <DeleteOutlinedIcon className={classes.pointer} onClick={handleDeleteEmails} />
+          <ArchiveOutlinedIcon className={classes.pointer} />
+          <MarkEmailReadOutlinedIcon className={classes.pointer} />
+          <WatchLaterOutlinedIcon className={classes.pointer} />
+          <AssignmentTurnedInOutlinedIcon className={classes.pointer} />
+          <CreateNewFolderOutlinedIcon className={classes.pointer} />
+          <LabelOutlinedIcon className={classes.pointer} />
+          <MoreVertIcon className={classes.pointer} />
+        </div> : <div className="navigate">
+          <button onClick={() => handleRefreshMail(page, size)}>
+            <img src={refresh} alt="refresh" />
           </button>
-          <button onClick={handleNextPage} disabled={loading}>
-            <ArrowForwardIosIcon className={classes.headSvg} />
+          <button>
+            <img src={more} alt="more" />
           </button>
-        </div>
+        </div>}
       </div>
+      <div className={classes.headchecker}>
+        <span className={classes.mailAmount}>{totalPages === 1 || !mails.length ? `${(page - 1) * size + 1} - ${mails.length} trong số ${mails.length}` : `${(page - 1) * size + 1} - ${page * size} trong số ${totalPages * size}`}</span>
+        <button onClick={handlePrevPage} disabled={loading}>
+          <ArrowBackIosIcon className={classes.headSvg} />
+        </button>
+        <button onClick={handleNextPage} disabled={loading}>
+          <ArrowForwardIosIcon className={classes.headSvg} />
+        </button>
+      </div>
+    </div>
   );
 }
 
