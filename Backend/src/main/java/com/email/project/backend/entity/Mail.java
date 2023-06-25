@@ -44,7 +44,7 @@ public class Mail {
     private MailStatus status;
 
     @Column(name = "is_read")
-    private boolean is_read;
+    private boolean isRead;
 
     @OneToMany(mappedBy = "mail", cascade = CascadeType.ALL)
     private List<FileData> fileDataList;
@@ -60,7 +60,7 @@ public class Mail {
                 .fileDataList(fileDataList)
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
-                .is_read(is_read)
+                .isRead(isRead)
                 .status(status)
                 .build();
     }
