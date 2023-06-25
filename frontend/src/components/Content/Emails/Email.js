@@ -14,6 +14,7 @@ import IconScript from "../../../assets/img/icon_script.png"
 import IconText from "../../../assets/img/icon_text.png"
 import IconVideo from "../../../assets/img/icon_video.png"
 import { handleChildCheckboxChange } from "../../../redux/slices/getMailsSlice";
+import { starMailThunk } from "../../../redux/slices/starMailSlice";
 
 function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }) {
   const isStarred = status.includes("STARRED")
@@ -87,6 +88,11 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
 
   }
 
+  function handleStarMail(mailId, newValue) {
+    setStarred(newValue)
+    dispatch(starMailThunk({id: mailId, status: newValue ? "STARRED" : "INBOX"}))
+  }
+
   return (
     <React.Fragment>
       <div
@@ -105,7 +111,7 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
             className={classes.starred}
             max={1}
             value={starred}
-            onChange={(event, newValue) => setStarred(newValue)}
+            onChange={(event, newValue) => handleStarMail(id, newValue)}
           />
         </div>
         <div

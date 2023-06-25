@@ -3,6 +3,7 @@ const API = {
     LOGIN: '/api/login',
     SIGN_UP: '/api/signup',
     GET_MAIL: '/api/mail',
+    STAR_MAIL: '/api/mail/status'
 }
 
 export default API
