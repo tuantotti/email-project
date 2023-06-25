@@ -16,6 +16,7 @@ function Pagination({ data, dataLimit, currentPage, path }) {
 
   return (
     <div className={classes.Pagination}>
+      <hr className={classes.hr} />
       {mails.map((d, i) => {
         return (
           <Email
@@ -25,6 +26,7 @@ function Pagination({ data, dataLimit, currentPage, path }) {
             subject={d.subject}
             body={d.body}
             fromAddress={d.fromAddress}
+            fromName={d.fromName}
             toAddress={d.toAddress}
             ccAddress={d.ccAddress}
             bccAddress={d.bccAddress}
@@ -32,7 +34,7 @@ function Pagination({ data, dataLimit, currentPage, path }) {
             receivedDate={d.receivedDate}
             status={d.status}
             fileDataList={d.fileDataList}
-            isRead={d._read}
+            isRead={d.isRead}
             isStarred={d.isStarred}
           />
         );

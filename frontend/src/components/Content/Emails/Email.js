@@ -15,7 +15,7 @@ import IconText from "../../../assets/img/icon_text.png"
 import IconVideo from "../../../assets/img/icon_video.png"
 import { handleChildCheckboxChange } from "../../../redux/slices/getMailsSlice";
 
-function Email({ index, id, subject, body, fromAddress, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }) {
+function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }) {
   const isStarred = status.includes("STARRED")
   const navigate = useNavigate();
   const checkBoxRef = useRef();
@@ -24,13 +24,6 @@ function Email({ index, id, subject, body, fromAddress, toAddress, ccAddress, bc
   const path = useParams()['*']
   const [showOnHover, setShowOnHover] = useState(false);
   const [starred, setStarred] = useState(() => isStarred && 1)
-  // const fileDataList = [
-    // { name: 'report.txt' },
-    // { name: 'Cambridge Ielts 11.zip' },
-    // { name: 'Cambridge Ielts 17.pdf' },
-    // { name: 'Speaking Part II.mp4' },
-    // { name: 'abcdefghbcaed.png' },
-  // ];
 
   const handlingShowOnOver = (e) => {
     e.stopPropagation();
@@ -56,13 +49,6 @@ function Email({ index, id, subject, body, fromAddress, toAddress, ccAddress, bc
 
   function handleSelectMail(e) {
     dispatch(handleChildCheckboxChange({ index, isChecked: e.target.checked }))
-    // e.stopPropagation();
-    // e.preventDefault();
-    if (e.target.checked) {
-      //   dispatch(addToSelected(id));
-    } else {
-      //   dispatch(remFromSelected(id));
-    }
   }
 
   function handleFileType(name) {
@@ -126,7 +112,7 @@ function Email({ index, id, subject, body, fromAddress, toAddress, ccAddress, bc
           onClick={showMail}
           className={classes.company} >
           <div className={classNames(classes.mailLineContainer, { [classes.flexStart]: fileDataList.length })} >
-            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead })}>{fromAddress}</h3>
+            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead })}>{fromName}</h3>
             <div className={classes.groupContainFile}>
               <div className={classes.flexItem}>
                 <h3 className={classNames(classes.mailTitle, { [classes.fontWeightLight]: isRead })}>{subject}</h3>
