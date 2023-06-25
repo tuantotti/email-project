@@ -3,6 +3,7 @@ package com.email.project.backend.service;
 import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.dto.SendMailDto;
+import com.email.project.backend.dto.UpdateMail;
 import com.email.project.backend.entity.Mail;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.repository.FileDataRepository;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -149,7 +151,23 @@ public class MailService {
     }
 
     @Transactional
-    public void updateMailStatus(Mail mail) {
-        mailRepository.updateStatusById(mail.getId(), mail.getStatus());
+    public void updateMailStatus(UpdateMail mail) {
+        String ownerEmail = UserService.getCurrentUsername();
+        try {
+            Optional<Mail> mailOptional = mailRepository.findById(mail.getId());
+            if (mailOptional.get().getToAddress().equals(ownerEmail)) {
+                mailRepository.updateStatusById(mail.getId(), mail.getStatus());
+            } else {
+                String msg = "user with " + ownerEmail + " is not the owner of mail with id " + mail.getId();
+                log.error(msg);
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, msg);
+            }
+        } catch (DataAccessException e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 }

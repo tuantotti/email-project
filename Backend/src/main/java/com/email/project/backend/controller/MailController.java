@@ -3,6 +3,7 @@ package com.email.project.backend.controller;
 import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.dto.SendMailDto;
+import com.email.project.backend.dto.UpdateMail;
 import com.email.project.backend.entity.Mail;
 import com.email.project.backend.service.MailService;
 import com.email.project.backend.service.StorageService;
@@ -40,7 +41,7 @@ public class MailController {
         return ResponseEntity.ok(mailDtoList);
     }
 
-    @PostMapping
+    @PostMapping("/send")
     public ResponseEntity<Void> sendMail(@ModelAttribute SendMailDto sendMailDto) {
         mailService.sendMail(sendMailDto);
 
@@ -63,8 +64,9 @@ public class MailController {
     }
 
     @PutMapping("/status")
-    public void updateMailStatus(@RequestBody Mail mail) {
+    public ResponseEntity<?> updateMailStatus(@RequestBody UpdateMail mail) {
         mailService.updateMailStatus(mail);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
