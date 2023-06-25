@@ -28,9 +28,13 @@ public class AuthorizationFilter extends OncePerRequestFilter {
         String username;
         String accessToken;
         String tokenHeader = request.getHeader("Authorization");
-        // for prelight request from browser
-        boolean isNullString = tokenHeader.substring(7).equals("null");
-        if (tokenHeader != null && tokenHeader.startsWith("Bearer") && !isNullString) {
+        if (tokenHeader != null && tokenHeader.startsWith("Bearer")) {
+            // for prelight request from browser
+            boolean isNullString = tokenHeader.substring(7).equals("null");
+            if (isNullString) {
+                filterChain.doFilter(request, response);
+                return;
+            }
             accessToken = tokenHeader.substring(7);
             username = jwtService.extractUsernameFromToken(accessToken);
 

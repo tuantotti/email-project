@@ -2,10 +2,11 @@ package com.email.project.backend.service;
 
 import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
-import com.email.project.backend.entity.FileData;
+import com.email.project.backend.dto.SendMailDto;
 import com.email.project.backend.entity.Mail;
 import com.email.project.backend.repository.FileDataRepository;
 import com.email.project.backend.repository.MailRepository;
+import com.email.project.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,67 +32,72 @@ public class MailService {
     private final MailRepository mailRepository;
     private final StorageService storageService;
 
+    private final UserRepository userRepository;
+
     private final FileDataRepository fileDataRepository;
     private final JavaMailSender javaMailSender;
 
     @Autowired
     public MailService(MailRepository mailRepository, StorageService storageService,
-                       FileDataRepository fileDataRepository, JavaMailSender javaMailSender) {
+                       UserRepository userRepository, FileDataRepository fileDataRepository,
+                       JavaMailSender javaMailSender) {
         this.mailRepository = mailRepository;
         this.storageService = storageService;
+        this.userRepository = userRepository;
         this.fileDataRepository = fileDataRepository;
         this.javaMailSender = javaMailSender;
     }
 
     public Page<MailDto> getMail(MailStatus mailStatus, Pageable pageable) {
-        Page<MailDto> mailDtos = new PageImpl<>(new ArrayList<>());
         try {
-//            Optional<Page<Mail>> mailPage = mailRepository.getMailByStatus(mailStatus, pageable);
-//            if (mailPage.isPresent())
-//                mailDtos = mailPage.get().map(mail -> mail.toDto());
-            List<FileData> fileDataList = List.of(new FileData(), new FileData(), new FileData());
-            MailDto mailDto = MailDto.builder()
-                    .toAddress("tuan.nv198269@sis.hust.edu.vn")
-                    .fromAddress("dat.dt1234@gmail.com")
-                    .ccAddress("")
-                    .bccAddress("")
-                    .body("Hello")
-                    .subject("Hello")
-                    .fileDataList(fileDataList)
-                    .receivedDate(new Date())
-                    .sendDate(new Date())
-                    .is_read(false)
-                    .status(mailStatus)
-                    .build();
-
-            MailDto mailDto2 = MailDto.builder()
-                    .toAddress("tuan.nv198269@sis.hust.edu.vn")
-                    .fromAddress("dat.dt1234@gmail.com")
-                    .ccAddress("")
-                    .bccAddress("")
-                    .body("Hello")
-                    .subject("Hello")
-                    .fileDataList(new ArrayList<>())
-                    .receivedDate(new Date())
-                    .sendDate(new Date())
-                    .is_read(false)
-                    .status(mailStatus)
-                    .build();
-
-            List<MailDto> list = List.of(mailDto, mailDto2);
-            mailDtos = new PageImpl<>(list);
+            String email = UserService.getCurrentUsername();
+            Optional<Page<Mail>> mailPage = mailRepository.getMailByToAddressAndStatus(email, mailStatus, pageable);
+            if (mailPage.isPresent())
+                return mailPage.get().map(mail -> mail.toDto());
         } catch (DataAccessException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         } catch (Exception e) {
+            log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
 
-        return mailDtos;
+        return new PageImpl<>(new ArrayList<>());
     }
 
-    public MailDto sendMail(MailDto mailDto) {
-        return null;
+    public void sendMail(SendMailDto sendMailDto) {
+        try {
+            String currentUsername = UserService.getCurrentUsername();
+            String fromAddress = sendMailDto.getFromAddress();
+            String toAddress = sendMailDto.getToAddress();
+            String ccAddress = sendMailDto.getCcAddress();
+            String bccAddress = sendMailDto.getBccAddress();
+            sendMailDto.setSendDate(new Date());
+
+            // check mail is exist
+            if (!currentUsername.equals(fromAddress)) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Current email and from email must be the same");
+            }
+
+            if (!userRepository.getUserByEmail(toAddress).isPresent()) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "toAddress is not exist");
+            }
+
+            Mail mail = sendMailDto.toEntity(storageService.getFolderPath());
+            mail.setStatus(MailStatus.INBOX);
+
+            // save mail to database
+            mailRepository.save(mail);
+
+            // save file to filesystem
+            sendMailDto.getFiles().stream().forEach(file -> storageService.uploadFileToSystem(file));
+        } catch (DataAccessException e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 
     public MailDto sendSimpleMail(MailDto details) {

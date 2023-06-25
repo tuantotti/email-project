@@ -19,7 +19,6 @@ public class MailDto {
     private String body;
     private String fromAddress;
     private String toAddress;
-    //    private List<MultipartFile> files;
     @Nullable
     private String ccAddress;
     @Nullable

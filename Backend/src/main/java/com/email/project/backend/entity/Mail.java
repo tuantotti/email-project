@@ -8,8 +8,6 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
-import static com.email.project.backend.constant.Constant.SPLIT_STRING;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -42,6 +40,7 @@ public class Mail {
     private Date receivedDate;
 
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private MailStatus status;
 
     @Column(name = "is_read")

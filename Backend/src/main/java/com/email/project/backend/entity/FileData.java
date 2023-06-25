@@ -1,5 +1,6 @@
 package com.email.project.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class FileData {
     private String filePath;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mail_id")
+    @JoinColumn(name = "mail_id", referencedColumnName = "id")
+    @JsonIgnore
     private Mail mail;
 }
