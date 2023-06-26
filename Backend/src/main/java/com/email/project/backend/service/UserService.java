@@ -144,7 +144,9 @@ public class UserService {
             }
             return credentialRepository.save(credential);
         } catch (AuthenticationException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password!");
+        } catch (Exception e) {
+            throw new RuntimeException("New password and confirm password is not equals!");
         }
     }
 
