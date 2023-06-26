@@ -20,7 +20,7 @@ import headerImg from "../../../assets/img/personal-infor-header.png";
 import personalInformationTheme from "../../../theme/PersonalInformation.theme";
 import "./PersonalInformation.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInformation } from '../../../redux/slices/getUserInfoSlice';
+import { editUserInformation, getUserInformation } from '../../../redux/slices/getUserInfoSlice';
 
 const ModalProfilePicture = ({ setShowModalPicture, setSelectedFile, previewImage, setPreviewImage }) => {
     const inputRef = useRef(null);
@@ -232,44 +232,38 @@ function PersonalInformation() {
         lastName: Yup.string().required('Please enter your last name'),
         email: Yup.string().email('Invalid email').required('Please enter your email'),
         phoneNumber: Yup.string().matches(/^[^a-z]+$/i, 'Invalid phone number').required('Please enter your phone number'),
-        password: Yup.string()
-            .required('Please enter your new password')
-            .matches(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/,
-                'Password must be stronger'
-            ),
-        confirmPassword: Yup.string()
-            .required('Please enter the new password again')
-            .oneOf([Yup.ref('password'), null], 'Password confirmation does not match'),
     });
 
     const formik = useFormik({
         initialValues: {
-            firstName: user?.firstName || "Nguyen Van",
-            lastName: user?.lastName || "A",
-            email: user?.email || "nguyenvana_hanoi@gmail.com",
-            phoneNumber: user?.phoneNumber || "0912345678",
-            password: "",
-            confirmPassword: "",
+            firstName: user?.firstName || "",
+            lastName: user?.lastName || "",
+            email: user?.email || "",
+            phoneNumber: user?.phoneNumber || "",
         },
         validationSchema,
         onSubmit: (values) => {
-            const formValues = {
-                firstName: values.firstName,
-                lastName: values.lastName,
-                email: values.email,
-                phoneNumber: values.phoneNumber,
-                password: values.password,
-            };
+            const { firstName, lastName, phoneNumber } = values
+            const newInfo = { ...user, firstName, lastName, phoneNumber };
+            console.log("🚀 ~ file: PersonalInformation.js:259 ~ PersonalInformation ~ newInfo:", newInfo)
 
-            console.log("🚀 ~ file: PersonalInformation.js:107 ~ PersonalInformation ~ formValues:", formValues)
+            dispatch(editUserInformation(newInfo))
         },
     });
 
+    useEffect(() => {
+        formik.setValues({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+        })
+    }, [user])
 
     useEffect(() => {
         dispatch(getUserInformation())
     }, [])
+
     return (
         <ThemeProvider theme={personalInformationTheme}>
             <form className="personal-info__container" onSubmit={formik.handleSubmit} id="form">

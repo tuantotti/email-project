@@ -6,6 +6,7 @@ const API = {
     STAR_MAIL: '/api/mail/status',
     SEND_MAIL: '/api/mail/send',
     GET_USER_INFO: '/api/user',
+    EDIT_USER_INFO: '/api/user/edit',
 }
 
 export default API
