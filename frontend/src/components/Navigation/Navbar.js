@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import glogo from "../../assets/img/gmail_logo.png";
 import man from "../../assets/img/man.png";
@@ -13,7 +13,6 @@ import useClickOutSide from "../../hooks/useClickOutside";
 import { logout } from '../../redux/slices/authenticationSlice';
 import { getUserInformation } from '../../redux/slices/getUserInfoSlice';
 import navbarTheme from "../../theme/Navbar.theme";
-import menu from "./Images/menu.png";
 import classes from "./Navbar.module.css";
 import SearchBar from "./SearchBar/SearchBar";
 
@@ -21,6 +20,7 @@ import SearchBar from "./SearchBar/SearchBar";
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.getUserInfoSlice)
   const { show, setShow, nodeRef } = useClickOutSide();
 
   const handleLogout = () => {
@@ -35,9 +35,6 @@ function Navbar() {
     <ThemeProvider theme={navbarTheme}>
       <div className={classes.navbar}>
         <div className={classes.menuBrand}>
-          <button>
-            <img src={menu} alt="menu" />
-          </button>
           <img src={glogo} alt="glogo" />
         </div>
         <SearchBar />
@@ -52,10 +49,10 @@ function Navbar() {
               <div className={classes.nameGroup}>
                 <div className={classes.inforDetail}>
                   <Avatar alt="avt" src={man} />
-                  <span className={classes.name}>Dat Dang</span>
+                  <span className={classes.name}>{user.firstName} {user.lastName}</span>
                 </div>
                 <div className={classes.divide}></div>
-                <span className={classes.emailAddress}>nguyenvana_hanoi@gmail.com</span>
+                <span className={classes.emailAddress}>{user.email}</span>
               </div>
               <div className={classes.actionText} onClick={() => { navigate("/personal-information") }}>
                 <span>

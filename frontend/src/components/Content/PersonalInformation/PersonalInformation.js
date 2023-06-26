@@ -22,7 +22,7 @@ import "./PersonalInformation.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInformation } from '../../../redux/slices/getUserInfoSlice';
 
-const ModalProfilePicture = ({ setShowModal, setSelectedFile, previewImage, setPreviewImage }) => {
+const ModalProfilePicture = ({ setShowModalPicture, setSelectedFile, previewImage, setPreviewImage }) => {
     const inputRef = useRef(null);
 
     const handleFileChange = (event) => {
@@ -51,7 +51,7 @@ const ModalProfilePicture = ({ setShowModal, setSelectedFile, previewImage, setP
                 <AddAPhotoOutlinedIcon />
                 <span>Add profile picture</span>
             </div>
-            <div className="profile-picture__close" onClick={() => setShowModal(false)}>
+            <div className="profile-picture__close" onClick={() => setShowModalPicture(false)}>
                 <IconButton aria-label="delete">
                     <CloseOutlinedIcon />
                 </IconButton>
@@ -59,17 +59,171 @@ const ModalProfilePicture = ({ setShowModal, setSelectedFile, previewImage, setP
         </div>
     </div>
 }
+const ModalChangePassword = ({ setShowModalPassword }) => {
+    const [showOldPassword, setOldShowPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
+    const validationSchema = Yup.object({
+        oldPassword: Yup.string()
+            .required('Please enter your old password')
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/,
+                'Password must be stronger'
+            ),
+        newPassword: Yup.string()
+            .required('Please enter your new password')
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/,
+                'Password must be stronger'
+            ),
+        confirmNewPassword: Yup.string()
+            .required('Please enter the new password again')
+            .oneOf([Yup.ref('newPassword'), null], 'Password confirmation does not match'),
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            oldPassword: "",
+            newPassword: "",
+            confirmNewPassword: "",
+        },
+        validationSchema,
+        onSubmit: (values) => {
+            const formValues = {
+                oldPassword: values.oldPassword,
+                newPassword: values.newPassword,
+                confirmNewPassword: values.confirmNewPassword,
+            };
+
+            console.log("🚀 ~ file: PersonalInformation.js:107 ~ PersonalInformation ~ formValues:", formValues)
+        },
+    });
+
+    const handleClickShowOldPassword = () => setOldShowPassword((show) => !show);
+    const handleClickShowNewPassword = () => setShowNewPassword((show) => !show);
+    const handleClickShowConfirmNewPassword = () => setShowConfirmNewPassword((show) => !show);
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    return <form className="profile-picture__container" onSubmit={formik.handleSubmit}>
+        <div className="change-pass__group">
+            <span className="profile-picture__title">Change your password</span>
+            <span className="signup-subtext-password-condition" style={{ margin: "16px 0px" }}>Password must contain at least one uppercase letter, one lowercase letter, one special character, one number, and be at least 8 characters long</span>
+
+            <div className="text-field-change-pass">
+                <FormControl variant="outlined" fullWidth>
+                    <InputLabel htmlFor="outlined-adornment-password">Old password</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showOldPassword ? 'text' : 'password'}
+
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowOldPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showOldPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="Old password"
+                        name="oldPassword"
+                        value={formik.values.oldPassword}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.oldPassword && Boolean(formik.errors.oldPassword)}
+
+                    />
+                </FormControl>
+                {formik.touched.oldPassword && formik.errors.oldPassword ? <span className="error-validation">{formik.errors.oldPassword}</span> : <span className="error-validation"></span>}
+            </div>
+            <div className="text-field-change-pass">
+                <FormControl variant="outlined" fullWidth>
+                    <InputLabel htmlFor="outlined-adornment-password">New password</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showNewPassword ? 'text' : 'password'}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowNewPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="New password"
+                        name="newPassword"
+                        value={formik.values.newPassword}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.newPassword && Boolean(formik.errors.newPassword)}
+                    />
+                </FormControl>
+                {formik.touched.newPassword && formik.errors.newPassword ? <span className="error-validation">{formik.errors.newPassword}</span> : <span className="error-validation"></span>}
+            </div>
+            <div className="text-field-change-pass">
+                <FormControl variant="outlined" fullWidth>
+                    <InputLabel htmlFor="outlined-adornment-password">Confirm new password</InputLabel>
+                    <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showConfirmNewPassword ? 'text' : 'password'}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowConfirmNewPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showConfirmNewPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        label="New password"
+                        name="confirmNewPassword"
+                        value={formik.values.confirmNewPassword}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.confirmNewPassword && Boolean(formik.errors.confirmNewPassword)}
+                    />
+                </FormControl>
+                {formik.touched.confirmNewPassword && formik.errors.confirmNewPassword ? <span className="error-validation">{formik.errors.confirmNewPassword}</span> : <span className="error-validation"></span>}
+            </div>
+            <div className="personal-info__save-info">
+                <Button
+                    variant="contained"
+                    sx={{ bgcolor: "#1A73E8" }}
+                    role="button"
+                    type="submit"
+                >
+                    Save
+                </Button>
+            </div>
+            <div className="profile-picture__close" onClick={() => setShowModalPassword(false)}>
+                <IconButton aria-label="delete">
+                    <CloseOutlinedIcon />
+                </IconButton>
+            </div>
+        </div>
+    </form>
+}
 function PersonalInformation() {
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.getUserInfoSlice.user)
-    const [showModal, setShowModal] = useState(false)
+    const { user } = useSelector(state => state.getUserInfoSlice)
+    const [showModalPicture, setShowModalPicture] = useState(false)
+    const [showModalPassword, setShowModalPassword] = useState(false)
     const [showExtentName, setShowExtentName] = useState(false);
     const [showExtentEmail, setShowExtentEmail] = useState(false);
     const [showExtentPhone, setShowExtentPhone] = useState(false);
-    const [showExtentPassword, setShowExtentPassword] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
 
@@ -91,7 +245,7 @@ function PersonalInformation() {
 
     const formik = useFormik({
         initialValues: {
-            firstName: user?.firstName ||"Nguyen Van",
+            firstName: user?.firstName || "Nguyen Van",
             lastName: user?.lastName || "A",
             email: user?.email || "nguyenvana_hanoi@gmail.com",
             phoneNumber: user?.phoneNumber || "0912345678",
@@ -112,11 +266,6 @@ function PersonalInformation() {
         },
     });
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
 
     useEffect(() => {
         dispatch(getUserInformation())
@@ -139,7 +288,7 @@ function PersonalInformation() {
                         <span className="personal-info__block-title">Basic info</span>
                         <span className="personal-info__block-subtitle">Some info may be visible to other people using Google services.</span>
                     </div>
-                    <div className="personal-info__block-group" onClick={() => setShowModal(true)}>
+                    <div className="personal-info__block-group" onClick={() => setShowModalPicture(true)}>
                         <div className="personal-info__block-group-main">
                             <span className="personal-info__block-cate">
                                 Profile Picture
@@ -261,7 +410,7 @@ function PersonalInformation() {
                     </div>
                     <div className="personal-info__block-divide"></div>
                     <div className="personal-info__block-group">
-                        <div className="personal-info__block-group-main" onClick={() => setShowExtentPassword(prev => !prev)}>
+                        <div className="personal-info__block-group-main" onClick={() => setShowModalPassword(true)}>
                             <span className="personal-info__block-cate">
                                 Password
                             </span>
@@ -270,70 +419,9 @@ function PersonalInformation() {
                             </span>
 
                             <IconButton aria-label="delete">
-                                {showExtentPassword ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                <KeyboardArrowDownIcon />
                             </IconButton>
                         </div>
-                        {showExtentPassword && <span className="signup-subtext-password-condition" style={{ margin: "0px 24px" }}>Password must contain at least one uppercase letter, one lowercase letter, one special character, one number, and be at least 8 characters long</span>}
-                        {showExtentPassword && <div className="personal-info__block-group-expansion">
-                            <div className="text-field-group-left">
-                                <FormControl variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                    <OutlinedInput
-                                        id="outlined-adornment-password"
-                                        type={showPassword ? 'text' : 'password'}
-                                        endAdornment={
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
-                                                    onMouseDown={handleMouseDownPassword}
-                                                    edge="end"
-                                                >
-                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        }
-                                        label="Password"
-                                        name="password"
-                                        value={formik.values.password}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        error={formik.touched.password && Boolean(formik.errors.password)}
-
-                                    />
-                                </FormControl>
-                                {formik.touched.password && formik.errors.password ? <span className="error-validation">{formik.errors.password}</span> : <span className="error-validation"></span>}
-                            </div>
-
-                            <div className="text-field-group-left">
-                                <FormControl variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-password">Confirm</InputLabel>
-                                    <OutlinedInput
-                                        id="outlined-adornment-password"
-                                        type={showConfirmPassword ? 'text' : 'password'}
-                                        endAdornment={
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    aria-label="toggle password visibility"
-                                                    onClick={handleClickShowConfirmPassword}
-                                                    onMouseDown={handleMouseDownPassword}
-                                                    edge="end"
-                                                >
-                                                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        }
-                                        label="Confirm"
-                                        name="confirmPassword"
-                                        value={formik.values.confirmPassword}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-                                    />
-                                </FormControl>
-                                {formik.touched.confirmPassword && formik.errors.confirmPassword ? <span className="error-validation">{formik.errors.confirmPassword}</span> : <span className="error-validation"></span>}
-                            </div>
-                        </div>}
                     </div>
 
                     <div className="personal-info__save-info">
@@ -349,13 +437,14 @@ function PersonalInformation() {
                 </div>
 
             </form>
-            {showModal && <ModalProfilePicture
-                setShowModal={setShowModal}
+            {showModalPicture && <ModalProfilePicture
+                setShowModalPicture={setShowModalPicture}
                 selectedFile={selectedFile}
                 setSelectedFile={setSelectedFile}
                 previewImage={previewImage}
                 setPreviewImage={setPreviewImage}
             />}
+            {showModalPassword && <ModalChangePassword setShowModalPassword={setShowModalPassword} />}
         </ThemeProvider>
     );
 }

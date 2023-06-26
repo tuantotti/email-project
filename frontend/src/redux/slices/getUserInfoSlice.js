@@ -7,8 +7,8 @@ export const getUserInformation = createAsyncThunk(
     "userInfor/get",
     async () => {
         try {
-            const response = await axiosInstance.get(API.GET_USER_INFO);
-            return response.data.data;
+            const response = await axiosInstance.get(API.GET_USER_INFO+"/4");
+            return response.data;
         } catch (err) {
             throw new Error(err)
         }
