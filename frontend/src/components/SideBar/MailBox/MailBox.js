@@ -1,5 +1,3 @@
-import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
 import ClearIcon from '@material-ui/icons/Clear';
 import React, { useRef, useState } from "react";
 import ReactQuill from 'react-quill';
@@ -33,7 +31,7 @@ function MailBox({ hide }) {
   const [toAddress, setToAddress] = useState("")
   const [subject, setSubject] = useState("")
   const [body, setBody] = useState("")
-  const [files, setFiles] = useState(null);
+  const [files, setFiles] = useState([]);
 
   const handleAttachIconClick = () => {
     fileInputRef.current.click();
@@ -50,7 +48,7 @@ function MailBox({ hide }) {
   }
 
   const bytesToMB = (bytes) => {
-    return (bytes / (1024*1024)).toFixed(2);
+    return (bytes / (1024 * 1024)).toFixed(2);
   }
 
   const removeFile = (idx) => {
@@ -59,10 +57,19 @@ function MailBox({ hide }) {
 
   const handleSendMail = () => {
     if (toAddress) {
-      dispatch(sendMailThunk({
+      console.log({
+        fromAddress: "dungnd@gmail.com",
         toAddress,
         subject,
-        body
+        body: body.replace("\\", ""),
+        files: files?.length ? files : []
+      })
+      dispatch(sendMailThunk({
+        fromAddress: "dungnd@gmail.com",
+        toAddress,
+        subject,
+        body,
+        files: files?.length ? files : []
       }))
     }
   }

@@ -9,15 +9,15 @@ const initialState = {
 }
 
 export const sendMailThunk = createAsyncThunk(
-    "getMails",
-    async ({ toAddress, subject, body }) => {
+    "sendMail",
+    async ({ fromAddress, toAddress, subject, body, files }) => {
         console.log({
             toAddress,
             subject,
             body
         })
         try {
-            const response = await axiosInstance.post(API.SEND_MAIL, { toAddress, subject, body });
+            const response = await axiosInstance.post(API.SEND_MAIL, { fromAddress, toAddress, subject, body, files });
             return response.data.data;
         } catch (err) {
             throw new Error("Error!");
