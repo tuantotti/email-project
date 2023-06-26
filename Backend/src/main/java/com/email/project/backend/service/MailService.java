@@ -20,13 +20,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -102,7 +98,7 @@ public class MailService {
             mailRepository.save(mail);
 
             // save file to filesystem
-            sendMailDto.getFiles().stream().forEach(file -> storageService.uploadFileToSystem(file));
+            Arrays.stream(sendMailDto.getFiles()).forEach(file -> storageService.uploadFileToSystem(file));
         } catch (DataAccessException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());

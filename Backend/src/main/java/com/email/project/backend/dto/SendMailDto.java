@@ -7,6 +7,7 @@ import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class SendMailDto implements Serializable {
     private String body;
     private String fromAddress;
     private String toAddress;
-    private List<MultipartFile> files;
+    private MultipartFile[] files;
     @Nullable
     private String ccAddress;
     @Nullable
@@ -31,7 +32,7 @@ public class SendMailDto implements Serializable {
     private Date sendDate;
 
     public List<FileData> getFileDataList(String folderPath) {
-        List<FileData> fileDataList = files.stream()
+        List<FileData> fileDataList = Arrays.stream(files)
                 .map(multipartfile -> {
                     String fileName = multipartfile.getOriginalFilename();
                     int extensionIndex = fileName.lastIndexOf(".");

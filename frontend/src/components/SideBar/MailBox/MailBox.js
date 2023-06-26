@@ -62,7 +62,10 @@ function MailBox({ hide }) {
       formData.append('toAddress', toAddress)
       formData.append('subject', subject)
       formData.append('body', body)
-      formData.append('files', files)
+
+      for (let i = 0 ; i < files.length ; i++) {
+        formData.append("files", files[i]);
+    }
       dispatch(sendMailThunk(formData))
     }
   }

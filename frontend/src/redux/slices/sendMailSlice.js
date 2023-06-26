@@ -11,9 +11,15 @@ const initialState = {
 export const sendMailThunk = createAsyncThunk(
     "sendMail",
     async (formData) => {
-        console.log(formData)
+        for (const pair of formData.entries()) {
+            console.log(`${pair[0]}, ${pair[1]}`);
+        }
         try {
-            const response = await axiosInstance.post(API.SEND_MAIL, formData);
+            const response = await axiosInstance.post(API.SEND_MAIL, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
             return response.data.data;
         } catch (err) {
             throw new Error("Error!");
