@@ -1,11 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
-import getMailsReducer from './slices/getMailsSlice'
 import authenticationSlice from './slices/authenticationSlice'
+import getMailsSlice from './slices/getMailsSlice'
+import starMailSlice from './slices/starMailSlice'
 import sendMailSlice from './slices/sendMailSlice'
+
 const reducer = {
-    getMailsReducer,
     authenticationSlice,
-    sendMailSlice,
+    getMailsSlice,
+    starMailSlice,
+    sendMailSlice
 };
 
 export const store = configureStore({ reducer })

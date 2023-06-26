@@ -3,7 +3,7 @@ package com.email.project.backend.dto;
 import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,24 +17,23 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MailDto {
-    @Nullable
+    private int id;
     private String subject;
     private String body;
     private String fromAddress;
+    private String fromName;
     private String toAddress;
-    @Nullable
     private String ccAddress;
-    @Nullable
     private String bccAddress;
     private Date sendDate;
     private Date receivedDate;
     private MailStatus status;
     private List<FileData> fileDataList;
-    @Nullable
-    private boolean is_read;
+    private boolean isRead;
 
     public Mail toEntity() {
         return Mail.builder()
+                .id(id)
                 .toAddress(toAddress)
                 .fromAddress(fromAddress)
                 .bccAddress(bccAddress)
@@ -44,8 +43,17 @@ public class MailDto {
                 .fileDataList(fileDataList)
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
-                .is_read(is_read)
+                .isRead(isRead)
                 .status(status)
                 .build();
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
+    }
+
+    @JsonProperty("isRead")
+    public boolean isRead() {
+        return isRead;
     }
 }

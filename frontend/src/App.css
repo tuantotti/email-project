@@ -1,22 +1,23 @@
 * {
   margin: 0;
+  box-sizing: border-box;
 }
 
 .body {
   display: grid;
-  grid-template-columns: 296px 1fr;
+  grid-template-columns: 280px 1fr;
   background-color: #f6f8fc;
-  min-height: 100vh;
-  height: 100%;
+  height: 100vh;
 }
+
 
 hr {
   border-top: 1px solid #f1f1f1;
 }
 
 .ql-editor {
-  max-height: 400px;
-  height: 400px;
+  max-height: 300px !important;
+  height: 300px !important;
   overflow-y: scroll;
 }
 .quill {

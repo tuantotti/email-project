@@ -1,3 +1,5 @@
+import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import ClearIcon from '@material-ui/icons/Clear';
 import React, { useRef, useState } from "react";
 import ReactQuill from 'react-quill';
@@ -47,6 +49,10 @@ function MailBox({ hide }) {
     return (bytes / 1024).toFixed(2);
   }
 
+  const bytesToMB = (bytes) => {
+    return (bytes / (1024*1024)).toFixed(2);
+  }
+
   const removeFile = (idx) => {
     setFiles(prevFiles => prevFiles.filter((file, i) => i !== idx))
   }
@@ -78,17 +84,19 @@ function MailBox({ hide }) {
       {/* <br />
       <div dangerouslySetInnerHTML={{ __html: value }}></div> */}
       <br />
-      <ReactQuill theme="snow" value={body} onChange={setBody} modules={modules} />
-      <div className={classes.fileAttachGroup}>
-        {files?.length ? files?.map((file, idx) => (
-          <div className={classes.file}>
-            <div className={classes.fileName}>
-              <h3>{file.name}</h3>
-              <span>({bytesToKB(file.size)}KB)</span>
+      <div className={classes.scrollContent}>
+        <ReactQuill theme="snow" value={body} onChange={setBody} modules={modules} />
+        <div className={classes.fileAttachGroup}>
+          {files?.length ? files?.map((file, idx) => (
+            <div className={classes.file}>
+              <div className={classes.fileName}>
+                <h3>{file.name}</h3>
+                <span>({bytesToKB(file.size) < 1024 ? bytesToKB(file.size) : bytesToMB(file.size)} {bytesToKB(file.size) < 1024 ? 'KB' : 'MB'})</span>
+              </div>
+              <ClearIcon style={{ cursor: "pointer", width: '18px', height: '18px' }} onClick={() => removeFile(idx)} />
             </div>
-            <ClearIcon style={{ cursor: "pointer", width: '18px', height: '18px' }} onClick={() => removeFile(idx)} />
-          </div>
-        )) : null}
+          )) : null}
+        </div>
       </div>
       <div className={classes.mailBoxFooter}>
         <button className={classes.sendButton} onClick={handleSendMail}>Gửi</button>
