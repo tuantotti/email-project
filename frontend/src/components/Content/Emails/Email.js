@@ -13,15 +13,16 @@ import IconPdf from "../../../assets/img/icon_pdf.png"
 import IconScript from "../../../assets/img/icon_script.png"
 import IconText from "../../../assets/img/icon_text.png"
 import IconVideo from "../../../assets/img/icon_video.png"
-import { handleChildCheckboxChange } from "../../../redux/slices/getMailsSlice";
+import { getMailsThunk, handleChildCheckboxChange } from "../../../redux/slices/getMailsSlice";
 import { starMailThunk } from "../../../redux/slices/starMailSlice";
 
 function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }) {
   const isStarred = status.includes("STARRED")
+  const statusPath = useParams()['*'].toUpperCase();
   const navigate = useNavigate();
   const checkBoxRef = useRef();
   const dispatch = useDispatch();
-  const { childChecked } = useSelector((state) => state.getMailsSlice);
+  const { childChecked, page, size, } = useSelector((state) => state.getMailsSlice);
   const path = useParams()['*']
   const [showOnHover, setShowOnHover] = useState(false);
   const [starred, setStarred] = useState(() => isStarred && 1)
@@ -90,7 +91,9 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
 
   function handleStarMail(mailId, newValue) {
     setStarred(newValue)
-    dispatch(starMailThunk({id: mailId, status: newValue ? "STARRED" : "INBOX"}))
+    dispatch(starMailThunk({id: mailId, status: newValue ? "STARRED" : "INBOX"})).then(res => {
+      dispatch(getMailsThunk({ status: statusPath, page, size }))
+    })
   }
 
   return (

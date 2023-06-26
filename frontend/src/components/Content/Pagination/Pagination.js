@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMailsThunk } from "../../../redux/slices/getMailsSlice"
 import { useParams } from "react-router-dom";
 
-function Pagination({ data, dataLimit, currentPage, path }) {
+function Pagination() {
   const dispatch = useDispatch();
-  const { mails, page, size, totalPages } = useSelector((state) => state.getMailsSlice);
+  const { mails, page, size } = useSelector((state) => state.getMailsSlice);
   const status = useParams()['*'].toUpperCase();
 
   useEffect(() => {

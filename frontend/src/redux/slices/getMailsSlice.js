@@ -10,6 +10,7 @@ const initialState = {
     page: 1,
     size: 2,
     totalPages: 10,
+    totalElements: 0,
     masterChecked: false,
     childChecked: [],
     mailSelected: [],
@@ -80,6 +81,7 @@ export const getMailsSlice = createSlice({
                 state.mails = action.payload.content;
                 state.childChecked = action.payload.content.map(() => false);
                 state.totalPages = action.payload.totalPages;
+                state.totalElements = action.payload.totalElements;
             });
     },
 });

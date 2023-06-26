@@ -21,7 +21,7 @@ import classes from "./HeadChecker.module.css";
 function HeadChecker() {
   const status = useParams()['*'].toUpperCase();
   const dispatch = useDispatch();
-  const { mails, masterChecked, mailSelected, page, size, totalPages, loading } = useSelector((state) => state.getMailsSlice);
+  const { mails, masterChecked, mailSelected, page, size, totalPages, totalElements, loading } = useSelector((state) => state.getMailsSlice);
 
   const showIcons = (e) => {
     dispatch(handleMasterCheckboxChange(e.target.checked))
@@ -83,7 +83,7 @@ function HeadChecker() {
         </div>}
       </div>
       <div className={classes.headchecker}>
-        <span className={classes.mailAmount}>{totalPages === 1 || !mails.length ? `${(page - 1) * size + 1} - ${mails.length} trong số ${mails.length}` : `${(page - 1) * size + 1} - ${page * size} trong số ${totalPages * size}`}</span>
+        <span className={classes.mailAmount}>{totalPages === 1 || !mails.length ? `${(page - 1) * size + 1} - ${mails.length} trong số ${mails.length}` : `${(page - 1) * size + 1} - ${page * size} trong số ${totalElements}`}</span>
         <button onClick={handlePrevPage} disabled={loading}>
           <ArrowBackIosIcon className={classes.headSvg} />
         </button>
