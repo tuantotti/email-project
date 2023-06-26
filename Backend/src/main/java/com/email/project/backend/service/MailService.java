@@ -4,6 +4,7 @@ import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.dto.SendMailDto;
 import com.email.project.backend.dto.UpdateMail;
+import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.repository.FileDataRepository;
@@ -20,9 +21,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -98,7 +103,13 @@ public class MailService {
             mailRepository.save(mail);
 
             // save file to filesystem
-            Arrays.stream(sendMailDto.getFiles()).forEach(file -> storageService.uploadFileToSystem(file));
+            int numberOfFile = mail.getFileDataList().size();
+            for (int i = 0; i < numberOfFile; i++) {
+                MultipartFile file = sendMailDto.getFiles().get(i);
+                FileData fileData = mail.getFileDataList().get(i);
+
+                storageService.uploadFileToSystem(file, fileData.getFilePath());
+            }
         } catch (DataAccessException e) {
             log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());

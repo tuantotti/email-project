@@ -3,11 +3,14 @@ package com.email.project.backend.dto;
 import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
 import jakarta.annotation.Nullable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +18,6 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class SendMailDto implements Serializable {
     @Nullable
@@ -23,7 +25,7 @@ public class SendMailDto implements Serializable {
     private String body;
     private String fromAddress;
     private String toAddress;
-    private MultipartFile[] files;
+    private List<MultipartFile> files;
     @Nullable
     private String ccAddress;
     @Nullable
@@ -31,8 +33,12 @@ public class SendMailDto implements Serializable {
     @Nullable
     private Date sendDate;
 
+    public SendMailDto() {
+        files = new ArrayList<>();
+    }
+
     public List<FileData> getFileDataList(String folderPath) {
-        List<FileData> fileDataList = Arrays.stream(files)
+        List<FileData> fileDataList = files.stream()
                 .map(multipartfile -> {
                     String fileName = multipartfile.getOriginalFilename();
                     int extensionIndex = fileName.lastIndexOf(".");

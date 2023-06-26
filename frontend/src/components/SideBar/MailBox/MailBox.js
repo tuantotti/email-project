@@ -31,7 +31,7 @@ function MailBox({ hide }) {
   const [toAddress, setToAddress] = useState("")
   const [subject, setSubject] = useState("")
   const [body, setBody] = useState("")
-  const [files, setFiles] = useState(null);
+  const [files, setFiles] = useState([]);
 
   const handleAttachIconClick = () => {
     fileInputRef.current.click();
