@@ -11,8 +11,6 @@ public class UserEdit {
 
     private String lastName;
 
-    private String email;
-
     private String phoneNumber;
 
     public void applyToUser(User user) throws Exception {
@@ -26,13 +24,6 @@ public class UserEdit {
 
         if (user.getFirstName().isEmpty() && user.getLastName().isEmpty()){
             throw new Exception("Both firstname and lastname is empty!");
-        }
-
-        if (email != null){
-            if (email.isEmpty())
-                throw new Exception("Email is empty!");
-
-            user.setEmail(email);
         }
 
         if (phoneNumber != null){

@@ -3,8 +3,11 @@ package com.email.project.backend.controller;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.User;
+import com.email.project.backend.entity.security.UserDetailsImpl;
 import com.email.project.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,24 +20,22 @@ public class UserController {
         this._userService = userService;
     }
 
-    @GetMapping("{id}")
-    public UserView getProfile(@PathVariable(name = "id") int id) {
-        try {
-            var user = _userService.getUserInfo(id);
-            return user;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    @GetMapping
+    public ResponseEntity<UserView> getProfile() {
+        var userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var email = userDetails.getUsername();
+        var user = _userService.getUserInfoByEmail(email);
+        return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/edit/{id}")
-    public void editProfile(@PathVariable(name = "id") int id, UserEdit userEdit) {
-        try {
-            _userService.update(id, userEdit);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @PostMapping("/edit")
+    public ResponseEntity<UserView> editProfile(@RequestBody UserEdit userEdit) {
+        var userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        var email = userDetails.getUsername();
+        var user = _userService.update(email, userEdit);
+        var userView = new UserView();
+        userView.loadFromUser(user);
+        return ResponseEntity.ok(userView);
     }
 
     @PostMapping("/create")

@@ -4,6 +4,7 @@ const API = {
     SIGN_UP: '/api/signup',
     GET_MAIL: '/api/mail',
     STAR_MAIL: '/api/mail/status',
+    SEND_MAIL: '/api/mail/send',
     GET_USER_INFO: '/api/user',
 }
 
