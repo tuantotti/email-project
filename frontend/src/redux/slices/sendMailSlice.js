@@ -11,9 +11,6 @@ const initialState = {
 export const sendMailThunk = createAsyncThunk(
     "sendMail",
     async (formData) => {
-        for (const pair of formData.entries()) {
-            console.log(`${pair[0]}, ${pair[1]}`);
-        }
         try {
             const response = await axiosInstance.post(API.SEND_MAIL, formData, {
                 headers: {
