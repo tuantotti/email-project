@@ -31,7 +31,7 @@ function MailBox({ hide }) {
   const [toAddress, setToAddress] = useState("")
   const [subject, setSubject] = useState("")
   const [body, setBody] = useState("")
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState(null);
 
   const handleAttachIconClick = () => {
     fileInputRef.current.click();
@@ -57,20 +57,13 @@ function MailBox({ hide }) {
 
   const handleSendMail = () => {
     if (toAddress) {
-      console.log({
-        fromAddress: "dungnd@gmail.com",
-        toAddress,
-        subject,
-        body: body.replace("\\", ""),
-        files: files?.length ? files : []
-      })
-      dispatch(sendMailThunk({
-        fromAddress: "dungnd@gmail.com",
-        toAddress,
-        subject,
-        body,
-        files: files?.length ? files : []
-      }))
+      const formData = new FormData();
+      formData.append('fromAddress', "dungnd@gmail.com")
+      formData.append('toAddress', toAddress)
+      formData.append('subject', subject)
+      formData.append('body', body)
+      formData.append('files', files)
+      dispatch(sendMailThunk(formData))
     }
   }
 
