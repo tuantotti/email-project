@@ -142,11 +142,10 @@ public class UserService {
                 String encodedPassword = passwordEncoder.encode(c.getNewPassword());
                 credential.setPassword(encodedPassword);
             }
-
+            return credentialRepository.save(credential);
         } catch (AuthenticationException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong username or password");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password");
         }
-        return credentialRepository.save(credential);
     }
 
     public JwtView authenticate(CredentialDto credentialDto) {
