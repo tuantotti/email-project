@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
 import ClearIcon from '@material-ui/icons/Clear';
-import attachIcon from "../Images/attach_icon.png"
-import classes from "./MailBox.module.css";
-import ReactQuill, { Quill } from 'react-quill';
+import React, { useRef, useState } from "react";
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useDispatch } from "react-redux";
+import { sendMailThunk } from "../../../redux/slices/sendMailSlice";
+import attachIcon from "../Images/attach_icon.png";
+import classes from "./MailBox.module.css";
 
 
 const modules = {
@@ -25,9 +26,12 @@ const modules = {
 }
 
 function MailBox({ hide }) {
+  const dispatch = useDispatch();
   const fileInputRef = useRef(null);
-  const [value, setValue] = useState("")
-  const [files, setFiles] = useState(null);
+  const [toAddress, setToAddress] = useState("")
+  const [subject, setSubject] = useState("")
+  const [body, setBody] = useState("")
+  const [files, setFiles] = useState([]);
 
   const handleAttachIconClick = () => {
     fileInputRef.current.click();
@@ -44,13 +48,27 @@ function MailBox({ hide }) {
   }
 
   const bytesToMB = (bytes) => {
-    return (bytes / (1024*1024)).toFixed(2);
+    return (bytes / (1024 * 1024)).toFixed(2);
   }
 
   const removeFile = (idx) => {
     setFiles(prevFiles => prevFiles.filter((file, i) => i !== idx))
   }
 
+  const handleSendMail = () => {
+    if (toAddress) {
+      const formData = new FormData();
+      formData.append('fromAddress', "dungnd@gmail.com")
+      formData.append('toAddress', toAddress)
+      formData.append('subject', subject)
+      formData.append('body', body)
+
+      for (let i = 0; i < files.length; i++) {
+        formData.append("files", files[i]);
+      }
+      dispatch(sendMailThunk(formData))
+    }
+  }
 
   return (<div className={classes.form}>
     <div className={classes.mailBoxHeader}>
@@ -59,18 +77,18 @@ function MailBox({ hide }) {
     </div>
     <div className={classes.content}>
       <div className={classes.inputGroup}>
-        <input className={classes.input} placeholder="Người nhận" />
+        <input className={classes.input} placeholder="Người nhận" value={toAddress} onChange={(e) => setToAddress(e.target.value)} />
       </div>
       <hr></hr>
       <div className={classes.inputGroup}>
-        <input className={classes.input} placeholder="Tiêu đề" />
+        <input className={classes.input} placeholder="Tiêu đề" value={subject} onChange={(e) => setSubject(e.target.value)} />
       </div>
       <hr></hr>
       {/* <br />
       <div dangerouslySetInnerHTML={{ __html: value }}></div> */}
       <br />
       <div className={classes.scrollContent}>
-        <ReactQuill theme="snow" value={value} onChange={setValue} modules={modules} />
+        <ReactQuill theme="snow" value={body} onChange={setBody} modules={modules} />
         <div className={classes.fileAttachGroup}>
           {files?.length ? files?.map((file, idx) => (
             <div className={classes.file}>
@@ -84,7 +102,7 @@ function MailBox({ hide }) {
         </div>
       </div>
       <div className={classes.mailBoxFooter}>
-        <button className={classes.sendButton}>Gửi</button>
+        <button className={classes.sendButton} onClick={handleSendMail}>Gửi</button>
         <button className={classes.attachButton} onClick={handleAttachIconClick} >
           Đính kèm
           <img alt="attach_icon" src={attachIcon} className={classes.footerIcon} />
