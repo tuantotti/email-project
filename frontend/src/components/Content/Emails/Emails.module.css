@@ -8,7 +8,8 @@
 }
 
 .list:hover {
-  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+  /* box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%); */
+  box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0, 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 4px 4px rgb(60 64 67 / 15%)
 }
 
 .hr {
@@ -30,9 +31,14 @@
 
 .check {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding-left: 10px;
   box-sizing: border-box;
+  margin-top: -9px;
+}
+
+.starred {
+  margin-top: 9px;
 }
 
 .company {
@@ -56,13 +62,17 @@
 .company>p {
   padding-right: 10px;
 }
+.hideIcons {
+  margin-top: auto;
+  margin-bottom: auto;
+}
 
 .hideIcons>button {
   cursor: pointer;
   background: none;
   border: none;
-  width: 30px;
-  margin-right: 20px;
+  /* width: 30px; */
+  /* margin-right: 20px; */
 }
 
 .button {
@@ -102,6 +112,7 @@
 .mailLineContainer {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .mailAuthor {
@@ -115,6 +126,68 @@
   font-size: 14px;
 }
 
+.mailTime {
+  font-weight: bold;
+}
+
 .isRead {
   background-color: #F2F6FC;
+}
+
+.fontWeightLight {
+  font-weight: 300;
+}
+
+.fileGroup {
+  display: flex;
+  margin: 16px 0px 3px 0px;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 160px;
+  width: fit-content;
+  border-radius: 15px;
+  box-shadow: inset 0 0 0 1px rgba(100, 121, 143, 0.302);
+  padding: 6px 10px;
+  margin-right: 8px;
+}
+
+.fileOthers {
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.fileIcon {
+  width: 16px;
+  margin-right: 8px;
+}
+
+.fileName {
+  color: #5f6368;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.containFile {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  height: 100%;
+}
+
+.flexStart {
+  align-items: flex-start;
+}
+
+.groupContainFile {
+  flex: 1
+}
+
+.flexItem {
+  display: flex;
+  justify-content: space-between;
 }

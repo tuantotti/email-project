@@ -19,6 +19,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,13 +54,13 @@ public class UserService {
         return res;
     }
 
-    public void update(int id, UserEdit userEdit) throws Exception {
+    public User update(int id, UserEdit userEdit) throws Exception {
         var user = _userRepository.getReferenceById(id);
         userEdit.applyToUser(user);
-        _userRepository.save(user);
+        return _userRepository.save(user);
     }
 
-    public void create(User user) {
+    public User create(User user) {
         user.setActive(true);
         user.setCreateAt(new Date());
 
@@ -69,7 +70,7 @@ public class UserService {
         credential.setUser(user);
         user.setCredential(credential);
 
-        _userRepository.save(user);
+        return _userRepository.save(user);
     }
 
     public JwtView create(UserCreateDto userCreateDto) {
@@ -97,9 +98,8 @@ public class UserService {
             credentialRepository.save(credential);
             UserDetails userDetails = new UserDetailsImpl(credential);
             String accessToken = jwtService.generateAccessToken(userDetails);
-            String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-            return new JwtView(accessToken, refreshToken);
+            return new JwtView(accessToken);
 
         } catch (DataAccessException e) {
             log.error(e.getMessage());
@@ -110,20 +110,22 @@ public class UserService {
         }
     }
 
-    public void inActive(int id) {
+    public User inActive(int id) {
         var user = _userRepository.getReferenceById(id);
         if (user.isActive()) {
             user.setActive(false);
             _userRepository.save(user);
         }
+        return user;
     }
 
-    public void active(int id) {
+    public User active(int id) {
         var user = _userRepository.getReferenceById(id);
         if (!user.isActive()) {
             user.setActive(true);
             _userRepository.save(user);
         }
+        return user;
     }
 
 
@@ -136,33 +138,43 @@ public class UserService {
 
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String accessToken = jwtService.generateAccessToken(userDetails);
-            String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-            return new JwtView(accessToken, refreshToken);
+            return new JwtView(accessToken);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong username or password");
         }
     }
 
     public JwtView refreshToken(JwtView jwtView) {
-        boolean isExpiredAccessToken = jwtService.validateToken(jwtView.getAccessToken());
-        boolean isExpiredRefreshToken = jwtService.validateToken(jwtView.getRefreshToken());
+        boolean isExpiredAccessToken = jwtService.isExpired(jwtView.getAccessToken());
         String username = jwtService.extractUsernameFromToken(jwtView.getAccessToken());
-        if (isExpiredAccessToken && !isExpiredRefreshToken) {
-            var newAccessToken = jwtService.generateAccessToken(username);
-
-            return JwtView.builder()
-                    .accessToken(newAccessToken)
-                    .refreshToken(jwtView.getRefreshToken())
-                    .build();
+        String newAccessToken = jwtView.getAccessToken();
+        if (isExpiredAccessToken) {
+            newAccessToken = jwtService.generateAccessToken(username);
+        }
+        if (isExpiredAccessToken) {
+            newAccessToken = jwtService.generateAccessToken(username);
         }
 
-        String accessToken = jwtService.generateAccessToken(username);
-        String refreshToken = jwtService.generateRefreshToken(username);
-
-        return JwtView.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
+        JwtView res = JwtView.builder()
+                .accessToken(newAccessToken)
                 .build();
+
+        return res;
+    }
+
+    /**
+     * @return get the username of request
+     */
+    public static String getCurrentUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email;
+        if (principal instanceof UserDetails) {
+            email = ((UserDetails) principal).getUsername();
+        } else {
+            email = principal.toString();
+        }
+
+        return email;
     }
 }

@@ -1,53 +1,59 @@
 package com.email.project.backend.dto;
 
 import com.email.project.backend.constant.MailStatus;
+import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
 
-import static com.email.project.backend.constant.Constant.SPLIT_STRING;
-
 @Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MailDto {
+    private int id;
     private String subject;
     private String body;
     private String fromAddress;
+    private String fromName;
     private String toAddress;
     private String ccAddress;
     private String bccAddress;
-    private List<String> fileNames;
     private Date sendDate;
     private Date receivedDate;
     private MailStatus status;
-    private boolean is_read;
+    private List<FileData> fileDataList;
+    private boolean isRead;
 
     public Mail toEntity() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (String name : fileNames) {
-            stringBuilder.append(name + SPLIT_STRING);
-        }
-
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        String fileNameConcat = stringBuilder.toString();
         return Mail.builder()
+                .id(id)
                 .toAddress(toAddress)
                 .fromAddress(fromAddress)
                 .bccAddress(bccAddress)
                 .ccAddress(ccAddress)
                 .subject(subject)
                 .body(body)
-                .fileNames(fileNameConcat)
+                .fileDataList(fileDataList)
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
-                .is_read(is_read)
+                .isRead(isRead)
                 .status(status)
                 .build();
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
+    }
+
+    @JsonProperty("isRead")
+    public boolean isRead() {
+        return isRead;
     }
 }

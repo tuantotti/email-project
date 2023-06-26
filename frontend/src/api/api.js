@@ -1,7 +1,9 @@
 const API = {
-    BASE_API_URL: 'https://e4ea-2402-800-61b3-4e29-7c6f-5f8f-8187-8c9d.ngrok-free.app',
+    BASE_API_URL: 'http://localhost:8080',
     LOGIN: '/api/login',
     SIGN_UP: '/api/signup',
+    GET_MAIL: '/api/mail',
+    STAR_MAIL: '/api/mail/status',
     GET_USER_INFO: '/api/user',
 }
 

@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { send } from "../../../redux/action/send";
 import ClearIcon from '@material-ui/icons/Clear';
 import attachIcon from "../Images/attach_icon.png"
 import classes from "./MailBox.module.css";
@@ -37,11 +36,15 @@ function MailBox({ hide }) {
   const handleFileSelect = () => {
     const files = fileInputRef.current.files;
     setFiles(Array.from(files))
-    console.log(files); 
+    console.log(files);
   };
 
   const bytesToKB = (bytes) => {
     return (bytes / 1024).toFixed(2);
+  }
+
+  const bytesToMB = (bytes) => {
+    return (bytes / (1024*1024)).toFixed(2);
   }
 
   const removeFile = (idx) => {
@@ -66,17 +69,19 @@ function MailBox({ hide }) {
       {/* <br />
       <div dangerouslySetInnerHTML={{ __html: value }}></div> */}
       <br />
-      <ReactQuill theme="snow" value={value} onChange={setValue} modules={modules} />
-      <div className={classes.fileAttachGroup}>
-        {files?.length ? files?.map((file, idx) => (
-          <div className={classes.file}>
-            <div className={classes.fileName}>
-              <h3>{file.name}</h3>
-              <span>({bytesToKB(file.size)}KB)</span>
+      <div className={classes.scrollContent}>
+        <ReactQuill theme="snow" value={value} onChange={setValue} modules={modules} />
+        <div className={classes.fileAttachGroup}>
+          {files?.length ? files?.map((file, idx) => (
+            <div className={classes.file}>
+              <div className={classes.fileName}>
+                <h3>{file.name}</h3>
+                <span>({bytesToKB(file.size) < 1024 ? bytesToKB(file.size) : bytesToMB(file.size)} {bytesToKB(file.size) < 1024 ? 'KB' : 'MB'})</span>
+              </div>
+              <ClearIcon style={{ cursor: "pointer", width: '18px', height: '18px' }} onClick={() => removeFile(idx)} />
             </div>
-            <ClearIcon style={{ cursor: "pointer", width: '18px', height: '18px' }} onClick={() => removeFile(idx)} />
-          </div>
-        )) : null}
+          )) : null}
+        </div>
       </div>
       <div className={classes.mailBoxFooter}>
         <button className={classes.sendButton}>Gửi</button>

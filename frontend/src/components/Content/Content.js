@@ -1,96 +1,75 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 import Navbar from "../../components/Navigation/Navbar";
 import SideBar from "../../components/SideBar/SideBar";
-import { getMails } from "../../redux/slices/getMailsSlice";
-import classes from "./Content.module.css";
+import "./Content.css";
 import HeadChecker from "./HeadChecker/HeadChecker";
 import Message from "./MessageShow/MessageShow";
 import Pagination from "./Pagination/Pagination";
 import SendMail from "./SendMail/SendMail";
-import Snooze from "./Snooze/Snooze";
+import Spam from "./Spam/Spam";
+import Trash from "./Trash/Trash";
 import Starred from "./Starred/Starred";
 import PersonalInformation from "./PersonalInformation/PersonalInformation";
 
 
 function Content() {
-  const dispatch = useDispatch()
-  const mails = useSelector(state => state.getMailsReducer.mails)
+  const { mails, loading } = useSelector(state => state.getMailsSlice)
   const accessToken = useSelector(state => state.authenticationSlice.accessToken)
-  const [currentPage, setCurrentPage] = useState(1);
+  const [path, mailId] = useParams()['*'].split('/');
+  const mainContent = (children) => {
+    return <div className='mainContent' style={mails.length ? {} : { padding: 0 }}>
+      {loading && <Box sx={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+      }}>
+        <LinearProgress sx={{ height: 10 }} />
+      </Box>}
+      {loading && <div className="overlay"></div>}
+      {children}
+    </div>
+  }
 
-  const goToNextPage = () => {
-    return setCurrentPage(currentPage + 1);
-  };
-
-  const goToPreviousPage = () => {
-    return setCurrentPage(currentPage > 1 ? currentPage - 1 : currentPage);
-  };
-
-  useEffect(() => {
-    dispatch(getMails())
-  }, [])
   return accessToken ? (<div className="App">
     < Navbar />
     <div className="body">
       <SideBar />
-      <div className={classes.container}>
-        {/* <HeadChecker /> */}
+      <div style={{ marginRight: '20px' }}>
+        {!mailId && <HeadChecker />}
         <hr />
         <Routes>
           <Route index element={<Navigate to="inbox" />} />
-          <Route path="/inbox/:mailId" element={<Message />} />
+          <Route path={`/${path}/:mailId`} element={<Message />} />
+
+          <Route
+            path="/trash"
+            element={mainContent(<Trash />)}
+          />
+
+          <Route
+            path="/spam"
+            element={mainContent(<Spam />)}
+          />
 
           <Route path="/personal-information" element={<PersonalInformation />} />
           <Route
             path="/starred"
-            element={
-              <>
-                <Starred />
-              </>
-            }
-          />
-
-          <Route
-            path="/drafts"
-            element={
-              <>
-                <h1>Drafts</h1>
-              </>
-            }
-          />
-
-          <Route
-            path="/snoozed"
-            element={
-              <>
-                <Snooze />
-              </>
-            }
+            element={mainContent(<Starred />)}
           />
 
           <Route
             path="/sent"
-            element={
-              <>
-                <SendMail />
-              </>
-            }
+            element={mainContent(<SendMail />)}
           />
 
           <Route
             path="/inbox"
-            element={
-              <div className={classes.mainContent}>
-                <Pagination
-                  data={mails}
-                  dataLimit={20}
-                  currentPage={currentPage}
-                  path="/inbox"
-                />
-              </div>
-            }
+            element={mainContent(<Pagination />)}
           />
         </Routes>
       </div>

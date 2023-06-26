@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import authenticationTheme from "../../../theme/Authentication.theme.ts"
+import authenticationTheme from "../../../theme/Authentication.theme.js"
 import { signUpThunk } from '../../../redux/slices/authenticationSlice';
 
 import "./SignUp.css";

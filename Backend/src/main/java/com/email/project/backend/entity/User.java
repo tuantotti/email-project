@@ -1,5 +1,6 @@
 package com.email.project.backend.entity;
 
+import com.email.project.backend.dto.user.UserView;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,5 +38,11 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Credential credential;
+
+    public UserView toUserView(){
+        UserView userView = new UserView();
+        userView.loadFromUser(this);
+        return userView;
+    }
 
 }
