@@ -27,6 +27,7 @@ export default function Message(props) {
   const navigate = useNavigate();
   const [path, mailId] = useParams()['*'].split('/');
   const { mailDetail } = useSelector(state => state.viewMailSlice)
+  const { user } = useSelector(state => state.userInfoSlice)
   const dispatch = useDispatch();
   const navigateBack = () => {
     navigate(`/${path}`);
@@ -137,7 +138,7 @@ export default function Message(props) {
           <span className="mailAuthor">{mailDetail?.fromName}</span>
           <span>{" "}</span>
           <span className="mailAddress">{"<"}{mailDetail?.fromAddress}{">"}</span>
-          <h3 className="mailAddressDestination">to {false ? "Me" : mailDetail?.toAddress}</h3>
+          <h3 className="mailAddressDestination">to {user.email === mailDetail?.toAddress ? "Me" : mailDetail?.toAddress}</h3>
           <h3 className="mailTime">{handleTime(mailDetail?.sendDate)}</h3>
         </div>
       </div>

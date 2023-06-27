@@ -8,7 +8,7 @@ const initialState = {
     loading: false,
     error: false,
     page: 1,
-    size: 2,
+    size: 20,
     totalPages: 10,
     totalElements: 0,
     masterChecked: false,

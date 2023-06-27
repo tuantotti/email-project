@@ -23,3 +23,7 @@ hr {
 .quill {
   margin-bottom: 16px
 }
+
+.Toastify__toast-container {
+  width: 360px !important; 
+}

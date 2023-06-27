@@ -19,6 +19,7 @@ import { getMailsThunk, handleMasterCheckboxChange, nextPage, prevPage } from ".
 import classes from "./HeadChecker.module.css";
 
 function HeadChecker() {
+  const [path, mailId] = useParams()['*'].split('/');
   const status = useParams()['*'].toUpperCase();
   const dispatch = useDispatch();
   const { mails, masterChecked, mailSelected, page, size, totalPages, totalElements, loading } = useSelector((state) => state.getMailsSlice);
@@ -54,7 +55,7 @@ function HeadChecker() {
   }
 
   return (
-    <div className={classes.head}>
+    path !== 'personal-information' ? <div className={classes.head}>
       <div className={classes.headchecker}>
 
         <Checkbox
@@ -91,7 +92,7 @@ function HeadChecker() {
           <ArrowForwardIosIcon className={classes.headSvg} />
         </button>
       </div>
-    </div>
+    </div> : <></>
   );
 }
 

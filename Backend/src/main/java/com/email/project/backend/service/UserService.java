@@ -1,6 +1,7 @@
 package com.email.project.backend.service;
 
 import com.email.project.backend.dto.CredentialDto;
+import com.email.project.backend.dto.CredentialEditDto;
 import com.email.project.backend.dto.JwtView;
 import com.email.project.backend.dto.UserCreateDto;
 import com.email.project.backend.dto.user.UserEdit;
@@ -27,6 +28,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -151,6 +153,25 @@ public class UserService {
         return user;
     }
 
+    public Credential changePassword(CredentialEditDto c) {
+        Optional <Credential> credentialOptional = credentialRepository.findByEmail(c.getEmail());
+        Credential credential = credentialOptional.get();
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(c.getEmail(), c.getOldPassword())
+            );
+
+            if (c.getConfirmPassword().equals(c.getNewPassword())) {
+                String encodedPassword = passwordEncoder.encode(c.getNewPassword());
+                credential.setPassword(encodedPassword);
+            }
+            return credentialRepository.save(credential);
+        } catch (AuthenticationException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password!");
+        } catch (Exception e) {
+            throw new RuntimeException("New password and confirm password is not equals!");
+        }
+    }
 
     public JwtView authenticate(CredentialDto credentialDto) {
         try {

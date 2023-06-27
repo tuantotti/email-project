@@ -1,7 +1,9 @@
 package com.email.project.backend.controller;
 
+import com.email.project.backend.dto.CredentialEditDto;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
+import com.email.project.backend.entity.Credential;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
 import com.email.project.backend.service.UserService;
@@ -69,5 +71,10 @@ public class UserController {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @PostMapping("/edit/password")
+    public void changePassword(@RequestBody CredentialEditDto credentialEditDto) {
+       _userService.changePassword(credentialEditDto);
     }
 }

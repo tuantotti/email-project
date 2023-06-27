@@ -12,26 +12,108 @@
   width: 280px;
 }
 
-.menuBrand > button {
+.menuBrand>button {
   padding: 3px;
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.menuBrand > button:hover {
+.menuBrand>button:hover {
   background: rgb(223, 190, 190);
 }
 
-.menuBrand > button > img {
+.menuBrand>button>img {
   width: 20px;
 }
 
-.menuBrand > img {
+.menuBrand>img {
   width: 110px;
   margin-left: 16px;
 }
 
 .list {
   display: flex;
+  margin-right: 16px;
+}
+
+.arrowGroup {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  right: 0;
+  bottom: 0;
+  padding: 2px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.actionGroup {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  min-width: 280px;
+  width: fit-content;
+  background-color: white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 6px;
+  padding: 16px;
+  z-index: 1;
+}
+
+.actionText {
+  font-size: 15px;
+  font-weight: 500;
+  color: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-radius: 10px;
+}
+
+.actionText:hover {
+  background-color: #EAEBEF;
+}
+
+.actionText>span {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+
+.nameGroup {
+  padding: 10px 16px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.inforDetail {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.name {
+  font-size: 17px;
+  color: #050505;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+.divide {
+  height: 1px;
+  background-color: #ced0d4;
+  margin: 10px 0;
+}
+
+.emailAddress {
+  text-align: left;
+  display: block;
+  font-size: 15px;
+  color: #050505;
 }

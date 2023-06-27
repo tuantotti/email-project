@@ -13,6 +13,7 @@ import SendMail from "./SendMail/SendMail";
 import Spam from "./Spam/Spam";
 import Trash from "./Trash/Trash";
 import Starred from "./Starred/Starred";
+import PersonalInformation from "./PersonalInformation/PersonalInformation";
 
 
 function Content() {
@@ -39,7 +40,7 @@ function Content() {
     <div className="body">
       <SideBar />
       <div style={{ marginRight: '20px' }}>
-        {!mailId && <HeadChecker />}
+        {!(mailId && path) ? <HeadChecker /> : <></>}
         <hr />
         <Routes>
           <Route index element={<Navigate to="inbox" />} />
@@ -55,6 +56,7 @@ function Content() {
             element={mainContent(<Spam />)}
           />
 
+          <Route path="/personal-information" element={<PersonalInformation />} />
           <Route
             path="/starred"
             element={mainContent(<Starred />)}
