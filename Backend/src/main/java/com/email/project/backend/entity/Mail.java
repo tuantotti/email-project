@@ -51,6 +51,7 @@ public class Mail {
 
     public MailDto toDto() {
         return MailDto.builder()
+                .id(id)
                 .fromAddress(fromAddress)
                 .toAddress(toAddress)
                 .bccAddress(bccAddress)

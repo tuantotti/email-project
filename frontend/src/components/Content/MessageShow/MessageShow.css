@@ -8,31 +8,36 @@
 
 .navigate {
   display: flex;
+  align-items: center;
 }
-.navigate > svg {
+
+.navigate>svg {
   margin-right: 20px;
 }
 
-.navigate > button > img {
+.navigate>button>img {
   width: 20px;
 }
 
-.navigate > button {
+.navigate>button {
   background: none;
   border: none;
   margin-right: 20px;
   padding: 0;
   cursor: pointer;
 }
+
 .description {
+  margin-left: 56px;
 }
+
 .label {
   margin-top: 25px;
   margin-left: 15px;
 }
 
 .mailTitle {
-  padding-left: 44px;
+  padding-left: 56px;
   font-size: 25px;
   color: #1f1f1f;
   font-weight: 400;
@@ -56,7 +61,9 @@
   font-weight: 700;
 }
 
-.mailAddress, .mailTime, .mailAddressDestination {
+.mailAddress,
+.mailTime,
+.mailAddressDestination {
   font-size: 12px;
   color: #5e5e5e;
   font-weight: 400;
@@ -64,4 +71,200 @@
 
 .mailAddressDestination {
   margin: 3px 0;
+}
+
+.fileGroup {
+  margin-left: 56px;
+}
+
+.fileItemBlock {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fileItem {
+  width: 190px;
+  border: solid 1px #E5E5E5;
+  cursor: pointer;
+  position: relative;
+  margin: 0 16px 16px 0;
+  position: relative;
+}
+
+.fileItemUpper {
+  height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 
+  img: -96px 0px; 
+  script: -203px 0px; 
+  text: -121px -47px; 
+  pdf: -162px -47px; 
+  archive: -88px -88px;
+  video: -262px -107px;
+  download: -219px -129px;
+  download: -222px -132px;
+*/
+
+.fileItemUpper>div {
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  background: no-repeat url('../../../assets/img/bg.png');
+  /* background-position: -162px -47px; */
+  background-size: 311px 150px;
+}
+
+.fileItemLower {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-top: solid 1px #E5E5E5;
+  background-color: #F5F5F5;
+}
+
+.fileIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 16px
+}
+
+.fileName {
+  color: #777777;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rect {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid transparent;
+  transform: rotate(-135deg);
+  z-index: 1;
+}
+
+.rect2 {
+  position: absolute;
+  bottom: -11px;
+  right: -11px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-left: 10px solid white;
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.rect3 {
+  position: absolute;
+  bottom: -11px;
+  right: 3px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-left: 10px solid #C4C4C4;
+  transform: rotate(45deg);
+  z-index: 1;
+}
+
+.dash {
+  width: 100%;
+  border-top: 1px dotted #d8d8d8;
+}
+
+.fileQuantity {
+  color: #222;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 12px 0;
+  display: block;
+}
+
+.fileHover {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 1px);
+  top: 1px;
+  left: 0px;
+  background-color: #F5F5F5;
+  display: flex;
+  padding: 8px;
+  box-sizing: border-box;
+  display: none;
+}
+
+.fileItem:hover .fileHover {
+  display: flex;
+}
+
+.fileHover .fileIcon {
+  margin-right: 8px;
+}
+
+.fileNameFull {
+  color: #777777;
+  font-size: 12px;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.fileInfor {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fileInforDetail {
+  display: flex;
+  flex-direction: column;
+}
+
+.fileCapacity {
+  font-size: 11px;
+  color: #AAA;
+  margin-top: 4px;
+}
+
+.downloadFile {
+  background-color: #808080;
+  text-align: center;
+  width: 30px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.downloadFile:hover {
+  background-color: #000;
+}
+
+.downloadIcon {
+  border-radius: 4px;
+  width: 15px;
+  height: 15px;
+  background: no-repeat url('../../../assets/img/bg.png');
+  background-position: -222px -132px;
+  background-size: 311px 150px;
+}
+
+.pointer {
+  cursor: pointer;
 }

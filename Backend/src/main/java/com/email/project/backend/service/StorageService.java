@@ -47,8 +47,7 @@ public class StorageService {
         }
     }
 
-    public boolean uploadFileToSystem(MultipartFile file) {
-        String filePath = folderPath + file.getOriginalFilename();
+    public boolean uploadFileToSystem(MultipartFile file, String filePath) {
 
         boolean isSaveToFileSystem = false;
 

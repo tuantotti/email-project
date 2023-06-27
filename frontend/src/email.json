@@ -1,10 +1,11 @@
 [
   {
     "id": 1,
+    "isStarred": true,
     "isRead": true,
     "description": "Inverse fault-tolerant matrix",
     "company_Name": "Flashpoint",
-    "time": "4:34 PM",
+    "time": "2023-06-24T13:00:24.890Z",
     "email_address": "ejanjic0@boston.com",
     "first_name": "Elmira",
     "last_name": "Janjic",
@@ -12,10 +13,11 @@
   },
   {
     "id": 2,
+    "isStarred": false,
     "isRead": true,
     "description": "Multi-channelled scalable model",
     "company_Name": "Thoughtstorm",
-    "time": "6:18 PM",
+    "time": "2023-06-24T12:48:23.193Z",
     "email_address": "mgrishakov1@bloomberg.com",
     "first_name": "Marius",
     "last_name": "Grishakov",
@@ -23,10 +25,11 @@
   },
   {
     "id": 3,
+    "isStarred": false,
     "isRead": true,
     "description": "Cross-group demand-driven conglomeration",
     "company_Name": "Mydo",
-    "time": "5:17 PM",
+    "time": "2022-06-17T17:06:58.321Z",
     "email_address": "clettsom2@unblog.fr",
     "first_name": "Cyrille",
     "last_name": "Lettsom",
@@ -34,10 +37,11 @@
   },
   {
     "id": 4,
+    "isStarred": true,
     "isRead": true,
     "description": "Public-key 4th generation migration",
     "company_Name": "Skyble",
-    "time": "4:29 AM",
+    "time": "2021-06-21T14:39:39.679Z",
     "email_address": "rmebes3@51.la",
     "first_name": "Ryun",
     "last_name": "Mebes",
@@ -45,10 +49,11 @@
   },
   {
     "id": 5,
+    "isStarred": true,
     "isRead": true,
     "description": "Robust tertiary attitude",
     "company_Name": "Kwimbee",
-    "time": "7:18 PM",
+    "time": "2023-06-20T12:14:01.614Z",
     "email_address": "ldougan4@hhs.gov",
     "first_name": "Lambert",
     "last_name": "Dougan",
@@ -56,10 +61,11 @@
   },
   {
     "id": 6,
+    "isStarred": false,
     "isRead": false,
     "description": "Expanded bi-directional system engine",
     "company_Name": "Livetube",
-    "time": "6:49 AM",
+    "time": "2022-06-18T14:13:30.841Z",
     "email_address": "krawne5@wordpress.org",
     "first_name": "Klarrisa",
     "last_name": "Rawne",
@@ -67,10 +73,11 @@
   },
   {
     "id": 7,
+    "isStarred": false,
     "isRead": false,
     "description": "Fully-configurable regional product",
     "company_Name": "Jatri",
-    "time": "9:50 PM",
+    "time": "2023-06-24T15:26:40.474Z",
     "email_address": "dkolushev6@fda.gov",
     "first_name": "Darbie",
     "last_name": "Kolushev",
@@ -78,10 +85,11 @@
   },
   {
     "id": 8,
+    "isStarred": false,
     "isRead": false,
     "description": "Virtual cohesive complexity",
     "company_Name": "Shuffledrive",
-    "time": "8:10 PM",
+    "time": "2023-06-23T07:31:45.158Z",
     "email_address": "jwallentin7@europa.eu",
     "first_name": "Josey",
     "last_name": "Wallentin",
@@ -89,10 +97,11 @@
   },
   {
     "id": 9,
+    "isStarred": false,
     "isRead": false,
     "description": "Total maximized protocol",
     "company_Name": "Feedfire",
-    "time": "6:00 PM",
+    "time": "2023-06-18T21:07:24.632Z",
     "email_address": "nsemper8@craigslist.org",
     "first_name": "Natalya",
     "last_name": "Semper",
@@ -100,6 +109,7 @@
   },
   {
     "id": 10,
+    "isStarred": false,
     "isRead": false,
     "description": "Public-key explicit access",
     "company_Name": "Roombo",
@@ -111,6 +121,7 @@
   },
   {
     "id": 11,
+    "isStarred": false,
     "isRead": false,
     "description": "Optional human-resource ability",
     "company_Name": "Blogtag",
@@ -122,6 +133,7 @@
   },
   {
     "id": 12,
+    "isStarred": false,
     "isRead": false,
     "description": "Enhanced responsive hierarchy",
     "company_Name": "Layo",
@@ -133,6 +145,7 @@
   },
   {
     "id": 13,
+    "isStarred": false,
     "isRead": false,
     "description": "Future-proofed analyzing budgetary management",
     "company_Name": "Meemm",
@@ -144,6 +157,7 @@
   },
   {
     "id": 14,
+    "isStarred": false,
     "isRead": false,
     "description": "Customer-focused demand-driven forecast",
     "company_Name": "Twitternation",
@@ -155,6 +169,7 @@
   },
   {
     "id": 15,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent didactic data-warehouse",
     "company_Name": "Realbridge",
@@ -166,6 +181,7 @@
   },
   {
     "id": 16,
+    "isStarred": false,
     "isRead": false,
     "description": "Balanced asynchronous model",
     "company_Name": "Topicblab",
@@ -177,6 +193,7 @@
   },
   {
     "id": 17,
+    "isStarred": false,
     "isRead": false,
     "description": "Enterprise-wide mobile info-mediaries",
     "company_Name": "Edgeclub",
@@ -188,6 +205,7 @@
   },
   {
     "id": 18,
+    "isStarred": false,
     "isRead": false,
     "description": "Integrated 24/7 knowledge user",
     "company_Name": "Flipopia",
@@ -199,6 +217,7 @@
   },
   {
     "id": 19,
+    "isStarred": false,
     "isRead": false,
     "description": "Automated foreground concept",
     "company_Name": "Realcube",
@@ -210,6 +229,7 @@
   },
   {
     "id": 20,
+    "isStarred": false,
     "isRead": false,
     "description": "Open-source mission-critical portal",
     "company_Name": "Fiveclub",
@@ -221,6 +241,7 @@
   },
   {
     "id": 21,
+    "isStarred": false,
     "isRead": false,
     "description": "Devolved disintermediate firmware",
     "company_Name": "Mycat",
@@ -232,6 +253,7 @@
   },
   {
     "id": 22,
+    "isStarred": false,
     "isRead": false,
     "description": "Polarised demand-driven intranet",
     "company_Name": "Jabbersphere",
@@ -243,6 +265,7 @@
   },
   {
     "id": 23,
+    "isStarred": false,
     "isRead": false,
     "description": "Self-enabling stable capability",
     "company_Name": "Tagfeed",
@@ -254,6 +277,7 @@
   },
   {
     "id": 24,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse user-facing customer loyalty",
     "company_Name": "Voonder",
@@ -265,6 +289,7 @@
   },
   {
     "id": 25,
+    "isStarred": false,
     "isRead": false,
     "description": "Front-line dynamic productivity",
     "company_Name": "Shuffletag",
@@ -276,6 +301,7 @@
   },
   {
     "id": 26,
+    "isStarred": false,
     "isRead": false,
     "description": "Programmable bifurcated collaboration",
     "company_Name": "Feednation",
@@ -287,6 +313,7 @@
   },
   {
     "id": 27,
+    "isStarred": false,
     "isRead": false,
     "description": "Profit-focused explicit core",
     "company_Name": "Jaxspan",
@@ -298,6 +325,7 @@
   },
   {
     "id": 28,
+    "isStarred": false,
     "isRead": false,
     "description": "Persevering heuristic utilisation",
     "company_Name": "Pixonyx",
@@ -309,6 +337,7 @@
   },
   {
     "id": 29,
+    "isStarred": false,
     "isRead": false,
     "description": "Automated motivating access",
     "company_Name": "Bubblebox",
@@ -320,6 +349,7 @@
   },
   {
     "id": 30,
+    "isStarred": false,
     "isRead": false,
     "description": "Customer-focused disintermediate definition",
     "company_Name": "Innotype",
@@ -331,6 +361,7 @@
   },
   {
     "id": 31,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized 5th generation application",
     "company_Name": "Blogspan",
@@ -342,6 +373,7 @@
   },
   {
     "id": 32,
+    "isStarred": false,
     "isRead": false,
     "description": "Automated real-time task-force",
     "company_Name": "Divavu",
@@ -353,6 +385,7 @@
   },
   {
     "id": 33,
+    "isStarred": false,
     "isRead": false,
     "description": "Monitored 4th generation info-mediaries",
     "company_Name": "Topicblab",
@@ -364,6 +397,7 @@
   },
   {
     "id": 34,
+    "isStarred": false,
     "isRead": false,
     "description": "Open-architected heuristic adapter",
     "company_Name": "Gabcube",
@@ -375,6 +409,7 @@
   },
   {
     "id": 35,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse eco-centric migration",
     "company_Name": "Leenti",
@@ -386,6 +421,7 @@
   },
   {
     "id": 36,
+    "isStarred": false,
     "isRead": false,
     "description": "User-centric 4th generation support",
     "company_Name": "Voolia",
@@ -397,6 +433,7 @@
   },
   {
     "id": 37,
+    "isStarred": false,
     "isRead": false,
     "description": "Right-sized national neural-net",
     "company_Name": "Shuffledrive",
@@ -408,6 +445,7 @@
   },
   {
     "id": 38,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-engineered solution-oriented throughput",
     "company_Name": "Blogpad",
@@ -419,6 +457,7 @@
   },
   {
     "id": 39,
+    "isStarred": false,
     "isRead": false,
     "description": "Future-proofed fault-tolerant pricing structure",
     "company_Name": "Eire",
@@ -430,6 +469,7 @@
   },
   {
     "id": 40,
+    "isStarred": false,
     "isRead": false,
     "description": "Secured global model",
     "company_Name": "Jabberbean",
@@ -441,6 +481,7 @@
   },
   {
     "id": 41,
+    "isStarred": false,
     "isRead": false,
     "description": "Enterprise-wide secondary secured line",
     "company_Name": "Feednation",
@@ -452,6 +493,7 @@
   },
   {
     "id": 42,
+    "isStarred": false,
     "isRead": false,
     "description": "Switchable actuating knowledge base",
     "company_Name": "Zooveo",
@@ -463,6 +505,7 @@
   },
   {
     "id": 43,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots full-range product",
     "company_Name": "Trudeo",
@@ -474,6 +517,7 @@
   },
   {
     "id": 44,
+    "isStarred": false,
     "isRead": false,
     "description": "Polarised coherent protocol",
     "company_Name": "Roodel",
@@ -485,6 +529,7 @@
   },
   {
     "id": 45,
+    "isStarred": false,
     "isRead": false,
     "description": "Realigned motivating task-force",
     "company_Name": "Jetpulse",
@@ -496,6 +541,7 @@
   },
   {
     "id": 46,
+    "isStarred": false,
     "isRead": false,
     "description": "Mandatory well-modulated concept",
     "company_Name": "Feedfire",
@@ -507,6 +553,7 @@
   },
   {
     "id": 47,
+    "isStarred": false,
     "isRead": false,
     "description": "Configurable bandwidth-monitored knowledge base",
     "company_Name": "Quatz",
@@ -518,6 +565,7 @@
   },
   {
     "id": 48,
+    "isStarred": false,
     "isRead": false,
     "description": "Self-enabling mission-critical paradigm",
     "company_Name": "Miboo",
@@ -529,6 +577,7 @@
   },
   {
     "id": 49,
+    "isStarred": false,
     "isRead": false,
     "description": "Public-key mobile superstructure",
     "company_Name": "Talane",
@@ -540,6 +589,7 @@
   },
   {
     "id": 50,
+    "isStarred": false,
     "isRead": false,
     "description": "Profound clear-thinking focus group",
     "company_Name": "Buzzster",
@@ -551,6 +601,7 @@
   },
   {
     "id": 51,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse national product",
     "company_Name": "Eamia",
@@ -562,6 +613,7 @@
   },
   {
     "id": 52,
+    "isStarred": false,
     "isRead": false,
     "description": "User-centric systemic encryption",
     "company_Name": "Yamia",
@@ -573,6 +625,7 @@
   },
   {
     "id": 53,
+    "isStarred": false,
     "isRead": false,
     "description": "Public-key 24 hour task-force",
     "company_Name": "Layo",
@@ -584,6 +637,7 @@
   },
   {
     "id": 54,
+    "isStarred": false,
     "isRead": false,
     "description": "Organized optimal orchestration",
     "company_Name": "Zoovu",
@@ -595,6 +649,7 @@
   },
   {
     "id": 55,
+    "isStarred": false,
     "isRead": false,
     "description": "Reverse-engineered leading edge pricing structure",
     "company_Name": "Tagcat",
@@ -606,6 +661,7 @@
   },
   {
     "id": 56,
+    "isStarred": false,
     "isRead": false,
     "description": "Ergonomic motivating throughput",
     "company_Name": "Kimia",
@@ -617,6 +673,7 @@
   },
   {
     "id": 57,
+    "isStarred": false,
     "isRead": false,
     "description": "Profound attitude-oriented task-force",
     "company_Name": "Eadel",
@@ -628,6 +685,7 @@
   },
   {
     "id": 58,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked holistic conglomeration",
     "company_Name": "Dabtype",
@@ -639,6 +697,7 @@
   },
   {
     "id": 59,
+    "isStarred": false,
     "isRead": false,
     "description": "Focused intangible throughput",
     "company_Name": "Yamia",
@@ -650,6 +709,7 @@
   },
   {
     "id": 60,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal static Graphic Interface",
     "company_Name": "Janyx",
@@ -661,6 +721,7 @@
   },
   {
     "id": 61,
+    "isStarred": false,
     "isRead": false,
     "description": "Progressive fresh-thinking task-force",
     "company_Name": "Jaxworks",
@@ -672,6 +733,7 @@
   },
   {
     "id": 62,
+    "isStarred": false,
     "isRead": false,
     "description": "Compatible mission-critical open architecture",
     "company_Name": "Shufflester",
@@ -683,6 +745,7 @@
   },
   {
     "id": 63,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-group solution-oriented contingency",
     "company_Name": "Blogtags",
@@ -694,6 +757,7 @@
   },
   {
     "id": 64,
+    "isStarred": false,
     "isRead": false,
     "description": "Function-based hybrid emulation",
     "company_Name": "JumpXS",
@@ -705,6 +769,7 @@
   },
   {
     "id": 65,
+    "isStarred": false,
     "isRead": false,
     "description": "Seamless zero defect software",
     "company_Name": "Rhyzio",
@@ -716,6 +781,7 @@
   },
   {
     "id": 66,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused logistical methodology",
     "company_Name": "DabZ",
@@ -727,6 +793,7 @@
   },
   {
     "id": 67,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused radical knowledge base",
     "company_Name": "Browsebug",
@@ -738,6 +805,7 @@
   },
   {
     "id": 68,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal client-driven pricing structure",
     "company_Name": "Zava",
@@ -749,6 +817,7 @@
   },
   {
     "id": 69,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based web-enabled installation",
     "company_Name": "Photofeed",
@@ -760,6 +829,7 @@
   },
   {
     "id": 70,
+    "isStarred": false,
     "isRead": false,
     "description": "Quality-focused system-worthy forecast",
     "company_Name": "Fivebridge",
@@ -771,6 +841,7 @@
   },
   {
     "id": 71,
+    "isStarred": false,
     "isRead": false,
     "description": "Focused dedicated project",
     "company_Name": "Agimba",
@@ -782,6 +853,7 @@
   },
   {
     "id": 72,
+    "isStarred": false,
     "isRead": false,
     "description": "Inverse bandwidth-monitored capacity",
     "company_Name": "Zoomzone",
@@ -793,6 +865,7 @@
   },
   {
     "id": 73,
+    "isStarred": false,
     "isRead": false,
     "description": "Upgradable methodical artificial intelligence",
     "company_Name": "Izio",
@@ -804,6 +877,7 @@
   },
   {
     "id": 74,
+    "isStarred": false,
     "isRead": false,
     "description": "Progressive logistical frame",
     "company_Name": "Browseblab",
@@ -815,6 +889,7 @@
   },
   {
     "id": 75,
+    "isStarred": false,
     "isRead": false,
     "description": "Fundamental interactive approach",
     "company_Name": "Abata",
@@ -826,6 +901,7 @@
   },
   {
     "id": 76,
+    "isStarred": false,
     "isRead": false,
     "description": "Robust upward-trending monitoring",
     "company_Name": "Twitterlist",
@@ -837,6 +913,7 @@
   },
   {
     "id": 77,
+    "isStarred": false,
     "isRead": false,
     "description": "Balanced needs-based emulation",
     "company_Name": "Einti",
@@ -848,6 +925,7 @@
   },
   {
     "id": 78,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots zero defect product",
     "company_Name": "Mynte",
@@ -859,6 +937,7 @@
   },
   {
     "id": 79,
+    "isStarred": false,
     "isRead": false,
     "description": "Fundamental static policy",
     "company_Name": "Skyba",
@@ -870,6 +949,7 @@
   },
   {
     "id": 80,
+    "isStarred": false,
     "isRead": false,
     "description": "Digitized neutral contingency",
     "company_Name": "Bluezoom",
@@ -881,6 +961,7 @@
   },
   {
     "id": 81,
+    "isStarred": false,
     "isRead": false,
     "description": "Adaptive actuating productivity",
     "company_Name": "Realpoint",
@@ -892,6 +973,7 @@
   },
   {
     "id": 82,
+    "isStarred": false,
     "isRead": false,
     "description": "Reduced bi-directional hub",
     "company_Name": "Buzzster",
@@ -903,6 +985,7 @@
   },
   {
     "id": 83,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent uniform moratorium",
     "company_Name": "Dynazzy",
@@ -914,6 +997,7 @@
   },
   {
     "id": 84,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal logistical paradigm",
     "company_Name": "Skinte",
@@ -925,6 +1009,7 @@
   },
   {
     "id": 85,
+    "isStarred": false,
     "isRead": false,
     "description": "Pre-emptive responsive data-warehouse",
     "company_Name": "Tagpad",
@@ -936,6 +1021,7 @@
   },
   {
     "id": 86,
+    "isStarred": false,
     "isRead": false,
     "description": "Organic foreground artificial intelligence",
     "company_Name": "Dabjam",
@@ -947,6 +1033,7 @@
   },
   {
     "id": 87,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal optimizing framework",
     "company_Name": "Mybuzz",
@@ -958,6 +1045,7 @@
   },
   {
     "id": 88,
+    "isStarred": false,
     "isRead": false,
     "description": "Monitored multi-tasking access",
     "company_Name": "Topicware",
@@ -969,6 +1057,7 @@
   },
   {
     "id": 89,
+    "isStarred": false,
     "isRead": false,
     "description": "Ergonomic content-based core",
     "company_Name": "Babbleset",
@@ -980,6 +1069,7 @@
   },
   {
     "id": 90,
+    "isStarred": false,
     "isRead": false,
     "description": "Focused leading edge hub",
     "company_Name": "Skilith",
@@ -991,6 +1081,7 @@
   },
   {
     "id": 91,
+    "isStarred": false,
     "isRead": false,
     "description": "Automated optimal focus group",
     "company_Name": "Gigashots",
@@ -1002,6 +1093,7 @@
   },
   {
     "id": 92,
+    "isStarred": false,
     "isRead": false,
     "description": "Function-based high-level archive",
     "company_Name": "Realfire",
@@ -1013,6 +1105,7 @@
   },
   {
     "id": 93,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-layered incremental matrix",
     "company_Name": "Vinte",
@@ -1024,6 +1117,7 @@
   },
   {
     "id": 94,
+    "isStarred": false,
     "isRead": false,
     "description": "Automated 3rd generation solution",
     "company_Name": "Fiveclub",
@@ -1035,6 +1129,7 @@
   },
   {
     "id": 95,
+    "isStarred": false,
     "isRead": false,
     "description": "Optional grid-enabled customer loyalty",
     "company_Name": "Yata",
@@ -1046,6 +1141,7 @@
   },
   {
     "id": 96,
+    "isStarred": false,
     "isRead": false,
     "description": "User-friendly system-worthy middleware",
     "company_Name": "Ainyx",
@@ -1057,6 +1153,7 @@
   },
   {
     "id": 97,
+    "isStarred": false,
     "isRead": false,
     "description": "Balanced multi-state framework",
     "company_Name": "Zooxo",
@@ -1068,6 +1165,7 @@
   },
   {
     "id": 98,
+    "isStarred": false,
     "isRead": false,
     "description": "Inverse reciprocal middleware",
     "company_Name": "Tagcat",
@@ -1079,6 +1177,7 @@
   },
   {
     "id": 99,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-lateral foreground Graphical User Interface",
     "company_Name": "Twitterworks",
@@ -1090,6 +1189,7 @@
   },
   {
     "id": 100,
+    "isStarred": false,
     "isRead": false,
     "description": "Vision-oriented user-facing paradigm",
     "company_Name": "Quaxo",
@@ -1101,6 +1201,7 @@
   },
   {
     "id": 101,
+    "isStarred": false,
     "isRead": false,
     "description": "Configurable asymmetric circuit",
     "company_Name": "Meevee",
@@ -1112,6 +1213,7 @@
   },
   {
     "id": 102,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized tangible capability",
     "company_Name": "Kwilith",
@@ -1123,6 +1225,7 @@
   },
   {
     "id": 103,
+    "isStarred": false,
     "isRead": false,
     "description": "Profit-focused bifurcated matrix",
     "company_Name": "Meedoo",
@@ -1134,6 +1237,7 @@
   },
   {
     "id": 104,
+    "isStarred": false,
     "isRead": false,
     "description": "Adaptive real-time neural-net",
     "company_Name": "Twitterworks",
@@ -1145,6 +1249,7 @@
   },
   {
     "id": 105,
+    "isStarred": false,
     "isRead": false,
     "description": "Optional non-volatile support",
     "company_Name": "Ainyx",
@@ -1156,6 +1261,7 @@
   },
   {
     "id": 106,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-channelled eco-centric emulation",
     "company_Name": "Vinder",
@@ -1167,6 +1273,7 @@
   },
   {
     "id": 107,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent coherent paradigm",
     "company_Name": "Twitterbridge",
@@ -1178,6 +1285,7 @@
   },
   {
     "id": 108,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-platform asymmetric methodology",
     "company_Name": "Feedbug",
@@ -1189,6 +1297,7 @@
   },
   {
     "id": 109,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-lateral analyzing definition",
     "company_Name": "Gevee",
@@ -1200,6 +1309,7 @@
   },
   {
     "id": 110,
+    "isStarred": false,
     "isRead": false,
     "description": "De-engineered asymmetric process improvement",
     "company_Name": "Eadel",
@@ -1211,6 +1321,7 @@
   },
   {
     "id": 111,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-group scalable open architecture",
     "company_Name": "Flashspan",
@@ -1222,6 +1333,7 @@
   },
   {
     "id": 112,
+    "isStarred": false,
     "isRead": false,
     "description": "Function-based local internet solution",
     "company_Name": "Youspan",
@@ -1233,6 +1345,7 @@
   },
   {
     "id": 113,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked exuding frame",
     "company_Name": "Twitterbeat",
@@ -1244,6 +1357,7 @@
   },
   {
     "id": 114,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots mobile interface",
     "company_Name": "Oyoloo",
@@ -1255,6 +1369,7 @@
   },
   {
     "id": 115,
+    "isStarred": false,
     "isRead": false,
     "description": "Balanced stable frame",
     "company_Name": "Voomm",
@@ -1266,6 +1381,7 @@
   },
   {
     "id": 116,
+    "isStarred": false,
     "isRead": false,
     "description": "Visionary high-level workforce",
     "company_Name": "Jaxspan",
@@ -1277,6 +1393,7 @@
   },
   {
     "id": 117,
+    "isStarred": false,
     "isRead": false,
     "description": "Ameliorated 3rd generation encryption",
     "company_Name": "Dynava",
@@ -1288,6 +1405,7 @@
   },
   {
     "id": 118,
+    "isStarred": false,
     "isRead": false,
     "description": "Monitored full-range framework",
     "company_Name": "Geba",
@@ -1299,6 +1417,7 @@
   },
   {
     "id": 119,
+    "isStarred": false,
     "isRead": false,
     "description": "Programmable interactive leverage",
     "company_Name": "Flipbug",
@@ -1310,6 +1429,7 @@
   },
   {
     "id": 120,
+    "isStarred": false,
     "isRead": false,
     "description": "Optional dynamic workforce",
     "company_Name": "Wikivu",
@@ -1321,6 +1441,7 @@
   },
   {
     "id": 121,
+    "isStarred": false,
     "isRead": false,
     "description": "Expanded demand-driven intranet",
     "company_Name": "Shuffledrive",
@@ -1332,6 +1453,7 @@
   },
   {
     "id": 122,
+    "isStarred": false,
     "isRead": false,
     "description": "Enterprise-wide intangible secured line",
     "company_Name": "Blogtags",
@@ -1343,6 +1465,7 @@
   },
   {
     "id": 123,
+    "isStarred": false,
     "isRead": false,
     "description": "Fully-configurable leading edge parallelism",
     "company_Name": "Edgeblab",
@@ -1354,6 +1477,7 @@
   },
   {
     "id": 124,
+    "isStarred": false,
     "isRead": false,
     "description": "Front-line hybrid website",
     "company_Name": "Skippad",
@@ -1365,6 +1489,7 @@
   },
   {
     "id": 125,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused leading edge challenge",
     "company_Name": "Linktype",
@@ -1376,6 +1501,7 @@
   },
   {
     "id": 126,
+    "isStarred": false,
     "isRead": false,
     "description": "Function-based mobile success",
     "company_Name": "Gigazoom",
@@ -1387,6 +1513,7 @@
   },
   {
     "id": 127,
+    "isStarred": false,
     "isRead": false,
     "description": "Polarised 5th generation forecast",
     "company_Name": "Vidoo",
@@ -1398,6 +1525,7 @@
   },
   {
     "id": 128,
+    "isStarred": false,
     "isRead": false,
     "description": "Open-architected neutral benchmark",
     "company_Name": "Zazio",
@@ -1409,6 +1537,7 @@
   },
   {
     "id": 129,
+    "isStarred": false,
     "isRead": false,
     "description": "Enhanced dedicated complexity",
     "company_Name": "Yombu",
@@ -1420,6 +1549,7 @@
   },
   {
     "id": 130,
+    "isStarred": false,
     "isRead": false,
     "description": "Managed didactic utilisation",
     "company_Name": "Gabcube",
@@ -1431,6 +1561,7 @@
   },
   {
     "id": 131,
+    "isStarred": false,
     "isRead": false,
     "description": "Team-oriented empowering support",
     "company_Name": "Skippad",
@@ -1442,6 +1573,7 @@
   },
   {
     "id": 132,
+    "isStarred": false,
     "isRead": false,
     "description": "Front-line 3rd generation moratorium",
     "company_Name": "Vitz",
@@ -1453,6 +1585,7 @@
   },
   {
     "id": 133,
+    "isStarred": false,
     "isRead": false,
     "description": "Organized foreground capability",
     "company_Name": "Trupe",
@@ -1464,6 +1597,7 @@
   },
   {
     "id": 134,
+    "isStarred": false,
     "isRead": false,
     "description": "Reverse-engineered methodical productivity",
     "company_Name": "Yakidoo",
@@ -1475,6 +1609,7 @@
   },
   {
     "id": 135,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized content-based intranet",
     "company_Name": "Linklinks",
@@ -1486,6 +1621,7 @@
   },
   {
     "id": 136,
+    "isStarred": false,
     "isRead": false,
     "description": "Versatile well-modulated software",
     "company_Name": "Ntag",
@@ -1497,6 +1633,7 @@
   },
   {
     "id": 137,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal transitional focus group",
     "company_Name": "Zoonoodle",
@@ -1508,6 +1645,7 @@
   },
   {
     "id": 138,
+    "isStarred": false,
     "isRead": false,
     "description": "Distributed bi-directional capability",
     "company_Name": "Miboo",
@@ -1519,6 +1657,7 @@
   },
   {
     "id": 139,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized systematic migration",
     "company_Name": "Oyoba",
@@ -1530,6 +1669,7 @@
   },
   {
     "id": 140,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal client-server artificial intelligence",
     "company_Name": "Meedoo",
@@ -1541,6 +1681,7 @@
   },
   {
     "id": 141,
+    "isStarred": false,
     "isRead": false,
     "description": "Persevering national parallelism",
     "company_Name": "Brightbean",
@@ -1552,6 +1693,7 @@
   },
   {
     "id": 142,
+    "isStarred": false,
     "isRead": false,
     "description": "Sharable regional algorithm",
     "company_Name": "Babbleset",
@@ -1563,6 +1705,7 @@
   },
   {
     "id": 143,
+    "isStarred": false,
     "isRead": false,
     "description": "Reactive upward-trending info-mediaries",
     "company_Name": "Oloo",
@@ -1574,6 +1717,7 @@
   },
   {
     "id": 144,
+    "isStarred": false,
     "isRead": false,
     "description": "Realigned bandwidth-monitored info-mediaries",
     "company_Name": "Bluezoom",
@@ -1585,6 +1729,7 @@
   },
   {
     "id": 145,
+    "isStarred": false,
     "isRead": false,
     "description": "Public-key content-based framework",
     "company_Name": "Riffpedia",
@@ -1596,6 +1741,7 @@
   },
   {
     "id": 146,
+    "isStarred": false,
     "isRead": false,
     "description": "Focused composite productivity",
     "company_Name": "Oba",
@@ -1607,6 +1753,7 @@
   },
   {
     "id": 147,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized static adapter",
     "company_Name": "Viva",
@@ -1618,6 +1765,7 @@
   },
   {
     "id": 148,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse incremental local area network",
     "company_Name": "Mydeo",
@@ -1629,6 +1777,7 @@
   },
   {
     "id": 149,
+    "isStarred": false,
     "isRead": false,
     "description": "Centralized disintermediate benchmark",
     "company_Name": "Voonder",
@@ -1640,6 +1789,7 @@
   },
   {
     "id": 150,
+    "isStarred": false,
     "isRead": false,
     "description": "Customizable fresh-thinking knowledge base",
     "company_Name": "Eidel",
@@ -1651,6 +1801,7 @@
   },
   {
     "id": 151,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-contextualized 5th generation portal",
     "company_Name": "Yabox",
@@ -1662,6 +1813,7 @@
   },
   {
     "id": 152,
+    "isStarred": false,
     "isRead": false,
     "description": "Public-key contextually-based middleware",
     "company_Name": "Zoomzone",
@@ -1673,6 +1825,7 @@
   },
   {
     "id": 153,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked client-driven instruction set",
     "company_Name": "Trunyx",
@@ -1684,6 +1837,7 @@
   },
   {
     "id": 154,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-platform system-worthy software",
     "company_Name": "Rhybox",
@@ -1695,6 +1849,7 @@
   },
   {
     "id": 155,
+    "isStarred": false,
     "isRead": false,
     "description": "Fully-configurable web-enabled knowledge user",
     "company_Name": "Quatz",
@@ -1706,6 +1861,7 @@
   },
   {
     "id": 156,
+    "isStarred": false,
     "isRead": false,
     "description": "Realigned discrete service-desk",
     "company_Name": "Tanoodle",
@@ -1717,6 +1873,7 @@
   },
   {
     "id": 157,
+    "isStarred": false,
     "isRead": false,
     "description": "Reverse-engineered fault-tolerant analyzer",
     "company_Name": "Centimia",
@@ -1728,6 +1885,7 @@
   },
   {
     "id": 158,
+    "isStarred": false,
     "isRead": false,
     "description": "Seamless human-resource process improvement",
     "company_Name": "Youtags",
@@ -1739,6 +1897,7 @@
   },
   {
     "id": 159,
+    "isStarred": false,
     "isRead": false,
     "description": "Profound empowering website",
     "company_Name": "Browsetype",
@@ -1750,6 +1909,7 @@
   },
   {
     "id": 160,
+    "isStarred": false,
     "isRead": false,
     "description": "Pre-emptive stable intranet",
     "company_Name": "Rhyzio",
@@ -1761,6 +1921,7 @@
   },
   {
     "id": 161,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked 3rd generation model",
     "company_Name": "Kwimbee",
@@ -1772,6 +1933,7 @@
   },
   {
     "id": 162,
+    "isStarred": false,
     "isRead": false,
     "description": "User-centric explicit attitude",
     "company_Name": "Kwideo",
@@ -1783,6 +1945,7 @@
   },
   {
     "id": 163,
+    "isStarred": false,
     "isRead": false,
     "description": "Enterprise-wide encompassing synergy",
     "company_Name": "Bubblebox",
@@ -1794,6 +1957,7 @@
   },
   {
     "id": 164,
+    "isStarred": false,
     "isRead": false,
     "description": "Right-sized bifurcated groupware",
     "company_Name": "Npath",
@@ -1805,6 +1969,7 @@
   },
   {
     "id": 165,
+    "isStarred": false,
     "isRead": false,
     "description": "Seamless incremental capacity",
     "company_Name": "Trunyx",
@@ -1816,6 +1981,7 @@
   },
   {
     "id": 166,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal multi-state capacity",
     "company_Name": "Reallinks",
@@ -1827,6 +1993,7 @@
   },
   {
     "id": 167,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse hybrid alliance",
     "company_Name": "Avaveo",
@@ -1838,6 +2005,7 @@
   },
   {
     "id": 168,
+    "isStarred": false,
     "isRead": false,
     "description": "Reverse-engineered tertiary matrix",
     "company_Name": "Dazzlesphere",
@@ -1849,6 +2017,7 @@
   },
   {
     "id": 169,
+    "isStarred": false,
     "isRead": false,
     "description": "Optional upward-trending project",
     "company_Name": "Gigazoom",
@@ -1860,6 +2029,7 @@
   },
   {
     "id": 170,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based static groupware",
     "company_Name": "Tekfly",
@@ -1871,6 +2041,7 @@
   },
   {
     "id": 171,
+    "isStarred": false,
     "isRead": false,
     "description": "Seamless upward-trending system engine",
     "company_Name": "Shufflester",
@@ -1882,6 +2053,7 @@
   },
   {
     "id": 172,
+    "isStarred": false,
     "isRead": false,
     "description": "Ameliorated 3rd generation collaboration",
     "company_Name": "Quaxo",
@@ -1893,6 +2065,7 @@
   },
   {
     "id": 173,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots zero tolerance workforce",
     "company_Name": "Kamba",
@@ -1904,6 +2077,7 @@
   },
   {
     "id": 174,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized 24 hour methodology",
     "company_Name": "Dazzlesphere",
@@ -1915,6 +2089,7 @@
   },
   {
     "id": 175,
+    "isStarred": false,
     "isRead": false,
     "description": "Reduced bi-directional project",
     "company_Name": "Quatz",
@@ -1926,6 +2101,7 @@
   },
   {
     "id": 176,
+    "isStarred": false,
     "isRead": false,
     "description": "Future-proofed 24/7 installation",
     "company_Name": "Wikizz",
@@ -1937,6 +2113,7 @@
   },
   {
     "id": 177,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-tiered empowering array",
     "company_Name": "Twimm",
@@ -1948,6 +2125,7 @@
   },
   {
     "id": 178,
+    "isStarred": false,
     "isRead": false,
     "description": "Managed systemic access",
     "company_Name": "Einti",
@@ -1959,6 +2137,7 @@
   },
   {
     "id": 179,
+    "isStarred": false,
     "isRead": false,
     "description": "Synchronised encompassing application",
     "company_Name": "Dynabox",
@@ -1970,6 +2149,7 @@
   },
   {
     "id": 180,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent incremental moderator",
     "company_Name": "Linktype",
@@ -1981,6 +2161,7 @@
   },
   {
     "id": 181,
+    "isStarred": false,
     "isRead": false,
     "description": "Assimilated background instruction set",
     "company_Name": "Fiveclub",
@@ -1992,6 +2173,7 @@
   },
   {
     "id": 182,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal upward-trending hardware",
     "company_Name": "Plambee",
@@ -2003,6 +2185,7 @@
   },
   {
     "id": 183,
+    "isStarred": false,
     "isRead": false,
     "description": "Managed system-worthy firmware",
     "company_Name": "Twitterbeat",
@@ -2014,6 +2197,7 @@
   },
   {
     "id": 184,
+    "isStarred": false,
     "isRead": false,
     "description": "Down-sized 6th generation Graphical User Interface",
     "company_Name": "Dazzlesphere",
@@ -2025,6 +2209,7 @@
   },
   {
     "id": 185,
+    "isStarred": false,
     "isRead": false,
     "description": "Realigned systemic conglomeration",
     "company_Name": "Wordtune",
@@ -2036,6 +2221,7 @@
   },
   {
     "id": 186,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-contextualized client-server concept",
     "company_Name": "Skimia",
@@ -2047,6 +2233,7 @@
   },
   {
     "id": 187,
+    "isStarred": false,
     "isRead": false,
     "description": "Optimized incremental circuit",
     "company_Name": "Dabvine",
@@ -2058,6 +2245,7 @@
   },
   {
     "id": 188,
+    "isStarred": false,
     "isRead": false,
     "description": "Stand-alone explicit knowledge user",
     "company_Name": "Babbleblab",
@@ -2069,6 +2257,7 @@
   },
   {
     "id": 189,
+    "isStarred": false,
     "isRead": false,
     "description": "Streamlined methodical methodology",
     "company_Name": "Leexo",
@@ -2080,6 +2269,7 @@
   },
   {
     "id": 190,
+    "isStarred": false,
     "isRead": false,
     "description": "Phased tangible installation",
     "company_Name": "Tazzy",
@@ -2091,6 +2281,7 @@
   },
   {
     "id": 191,
+    "isStarred": false,
     "isRead": false,
     "description": "Ameliorated web-enabled adapter",
     "company_Name": "Wikido",
@@ -2102,6 +2293,7 @@
   },
   {
     "id": 192,
+    "isStarred": false,
     "isRead": false,
     "description": "De-engineered demand-driven knowledge user",
     "company_Name": "Rhynoodle",
@@ -2113,6 +2305,7 @@
   },
   {
     "id": 193,
+    "isStarred": false,
     "isRead": false,
     "description": "Automated intermediate circuit",
     "company_Name": "Oodoo",
@@ -2124,6 +2317,7 @@
   },
   {
     "id": 194,
+    "isStarred": false,
     "isRead": false,
     "description": "Proactive eco-centric standardization",
     "company_Name": "Blognation",
@@ -2135,6 +2329,7 @@
   },
   {
     "id": 195,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized real-time structure",
     "company_Name": "Rhynoodle",
@@ -2146,6 +2341,7 @@
   },
   {
     "id": 196,
+    "isStarred": false,
     "isRead": false,
     "description": "Polarised exuding Graphic Interface",
     "company_Name": "Skyvu",
@@ -2157,6 +2353,7 @@
   },
   {
     "id": 197,
+    "isStarred": false,
     "isRead": false,
     "description": "Intuitive homogeneous challenge",
     "company_Name": "Youspan",
@@ -2168,6 +2365,7 @@
   },
   {
     "id": 198,
+    "isStarred": false,
     "isRead": false,
     "description": "Configurable incremental initiative",
     "company_Name": "Yodel",
@@ -2179,6 +2377,7 @@
   },
   {
     "id": 199,
+    "isStarred": false,
     "isRead": false,
     "description": "Versatile bottom-line encoding",
     "company_Name": "Fivespan",
@@ -2190,6 +2389,7 @@
   },
   {
     "id": 200,
+    "isStarred": false,
     "isRead": false,
     "description": "Public-key uniform matrix",
     "company_Name": "Gabtype",
@@ -2201,6 +2401,7 @@
   },
   {
     "id": 201,
+    "isStarred": false,
     "isRead": false,
     "description": "Vision-oriented scalable adapter",
     "company_Name": "Cogilith",
@@ -2212,6 +2413,7 @@
   },
   {
     "id": 202,
+    "isStarred": false,
     "isRead": false,
     "description": "Digitized incremental firmware",
     "company_Name": "Feedfire",
@@ -2223,6 +2425,7 @@
   },
   {
     "id": 203,
+    "isStarred": false,
     "isRead": false,
     "description": "Virtual mobile intranet",
     "company_Name": "Thoughtstorm",
@@ -2234,6 +2437,7 @@
   },
   {
     "id": 204,
+    "isStarred": false,
     "isRead": false,
     "description": "Stand-alone system-worthy secured line",
     "company_Name": "Zooveo",
@@ -2245,6 +2449,7 @@
   },
   {
     "id": 205,
+    "isStarred": false,
     "isRead": false,
     "description": "Down-sized secondary system engine",
     "company_Name": "Topiclounge",
@@ -2256,6 +2461,7 @@
   },
   {
     "id": 206,
+    "isStarred": false,
     "isRead": false,
     "description": "Persevering regional website",
     "company_Name": "Zava",
@@ -2267,6 +2473,7 @@
   },
   {
     "id": 207,
+    "isStarred": false,
     "isRead": false,
     "description": "Digitized global projection",
     "company_Name": "Divavu",
@@ -2278,6 +2485,7 @@
   },
   {
     "id": 208,
+    "isStarred": false,
     "isRead": false,
     "description": "Innovative interactive time-frame",
     "company_Name": "Nlounge",
@@ -2289,6 +2497,7 @@
   },
   {
     "id": 209,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized content-based framework",
     "company_Name": "Bubblebox",
@@ -2300,6 +2509,7 @@
   },
   {
     "id": 210,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent bifurcated collaboration",
     "company_Name": "Skimia",
@@ -2311,6 +2521,7 @@
   },
   {
     "id": 211,
+    "isStarred": false,
     "isRead": false,
     "description": "Triple-buffered 6th generation website",
     "company_Name": "Browsetype",
@@ -2322,6 +2533,7 @@
   },
   {
     "id": 212,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse responsive policy",
     "company_Name": "Kanoodle",
@@ -2333,6 +2545,7 @@
   },
   {
     "id": 213,
+    "isStarred": false,
     "isRead": false,
     "description": "Devolved neutral emulation",
     "company_Name": "Aivee",
@@ -2344,6 +2557,7 @@
   },
   {
     "id": 214,
+    "isStarred": false,
     "isRead": false,
     "description": "Quality-focused bottom-line parallelism",
     "company_Name": "Voonte",
@@ -2355,6 +2569,7 @@
   },
   {
     "id": 215,
+    "isStarred": false,
     "isRead": false,
     "description": "Versatile responsive website",
     "company_Name": "Dazzlesphere",
@@ -2366,6 +2581,7 @@
   },
   {
     "id": 216,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-tiered homogeneous structure",
     "company_Name": "Blogtags",
@@ -2377,6 +2593,7 @@
   },
   {
     "id": 217,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergistic 24/7 database",
     "company_Name": "Digitube",
@@ -2388,6 +2605,7 @@
   },
   {
     "id": 218,
+    "isStarred": false,
     "isRead": false,
     "description": "Secured context-sensitive workforce",
     "company_Name": "Centimia",
@@ -2399,6 +2617,7 @@
   },
   {
     "id": 219,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized empowering focus group",
     "company_Name": "Skimia",
@@ -2410,6 +2629,7 @@
   },
   {
     "id": 220,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal bi-directional internet solution",
     "company_Name": "Vipe",
@@ -2421,6 +2641,7 @@
   },
   {
     "id": 221,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-contextualized asynchronous circuit",
     "company_Name": "Centimia",
@@ -2432,6 +2653,7 @@
   },
   {
     "id": 222,
+    "isStarred": false,
     "isRead": false,
     "description": "Polarised explicit migration",
     "company_Name": "Thoughtworks",
@@ -2443,6 +2665,7 @@
   },
   {
     "id": 223,
+    "isStarred": false,
     "isRead": false,
     "description": "Compatible real-time open system",
     "company_Name": "Divape",
@@ -2454,6 +2677,7 @@
   },
   {
     "id": 224,
+    "isStarred": false,
     "isRead": false,
     "description": "Organized optimal array",
     "company_Name": "Riffwire",
@@ -2465,6 +2689,7 @@
   },
   {
     "id": 225,
+    "isStarred": false,
     "isRead": false,
     "description": "Mandatory content-based toolset",
     "company_Name": "Skipstorm",
@@ -2476,6 +2701,7 @@
   },
   {
     "id": 226,
+    "isStarred": false,
     "isRead": false,
     "description": "Function-based well-modulated implementation",
     "company_Name": "Buzzdog",
@@ -2487,6 +2713,7 @@
   },
   {
     "id": 227,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-tiered encompassing secured line",
     "company_Name": "Topicshots",
@@ -2498,6 +2725,7 @@
   },
   {
     "id": 228,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked background info-mediaries",
     "company_Name": "Skilith",
@@ -2509,6 +2737,7 @@
   },
   {
     "id": 229,
+    "isStarred": false,
     "isRead": false,
     "description": "Digitized 3rd generation middleware",
     "company_Name": "Skipstorm",
@@ -2520,6 +2749,7 @@
   },
   {
     "id": 230,
+    "isStarred": false,
     "isRead": false,
     "description": "Front-line hybrid leverage",
     "company_Name": "Realbridge",
@@ -2531,6 +2761,7 @@
   },
   {
     "id": 231,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal 6th generation encryption",
     "company_Name": "Tanoodle",
@@ -2542,6 +2773,7 @@
   },
   {
     "id": 232,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-platform homogeneous firmware",
     "company_Name": "Rhynoodle",
@@ -2553,6 +2785,7 @@
   },
   {
     "id": 233,
+    "isStarred": false,
     "isRead": false,
     "description": "Secured directional secured line",
     "company_Name": "Jaloo",
@@ -2564,6 +2797,7 @@
   },
   {
     "id": 234,
+    "isStarred": false,
     "isRead": false,
     "description": "User-centric dedicated firmware",
     "company_Name": "Dynabox",
@@ -2575,6 +2809,7 @@
   },
   {
     "id": 235,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked scalable circuit",
     "company_Name": "JumpXS",
@@ -2586,6 +2821,7 @@
   },
   {
     "id": 236,
+    "isStarred": false,
     "isRead": false,
     "description": "Distributed systematic projection",
     "company_Name": "Divanoodle",
@@ -2597,6 +2833,7 @@
   },
   {
     "id": 237,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized intermediate hub",
     "company_Name": "Fivebridge",
@@ -2608,6 +2845,7 @@
   },
   {
     "id": 238,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based client-driven portal",
     "company_Name": "Lazz",
@@ -2619,6 +2857,7 @@
   },
   {
     "id": 239,
+    "isStarred": false,
     "isRead": false,
     "description": "Organized heuristic info-mediaries",
     "company_Name": "Midel",
@@ -2630,6 +2869,7 @@
   },
   {
     "id": 240,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused regional access",
     "company_Name": "Skaboo",
@@ -2641,6 +2881,7 @@
   },
   {
     "id": 241,
+    "isStarred": false,
     "isRead": false,
     "description": "Secured 24 hour encryption",
     "company_Name": "Fadeo",
@@ -2652,6 +2893,7 @@
   },
   {
     "id": 242,
+    "isStarred": false,
     "isRead": false,
     "description": "Reactive zero tolerance migration",
     "company_Name": "Flashdog",
@@ -2663,6 +2905,7 @@
   },
   {
     "id": 243,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-group fault-tolerant benchmark",
     "company_Name": "Devbug",
@@ -2674,6 +2917,7 @@
   },
   {
     "id": 244,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots 6th generation adapter",
     "company_Name": "Latz",
@@ -2685,6 +2929,7 @@
   },
   {
     "id": 245,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-tiered bottom-line collaboration",
     "company_Name": "Yodoo",
@@ -2696,6 +2941,7 @@
   },
   {
     "id": 246,
+    "isStarred": false,
     "isRead": false,
     "description": "Stand-alone full-range hub",
     "company_Name": "Quamba",
@@ -2707,6 +2953,7 @@
   },
   {
     "id": 247,
+    "isStarred": false,
     "isRead": false,
     "description": "Future-proofed solution-oriented capability",
     "company_Name": "Chatterbridge",
@@ -2718,6 +2965,7 @@
   },
   {
     "id": 248,
+    "isStarred": false,
     "isRead": false,
     "description": "Pre-emptive local website",
     "company_Name": "Photobug",
@@ -2729,6 +2977,7 @@
   },
   {
     "id": 249,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-contextualized non-volatile hub",
     "company_Name": "Devshare",
@@ -2740,6 +2989,7 @@
   },
   {
     "id": 250,
+    "isStarred": false,
     "isRead": false,
     "description": "Streamlined human-resource website",
     "company_Name": "Flipstorm",
@@ -2751,6 +3001,7 @@
   },
   {
     "id": 251,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-engineered impactful parallelism",
     "company_Name": "Skiba",
@@ -2762,6 +3013,7 @@
   },
   {
     "id": 252,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal directional middleware",
     "company_Name": "Avavee",
@@ -2773,6 +3025,7 @@
   },
   {
     "id": 253,
+    "isStarred": false,
     "isRead": false,
     "description": "Triple-buffered global process improvement",
     "company_Name": "Aimbo",
@@ -2784,6 +3037,7 @@
   },
   {
     "id": 254,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-group object-oriented concept",
     "company_Name": "Photobean",
@@ -2795,6 +3049,7 @@
   },
   {
     "id": 255,
+    "isStarred": false,
     "isRead": false,
     "description": "Up-sized asynchronous info-mediaries",
     "company_Name": "Kwinu",
@@ -2806,6 +3061,7 @@
   },
   {
     "id": 256,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based bandwidth-monitored portal",
     "company_Name": "Zooxo",
@@ -2817,6 +3073,7 @@
   },
   {
     "id": 257,
+    "isStarred": false,
     "isRead": false,
     "description": "Switchable client-driven solution",
     "company_Name": "Realblab",
@@ -2828,6 +3085,7 @@
   },
   {
     "id": 258,
+    "isStarred": false,
     "isRead": false,
     "description": "Ergonomic exuding function",
     "company_Name": "Topdrive",
@@ -2839,6 +3097,7 @@
   },
   {
     "id": 259,
+    "isStarred": false,
     "isRead": false,
     "description": "Face to face 24/7 conglomeration",
     "company_Name": "Yoveo",
@@ -2850,6 +3109,7 @@
   },
   {
     "id": 260,
+    "isStarred": false,
     "isRead": false,
     "description": "Public-key intangible architecture",
     "company_Name": "Thoughtbeat",
@@ -2861,6 +3121,7 @@
   },
   {
     "id": 261,
+    "isStarred": false,
     "isRead": false,
     "description": "Monitored eco-centric migration",
     "company_Name": "Skilith",
@@ -2872,6 +3133,7 @@
   },
   {
     "id": 262,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots systemic website",
     "company_Name": "Zoomdog",
@@ -2883,6 +3145,7 @@
   },
   {
     "id": 263,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse well-modulated policy",
     "company_Name": "Rhyzio",
@@ -2894,6 +3157,7 @@
   },
   {
     "id": 264,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-lateral mission-critical matrices",
     "company_Name": "Babbleset",
@@ -2905,6 +3169,7 @@
   },
   {
     "id": 265,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-layered non-volatile success",
     "company_Name": "Dynabox",
@@ -2916,6 +3181,7 @@
   },
   {
     "id": 266,
+    "isStarred": false,
     "isRead": false,
     "description": "Right-sized context-sensitive website",
     "company_Name": "Dabjam",
@@ -2927,6 +3193,7 @@
   },
   {
     "id": 267,
+    "isStarred": false,
     "isRead": false,
     "description": "Ergonomic zero tolerance encryption",
     "company_Name": "Podcat",
@@ -2938,6 +3205,7 @@
   },
   {
     "id": 268,
+    "isStarred": false,
     "isRead": false,
     "description": "User-friendly high-level help-desk",
     "company_Name": "Gevee",
@@ -2949,6 +3217,7 @@
   },
   {
     "id": 269,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergistic impactful project",
     "company_Name": "Shufflester",
@@ -2960,6 +3229,7 @@
   },
   {
     "id": 270,
+    "isStarred": false,
     "isRead": false,
     "description": "Inverse asynchronous software",
     "company_Name": "Voonyx",
@@ -2971,6 +3241,7 @@
   },
   {
     "id": 271,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergistic bi-directional installation",
     "company_Name": "Quamba",
@@ -2982,6 +3253,7 @@
   },
   {
     "id": 272,
+    "isStarred": false,
     "isRead": false,
     "description": "Polarised bottom-line approach",
     "company_Name": "Divanoodle",
@@ -2993,6 +3265,7 @@
   },
   {
     "id": 273,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized regional architecture",
     "company_Name": "Twiyo",
@@ -3004,6 +3277,7 @@
   },
   {
     "id": 274,
+    "isStarred": false,
     "isRead": false,
     "description": "Team-oriented content-based software",
     "company_Name": "Yakijo",
@@ -3015,6 +3289,7 @@
   },
   {
     "id": 275,
+    "isStarred": false,
     "isRead": false,
     "description": "Exclusive bi-directional task-force",
     "company_Name": "Lajo",
@@ -3026,6 +3301,7 @@
   },
   {
     "id": 276,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse mobile customer loyalty",
     "company_Name": "Meetz",
@@ -3037,6 +3313,7 @@
   },
   {
     "id": 277,
+    "isStarred": false,
     "isRead": false,
     "description": "Fully-configurable web-enabled attitude",
     "company_Name": "Bluejam",
@@ -3048,6 +3325,7 @@
   },
   {
     "id": 278,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal logistical moderator",
     "company_Name": "Thoughtbridge",
@@ -3059,6 +3337,7 @@
   },
   {
     "id": 279,
+    "isStarred": false,
     "isRead": false,
     "description": "Up-sized impactful standardization",
     "company_Name": "Edgeclub",
@@ -3070,6 +3349,7 @@
   },
   {
     "id": 280,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent local orchestration",
     "company_Name": "Twinte",
@@ -3081,6 +3361,7 @@
   },
   {
     "id": 281,
+    "isStarred": false,
     "isRead": false,
     "description": "Balanced explicit info-mediaries",
     "company_Name": "Abatz",
@@ -3092,6 +3373,7 @@
   },
   {
     "id": 282,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based global framework",
     "company_Name": "Twitterwire",
@@ -3103,6 +3385,7 @@
   },
   {
     "id": 283,
+    "isStarred": false,
     "isRead": false,
     "description": "Quality-focused composite protocol",
     "company_Name": "Kamba",
@@ -3114,6 +3397,7 @@
   },
   {
     "id": 284,
+    "isStarred": false,
     "isRead": false,
     "description": "Secured fault-tolerant customer loyalty",
     "company_Name": "Trunyx",
@@ -3125,6 +3409,7 @@
   },
   {
     "id": 285,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergistic tertiary implementation",
     "company_Name": "Kimia",
@@ -3136,6 +3421,7 @@
   },
   {
     "id": 286,
+    "isStarred": false,
     "isRead": false,
     "description": "Seamless impactful encoding",
     "company_Name": "Flashpoint",
@@ -3147,6 +3433,7 @@
   },
   {
     "id": 287,
+    "isStarred": false,
     "isRead": false,
     "description": "Profound fresh-thinking help-desk",
     "company_Name": "Gabcube",
@@ -3158,6 +3445,7 @@
   },
   {
     "id": 288,
+    "isStarred": false,
     "isRead": false,
     "description": "Synchronised eco-centric core",
     "company_Name": "Katz",
@@ -3169,6 +3457,7 @@
   },
   {
     "id": 289,
+    "isStarred": false,
     "isRead": false,
     "description": "Customizable multi-tasking algorithm",
     "company_Name": "Wordtune",
@@ -3180,6 +3469,7 @@
   },
   {
     "id": 290,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal encompassing open architecture",
     "company_Name": "Feednation",
@@ -3191,6 +3481,7 @@
   },
   {
     "id": 291,
+    "isStarred": false,
     "isRead": false,
     "description": "Upgradable mission-critical adapter",
     "company_Name": "Quire",
@@ -3202,6 +3493,7 @@
   },
   {
     "id": 292,
+    "isStarred": false,
     "isRead": false,
     "description": "Advanced holistic firmware",
     "company_Name": "Thoughtblab",
@@ -3213,6 +3505,7 @@
   },
   {
     "id": 293,
+    "isStarred": false,
     "isRead": false,
     "description": "Optional bottom-line projection",
     "company_Name": "Thoughtblab",
@@ -3224,6 +3517,7 @@
   },
   {
     "id": 294,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse didactic focus group",
     "company_Name": "Kare",
@@ -3235,6 +3529,7 @@
   },
   {
     "id": 295,
+    "isStarred": false,
     "isRead": false,
     "description": "Seamless 3rd generation matrices",
     "company_Name": "Dynabox",
@@ -3246,6 +3541,7 @@
   },
   {
     "id": 296,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based empowering success",
     "company_Name": "Quinu",
@@ -3257,6 +3553,7 @@
   },
   {
     "id": 297,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent impactful neural-net",
     "company_Name": "Dabvine",
@@ -3268,6 +3565,7 @@
   },
   {
     "id": 298,
+    "isStarred": false,
     "isRead": false,
     "description": "Face to face upward-trending project",
     "company_Name": "Zooxo",
@@ -3279,6 +3577,7 @@
   },
   {
     "id": 299,
+    "isStarred": false,
     "isRead": false,
     "description": "Switchable analyzing standardization",
     "company_Name": "Meezzy",
@@ -3290,6 +3589,7 @@
   },
   {
     "id": 300,
+    "isStarred": false,
     "isRead": false,
     "description": "Switchable zero administration function",
     "company_Name": "Jazzy",
@@ -3301,6 +3601,7 @@
   },
   {
     "id": 301,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergistic system-worthy model",
     "company_Name": "Yadel",
@@ -3312,6 +3613,7 @@
   },
   {
     "id": 302,
+    "isStarred": false,
     "isRead": false,
     "description": "User-centric system-worthy open architecture",
     "company_Name": "Leexo",
@@ -3323,6 +3625,7 @@
   },
   {
     "id": 303,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal grid-enabled software",
     "company_Name": "Kwimbee",
@@ -3334,6 +3637,7 @@
   },
   {
     "id": 304,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergistic upward-trending matrices",
     "company_Name": "Cogidoo",
@@ -3345,6 +3649,7 @@
   },
   {
     "id": 305,
+    "isStarred": false,
     "isRead": false,
     "description": "Ergonomic foreground website",
     "company_Name": "Buzzbean",
@@ -3356,6 +3661,7 @@
   },
   {
     "id": 306,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused bandwidth-monitored customer loyalty",
     "company_Name": "Meevee",
@@ -3367,6 +3673,7 @@
   },
   {
     "id": 307,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized directional algorithm",
     "company_Name": "Yodoo",
@@ -3378,6 +3685,7 @@
   },
   {
     "id": 308,
+    "isStarred": false,
     "isRead": false,
     "description": "Triple-buffered solution-oriented system engine",
     "company_Name": "Myworks",
@@ -3389,6 +3697,7 @@
   },
   {
     "id": 309,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots coherent customer loyalty",
     "company_Name": "Bubblebox",
@@ -3400,6 +3709,7 @@
   },
   {
     "id": 310,
+    "isStarred": false,
     "isRead": false,
     "description": "Enhanced human-resource task-force",
     "company_Name": "Leexo",
@@ -3411,6 +3721,7 @@
   },
   {
     "id": 311,
+    "isStarred": false,
     "isRead": false,
     "description": "Optimized demand-driven extranet",
     "company_Name": "Centimia",
@@ -3422,6 +3733,7 @@
   },
   {
     "id": 312,
+    "isStarred": false,
     "isRead": false,
     "description": "Inverse national matrix",
     "company_Name": "Brightbean",
@@ -3433,6 +3745,7 @@
   },
   {
     "id": 313,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-layered real-time benchmark",
     "company_Name": "Feedfish",
@@ -3444,6 +3757,7 @@
   },
   {
     "id": 314,
+    "isStarred": false,
     "isRead": false,
     "description": "Balanced disintermediate support",
     "company_Name": "Realcube",
@@ -3455,6 +3769,7 @@
   },
   {
     "id": 315,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused heuristic data-warehouse",
     "company_Name": "Yodoo",
@@ -3466,6 +3781,7 @@
   },
   {
     "id": 316,
+    "isStarred": false,
     "isRead": false,
     "description": "Reactive systematic moratorium",
     "company_Name": "Buzzster",
@@ -3477,6 +3793,7 @@
   },
   {
     "id": 317,
+    "isStarred": false,
     "isRead": false,
     "description": "Optional eco-centric projection",
     "company_Name": "Quimba",
@@ -3488,6 +3805,7 @@
   },
   {
     "id": 318,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused local open system",
     "company_Name": "Browsetype",
@@ -3499,6 +3817,7 @@
   },
   {
     "id": 319,
+    "isStarred": false,
     "isRead": false,
     "description": "Compatible heuristic core",
     "company_Name": "Nlounge",
@@ -3510,6 +3829,7 @@
   },
   {
     "id": 320,
+    "isStarred": false,
     "isRead": false,
     "description": "Enhanced global migration",
     "company_Name": "Centimia",
@@ -3521,6 +3841,7 @@
   },
   {
     "id": 321,
+    "isStarred": false,
     "isRead": false,
     "description": "Pre-emptive 3rd generation archive",
     "company_Name": "Fanoodle",
@@ -3532,6 +3853,7 @@
   },
   {
     "id": 322,
+    "isStarred": false,
     "isRead": false,
     "description": "Triple-buffered motivating website",
     "company_Name": "Quinu",
@@ -3543,6 +3865,7 @@
   },
   {
     "id": 323,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-layered discrete Graphical User Interface",
     "company_Name": "Ozu",
@@ -3554,6 +3877,7 @@
   },
   {
     "id": 324,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based stable archive",
     "company_Name": "Leenti",
@@ -3565,6 +3889,7 @@
   },
   {
     "id": 325,
+    "isStarred": false,
     "isRead": false,
     "description": "Advanced radical neural-net",
     "company_Name": "Camido",
@@ -3576,6 +3901,7 @@
   },
   {
     "id": 326,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized client-server function",
     "company_Name": "Meemm",
@@ -3587,6 +3913,7 @@
   },
   {
     "id": 327,
+    "isStarred": false,
     "isRead": false,
     "description": "Reverse-engineered leading edge protocol",
     "company_Name": "Livetube",
@@ -3598,6 +3925,7 @@
   },
   {
     "id": 328,
+    "isStarred": false,
     "isRead": false,
     "description": "Team-oriented eco-centric software",
     "company_Name": "Omba",
@@ -3609,6 +3937,7 @@
   },
   {
     "id": 329,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-engineered logistical policy",
     "company_Name": "Realmix",
@@ -3620,6 +3949,7 @@
   },
   {
     "id": 330,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-platform analyzing architecture",
     "company_Name": "Eamia",
@@ -3631,6 +3961,7 @@
   },
   {
     "id": 331,
+    "isStarred": false,
     "isRead": false,
     "description": "Mandatory systematic conglomeration",
     "company_Name": "Skajo",
@@ -3642,6 +3973,7 @@
   },
   {
     "id": 332,
+    "isStarred": false,
     "isRead": false,
     "description": "Optimized full-range interface",
     "company_Name": "Topicstorm",
@@ -3653,6 +3985,7 @@
   },
   {
     "id": 333,
+    "isStarred": false,
     "isRead": false,
     "description": "Function-based asymmetric hierarchy",
     "company_Name": "Voonix",
@@ -3664,6 +3997,7 @@
   },
   {
     "id": 334,
+    "isStarred": false,
     "isRead": false,
     "description": "User-friendly regional conglomeration",
     "company_Name": "Zooveo",
@@ -3675,6 +4009,7 @@
   },
   {
     "id": 335,
+    "isStarred": false,
     "isRead": false,
     "description": "Organized static secured line",
     "company_Name": "Jatri",
@@ -3686,6 +4021,7 @@
   },
   {
     "id": 336,
+    "isStarred": false,
     "isRead": false,
     "description": "Triple-buffered leading edge approach",
     "company_Name": "Wikizz",
@@ -3697,6 +4033,7 @@
   },
   {
     "id": 337,
+    "isStarred": false,
     "isRead": false,
     "description": "Optimized 24/7 workforce",
     "company_Name": "Twitterbridge",
@@ -3708,6 +4045,7 @@
   },
   {
     "id": 338,
+    "isStarred": false,
     "isRead": false,
     "description": "Exclusive incremental help-desk",
     "company_Name": "Yamia",
@@ -3719,6 +4057,7 @@
   },
   {
     "id": 339,
+    "isStarred": false,
     "isRead": false,
     "description": "Team-oriented dedicated time-frame",
     "company_Name": "Abata",
@@ -3730,6 +4069,7 @@
   },
   {
     "id": 340,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked tertiary focus group",
     "company_Name": "Mudo",
@@ -3741,6 +4081,7 @@
   },
   {
     "id": 341,
+    "isStarred": false,
     "isRead": false,
     "description": "Integrated scalable knowledge user",
     "company_Name": "Thoughtblab",
@@ -3752,6 +4093,7 @@
   },
   {
     "id": 342,
+    "isStarred": false,
     "isRead": false,
     "description": "Reverse-engineered user-facing analyzer",
     "company_Name": "Fanoodle",
@@ -3763,6 +4105,7 @@
   },
   {
     "id": 343,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots bottom-line paradigm",
     "company_Name": "Babbleopia",
@@ -3774,6 +4117,7 @@
   },
   {
     "id": 344,
+    "isStarred": false,
     "isRead": false,
     "description": "Phased homogeneous groupware",
     "company_Name": "Oyope",
@@ -3785,6 +4129,7 @@
   },
   {
     "id": 345,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-group composite standardization",
     "company_Name": "Quatz",
@@ -3796,6 +4141,7 @@
   },
   {
     "id": 346,
+    "isStarred": false,
     "isRead": false,
     "description": "Enterprise-wide mobile frame",
     "company_Name": "Oloo",
@@ -3807,6 +4153,7 @@
   },
   {
     "id": 347,
+    "isStarred": false,
     "isRead": false,
     "description": "Sharable client-server attitude",
     "company_Name": "Meemm",
@@ -3818,6 +4165,7 @@
   },
   {
     "id": 348,
+    "isStarred": false,
     "isRead": false,
     "description": "Intuitive multimedia service-desk",
     "company_Name": "Geba",
@@ -3829,6 +4177,7 @@
   },
   {
     "id": 349,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized disintermediate portal",
     "company_Name": "Realpoint",
@@ -3840,6 +4189,7 @@
   },
   {
     "id": 350,
+    "isStarred": false,
     "isRead": false,
     "description": "Managed dynamic framework",
     "company_Name": "Meejo",
@@ -3851,6 +4201,7 @@
   },
   {
     "id": 351,
+    "isStarred": false,
     "isRead": false,
     "description": "Upgradable systemic focus group",
     "company_Name": "Miboo",
@@ -3862,6 +4213,7 @@
   },
   {
     "id": 352,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused high-level migration",
     "company_Name": "Gigaclub",
@@ -3873,6 +4225,7 @@
   },
   {
     "id": 353,
+    "isStarred": false,
     "isRead": false,
     "description": "Distributed systemic secured line",
     "company_Name": "Youtags",
@@ -3884,6 +4237,7 @@
   },
   {
     "id": 354,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-layered directional internet solution",
     "company_Name": "Skimia",
@@ -3895,6 +4249,7 @@
   },
   {
     "id": 355,
+    "isStarred": false,
     "isRead": false,
     "description": "Balanced 24/7 time-frame",
     "company_Name": "Kaymbo",
@@ -3906,6 +4261,7 @@
   },
   {
     "id": 356,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized background intranet",
     "company_Name": "Devbug",
@@ -3917,6 +4273,7 @@
   },
   {
     "id": 357,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal background website",
     "company_Name": "Miboo",
@@ -3928,6 +4285,7 @@
   },
   {
     "id": 358,
+    "isStarred": false,
     "isRead": false,
     "description": "Focused impactful Graphical User Interface",
     "company_Name": "Innojam",
@@ -3939,6 +4297,7 @@
   },
   {
     "id": 359,
+    "isStarred": false,
     "isRead": false,
     "description": "Future-proofed 3rd generation knowledge user",
     "company_Name": "Divape",
@@ -3950,6 +4309,7 @@
   },
   {
     "id": 360,
+    "isStarred": false,
     "isRead": false,
     "description": "Intuitive value-added structure",
     "company_Name": "Oyoyo",
@@ -3961,6 +4321,7 @@
   },
   {
     "id": 361,
+    "isStarred": false,
     "isRead": false,
     "description": "Decentralized non-volatile access",
     "company_Name": "Centidel",
@@ -3972,6 +4333,7 @@
   },
   {
     "id": 362,
+    "isStarred": false,
     "isRead": false,
     "description": "Streamlined systemic task-force",
     "company_Name": "Dynabox",
@@ -3983,6 +4345,7 @@
   },
   {
     "id": 363,
+    "isStarred": false,
     "isRead": false,
     "description": "Mandatory motivating website",
     "company_Name": "Flashset",
@@ -3994,6 +4357,7 @@
   },
   {
     "id": 364,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal zero defect function",
     "company_Name": "Meemm",
@@ -4005,6 +4369,7 @@
   },
   {
     "id": 365,
+    "isStarred": false,
     "isRead": false,
     "description": "Team-oriented uniform leverage",
     "company_Name": "Brainbox",
@@ -4016,6 +4381,7 @@
   },
   {
     "id": 366,
+    "isStarred": false,
     "isRead": false,
     "description": "Total systemic structure",
     "company_Name": "Zava",
@@ -4027,6 +4393,7 @@
   },
   {
     "id": 367,
+    "isStarred": false,
     "isRead": false,
     "description": "Streamlined multimedia benchmark",
     "company_Name": "Dabshots",
@@ -4038,6 +4405,7 @@
   },
   {
     "id": 368,
+    "isStarred": false,
     "isRead": false,
     "description": "Cloned multi-state info-mediaries",
     "company_Name": "Feedmix",
@@ -4049,6 +4417,7 @@
   },
   {
     "id": 369,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused user-facing forecast",
     "company_Name": "Jaloo",
@@ -4060,6 +4429,7 @@
   },
   {
     "id": 370,
+    "isStarred": false,
     "isRead": false,
     "description": "Down-sized empowering ability",
     "company_Name": "Flashspan",
@@ -4071,6 +4441,7 @@
   },
   {
     "id": 371,
+    "isStarred": false,
     "isRead": false,
     "description": "Compatible tangible superstructure",
     "company_Name": "Voolith",
@@ -4082,6 +4453,7 @@
   },
   {
     "id": 372,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal attitude-oriented extranet",
     "company_Name": "Jabbertype",
@@ -4093,6 +4465,7 @@
   },
   {
     "id": 373,
+    "isStarred": false,
     "isRead": false,
     "description": "Visionary high-level Graphic Interface",
     "company_Name": "Eidel",
@@ -4104,6 +4477,7 @@
   },
   {
     "id": 374,
+    "isStarred": false,
     "isRead": false,
     "description": "Mandatory optimal capacity",
     "company_Name": "Ailane",
@@ -4115,6 +4489,7 @@
   },
   {
     "id": 375,
+    "isStarred": false,
     "isRead": false,
     "description": "Reduced disintermediate pricing structure",
     "company_Name": "Ozu",
@@ -4126,6 +4501,7 @@
   },
   {
     "id": 376,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-group radical database",
     "company_Name": "Jabberstorm",
@@ -4137,6 +4513,7 @@
   },
   {
     "id": 377,
+    "isStarred": false,
     "isRead": false,
     "description": "Total human-resource alliance",
     "company_Name": "Linklinks",
@@ -4148,6 +4525,7 @@
   },
   {
     "id": 378,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized attitude-oriented Graphical User Interface",
     "company_Name": "Flashspan",
@@ -4159,6 +4537,7 @@
   },
   {
     "id": 379,
+    "isStarred": false,
     "isRead": false,
     "description": "Progressive even-keeled strategy",
     "company_Name": "Bubblemix",
@@ -4170,6 +4549,7 @@
   },
   {
     "id": 380,
+    "isStarred": false,
     "isRead": false,
     "description": "Open-source content-based forecast",
     "company_Name": "Babbleblab",
@@ -4181,6 +4561,7 @@
   },
   {
     "id": 381,
+    "isStarred": false,
     "isRead": false,
     "description": "Down-sized 6th generation Graphical User Interface",
     "company_Name": "Geba",
@@ -4192,6 +4573,7 @@
   },
   {
     "id": 382,
+    "isStarred": false,
     "isRead": false,
     "description": "Total actuating extranet",
     "company_Name": "Camimbo",
@@ -4203,6 +4585,7 @@
   },
   {
     "id": 383,
+    "isStarred": false,
     "isRead": false,
     "description": "Seamless mission-critical core",
     "company_Name": "Skinix",
@@ -4214,6 +4597,7 @@
   },
   {
     "id": 384,
+    "isStarred": false,
     "isRead": false,
     "description": "Advanced homogeneous adapter",
     "company_Name": "Kare",
@@ -4225,6 +4609,7 @@
   },
   {
     "id": 385,
+    "isStarred": false,
     "isRead": false,
     "description": "Adaptive dedicated matrices",
     "company_Name": "Jetpulse",
@@ -4236,6 +4621,7 @@
   },
   {
     "id": 386,
+    "isStarred": false,
     "isRead": false,
     "description": "Configurable value-added archive",
     "company_Name": "Meemm",
@@ -4247,6 +4633,7 @@
   },
   {
     "id": 387,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergistic optimal synergy",
     "company_Name": "Yotz",
@@ -4258,6 +4645,7 @@
   },
   {
     "id": 388,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-group static support",
     "company_Name": "Latz",
@@ -4269,6 +4657,7 @@
   },
   {
     "id": 389,
+    "isStarred": false,
     "isRead": false,
     "description": "Stand-alone tangible parallelism",
     "company_Name": "Mydo",
@@ -4280,6 +4669,7 @@
   },
   {
     "id": 390,
+    "isStarred": false,
     "isRead": false,
     "description": "Pre-emptive dedicated alliance",
     "company_Name": "Fivebridge",
@@ -4291,6 +4681,7 @@
   },
   {
     "id": 391,
+    "isStarred": false,
     "isRead": false,
     "description": "Multi-tiered impactful focus group",
     "company_Name": "Mynte",
@@ -4302,6 +4693,7 @@
   },
   {
     "id": 392,
+    "isStarred": false,
     "isRead": false,
     "description": "Team-oriented value-added concept",
     "company_Name": "Edgeclub",
@@ -4313,6 +4705,7 @@
   },
   {
     "id": 393,
+    "isStarred": false,
     "isRead": false,
     "description": "Vision-oriented uniform framework",
     "company_Name": "Browsedrive",
@@ -4324,6 +4717,7 @@
   },
   {
     "id": 394,
+    "isStarred": false,
     "isRead": false,
     "description": "Function-based grid-enabled product",
     "company_Name": "Jetpulse",
@@ -4335,6 +4729,7 @@
   },
   {
     "id": 395,
+    "isStarred": false,
     "isRead": false,
     "description": "Ergonomic human-resource implementation",
     "company_Name": "Quaxo",
@@ -4346,6 +4741,7 @@
   },
   {
     "id": 396,
+    "isStarred": false,
     "isRead": false,
     "description": "Future-proofed executive protocol",
     "company_Name": "Voonder",
@@ -4357,6 +4753,7 @@
   },
   {
     "id": 397,
+    "isStarred": false,
     "isRead": false,
     "description": "Digitized context-sensitive frame",
     "company_Name": "Photolist",
@@ -4368,6 +4765,7 @@
   },
   {
     "id": 398,
+    "isStarred": false,
     "isRead": false,
     "description": "Fundamental incremental support",
     "company_Name": "Jabberstorm",
@@ -4379,6 +4777,7 @@
   },
   {
     "id": 399,
+    "isStarred": false,
     "isRead": false,
     "description": "Proactive solution-oriented moratorium",
     "company_Name": "Flipopia",
@@ -4390,6 +4789,7 @@
   },
   {
     "id": 400,
+    "isStarred": false,
     "isRead": false,
     "description": "Inverse solution-oriented circuit",
     "company_Name": "Yakidoo",
@@ -4401,6 +4801,7 @@
   },
   {
     "id": 401,
+    "isStarred": false,
     "isRead": false,
     "description": "Adaptive stable archive",
     "company_Name": "Buzzster",
@@ -4412,6 +4813,7 @@
   },
   {
     "id": 402,
+    "isStarred": false,
     "isRead": false,
     "description": "Front-line fresh-thinking toolset",
     "company_Name": "Yadel",
@@ -4423,6 +4825,7 @@
   },
   {
     "id": 403,
+    "isStarred": false,
     "isRead": false,
     "description": "Self-enabling optimal workforce",
     "company_Name": "Brainbox",
@@ -4434,6 +4837,7 @@
   },
   {
     "id": 404,
+    "isStarred": false,
     "isRead": false,
     "description": "Reverse-engineered 24 hour customer loyalty",
     "company_Name": "Trilith",
@@ -4445,6 +4849,7 @@
   },
   {
     "id": 405,
+    "isStarred": false,
     "isRead": false,
     "description": "Self-enabling 6th generation concept",
     "company_Name": "Mycat",
@@ -4456,6 +4861,7 @@
   },
   {
     "id": 406,
+    "isStarred": false,
     "isRead": false,
     "description": "Advanced scalable open system",
     "company_Name": "Skimia",
@@ -4467,6 +4873,7 @@
   },
   {
     "id": 407,
+    "isStarred": false,
     "isRead": false,
     "description": "Reduced context-sensitive middleware",
     "company_Name": "Brightbean",
@@ -4478,6 +4885,7 @@
   },
   {
     "id": 408,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal optimizing orchestration",
     "company_Name": "Gabtype",
@@ -4489,6 +4897,7 @@
   },
   {
     "id": 409,
+    "isStarred": false,
     "isRead": false,
     "description": "Advanced content-based methodology",
     "company_Name": "Innotype",
@@ -4500,6 +4909,7 @@
   },
   {
     "id": 410,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based exuding info-mediaries",
     "company_Name": "Zoovu",
@@ -4511,6 +4921,7 @@
   },
   {
     "id": 411,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-group zero tolerance protocol",
     "company_Name": "Yoveo",
@@ -4522,6 +4933,7 @@
   },
   {
     "id": 412,
+    "isStarred": false,
     "isRead": false,
     "description": "Customer-focused demand-driven knowledge user",
     "company_Name": "Flashset",
@@ -4533,6 +4945,7 @@
   },
   {
     "id": 413,
+    "isStarred": false,
     "isRead": false,
     "description": "Right-sized fresh-thinking architecture",
     "company_Name": "Brainsphere",
@@ -4544,6 +4957,7 @@
   },
   {
     "id": 414,
+    "isStarred": false,
     "isRead": false,
     "description": "Universal global throughput",
     "company_Name": "Fivechat",
@@ -4555,6 +4969,7 @@
   },
   {
     "id": 415,
+    "isStarred": false,
     "isRead": false,
     "description": "Ameliorated clear-thinking emulation",
     "company_Name": "Skimia",
@@ -4566,6 +4981,7 @@
   },
   {
     "id": 416,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based holistic pricing structure",
     "company_Name": "Jetwire",
@@ -4577,6 +4993,7 @@
   },
   {
     "id": 417,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked transitional core",
     "company_Name": "Youopia",
@@ -4588,6 +5005,7 @@
   },
   {
     "id": 418,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergistic system-worthy framework",
     "company_Name": "Meejo",
@@ -4599,6 +5017,7 @@
   },
   {
     "id": 419,
+    "isStarred": false,
     "isRead": false,
     "description": "Ameliorated composite middleware",
     "company_Name": "Mynte",
@@ -4610,6 +5029,7 @@
   },
   {
     "id": 420,
+    "isStarred": false,
     "isRead": false,
     "description": "Programmable executive capacity",
     "company_Name": "Centidel",
@@ -4621,6 +5041,7 @@
   },
   {
     "id": 421,
+    "isStarred": false,
     "isRead": false,
     "description": "Front-line optimizing paradigm",
     "company_Name": "Youspan",
@@ -4632,6 +5053,7 @@
   },
   {
     "id": 422,
+    "isStarred": false,
     "isRead": false,
     "description": "Reactive foreground migration",
     "company_Name": "Wordware",
@@ -4643,6 +5065,7 @@
   },
   {
     "id": 423,
+    "isStarred": false,
     "isRead": false,
     "description": "Realigned fresh-thinking info-mediaries",
     "company_Name": "Blogtag",
@@ -4654,6 +5077,7 @@
   },
   {
     "id": 424,
+    "isStarred": false,
     "isRead": false,
     "description": "Automated leading edge migration",
     "company_Name": "Cogidoo",
@@ -4665,6 +5089,7 @@
   },
   {
     "id": 425,
+    "isStarred": false,
     "isRead": false,
     "description": "Fundamental intermediate migration",
     "company_Name": "Aimbo",
@@ -4676,6 +5101,7 @@
   },
   {
     "id": 426,
+    "isStarred": false,
     "isRead": false,
     "description": "Vision-oriented homogeneous projection",
     "company_Name": "Gabtype",
@@ -4687,6 +5113,7 @@
   },
   {
     "id": 427,
+    "isStarred": false,
     "isRead": false,
     "description": "Digitized coherent encoding",
     "company_Name": "Thoughtstorm",
@@ -4698,6 +5125,7 @@
   },
   {
     "id": 428,
+    "isStarred": false,
     "isRead": false,
     "description": "Cross-platform systemic groupware",
     "company_Name": "Devpoint",
@@ -4709,6 +5137,7 @@
   },
   {
     "id": 429,
+    "isStarred": false,
     "isRead": false,
     "description": "Intuitive human-resource hub",
     "company_Name": "Twitterlist",
@@ -4720,6 +5149,7 @@
   },
   {
     "id": 430,
+    "isStarred": false,
     "isRead": false,
     "description": "Reverse-engineered analyzing analyzer",
     "company_Name": "Yodo",
@@ -4731,6 +5161,7 @@
   },
   {
     "id": 431,
+    "isStarred": false,
     "isRead": false,
     "description": "Advanced multi-state software",
     "company_Name": "Zoomcast",
@@ -4742,6 +5173,7 @@
   },
   {
     "id": 432,
+    "isStarred": false,
     "isRead": false,
     "description": "Operative exuding challenge",
     "company_Name": "Cogilith",
@@ -4753,6 +5185,7 @@
   },
   {
     "id": 433,
+    "isStarred": false,
     "isRead": false,
     "description": "Fundamental real-time benchmark",
     "company_Name": "Eadel",
@@ -4764,6 +5197,7 @@
   },
   {
     "id": 434,
+    "isStarred": false,
     "isRead": false,
     "description": "Networked zero defect analyzer",
     "company_Name": "Yadel",
@@ -4775,6 +5209,7 @@
   },
   {
     "id": 435,
+    "isStarred": false,
     "isRead": false,
     "description": "Expanded motivating system engine",
     "company_Name": "Rhybox",
@@ -4786,6 +5221,7 @@
   },
   {
     "id": 436,
+    "isStarred": false,
     "isRead": false,
     "description": "Devolved methodical initiative",
     "company_Name": "Babblestorm",
@@ -4797,6 +5233,7 @@
   },
   {
     "id": 437,
+    "isStarred": false,
     "isRead": false,
     "description": "Profound transitional emulation",
     "company_Name": "JumpXS",
@@ -4808,6 +5245,7 @@
   },
   {
     "id": 438,
+    "isStarred": false,
     "isRead": false,
     "description": "Phased 6th generation open system",
     "company_Name": "Ntag",
@@ -4819,6 +5257,7 @@
   },
   {
     "id": 439,
+    "isStarred": false,
     "isRead": false,
     "description": "Optional heuristic project",
     "company_Name": "Roomm",
@@ -4830,6 +5269,7 @@
   },
   {
     "id": 440,
+    "isStarred": false,
     "isRead": false,
     "description": "User-centric zero administration customer loyalty",
     "company_Name": "Browsebug",
@@ -4841,6 +5281,7 @@
   },
   {
     "id": 441,
+    "isStarred": false,
     "isRead": false,
     "description": "Triple-buffered didactic Graphic Interface",
     "company_Name": "Voonder",
@@ -4852,6 +5293,7 @@
   },
   {
     "id": 442,
+    "isStarred": false,
     "isRead": false,
     "description": "Virtual non-volatile open architecture",
     "company_Name": "Cogibox",
@@ -4863,6 +5305,7 @@
   },
   {
     "id": 443,
+    "isStarred": false,
     "isRead": false,
     "description": "Cloned multimedia hub",
     "company_Name": "Browsedrive",
@@ -4874,6 +5317,7 @@
   },
   {
     "id": 444,
+    "isStarred": false,
     "isRead": false,
     "description": "Customizable methodical analyzer",
     "company_Name": "Thoughtblab",
@@ -4885,6 +5329,7 @@
   },
   {
     "id": 445,
+    "isStarred": false,
     "isRead": false,
     "description": "Ergonomic background capacity",
     "company_Name": "Wikizz",
@@ -4896,6 +5341,7 @@
   },
   {
     "id": 446,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based context-sensitive portal",
     "company_Name": "Photospace",
@@ -4907,6 +5353,7 @@
   },
   {
     "id": 447,
+    "isStarred": false,
     "isRead": false,
     "description": "Ameliorated client-driven circuit",
     "company_Name": "Demivee",
@@ -4918,6 +5365,7 @@
   },
   {
     "id": 448,
+    "isStarred": false,
     "isRead": false,
     "description": "Fundamental hybrid infrastructure",
     "company_Name": "Quire",
@@ -4929,6 +5377,7 @@
   },
   {
     "id": 449,
+    "isStarred": false,
     "isRead": false,
     "description": "Progressive upward-trending toolset",
     "company_Name": "Gevee",
@@ -4940,6 +5389,7 @@
   },
   {
     "id": 450,
+    "isStarred": false,
     "isRead": false,
     "description": "Synchronised leading edge adapter",
     "company_Name": "Ooba",
@@ -4951,6 +5401,7 @@
   },
   {
     "id": 451,
+    "isStarred": false,
     "isRead": false,
     "description": "Switchable dedicated groupware",
     "company_Name": "Meevee",
@@ -4962,6 +5413,7 @@
   },
   {
     "id": 452,
+    "isStarred": false,
     "isRead": false,
     "description": "Grass-roots scalable algorithm",
     "company_Name": "Realblab",
@@ -4973,6 +5425,7 @@
   },
   {
     "id": 453,
+    "isStarred": false,
     "isRead": false,
     "description": "Ergonomic human-resource middleware",
     "company_Name": "Brightdog",
@@ -4984,6 +5437,7 @@
   },
   {
     "id": 454,
+    "isStarred": false,
     "isRead": false,
     "description": "Secured high-level pricing structure",
     "company_Name": "Dabtype",
@@ -4995,6 +5449,7 @@
   },
   {
     "id": 455,
+    "isStarred": false,
     "isRead": false,
     "description": "Synergized static access",
     "company_Name": "Realblab",
@@ -5006,6 +5461,7 @@
   },
   {
     "id": 456,
+    "isStarred": false,
     "isRead": false,
     "description": "Advanced object-oriented installation",
     "company_Name": "Livetube",
@@ -5017,6 +5473,7 @@
   },
   {
     "id": 457,
+    "isStarred": false,
     "isRead": false,
     "description": "Right-sized needs-based contingency",
     "company_Name": "Skinder",
@@ -5028,6 +5485,7 @@
   },
   {
     "id": 458,
+    "isStarred": false,
     "isRead": false,
     "description": "Intuitive 4th generation knowledge base",
     "company_Name": "Tazzy",
@@ -5039,6 +5497,7 @@
   },
   {
     "id": 459,
+    "isStarred": false,
     "isRead": false,
     "description": "Future-proofed intermediate definition",
     "company_Name": "Kaymbo",
@@ -5050,6 +5509,7 @@
   },
   {
     "id": 460,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused holistic intranet",
     "company_Name": "Feedspan",
@@ -5061,6 +5521,7 @@
   },
   {
     "id": 461,
+    "isStarred": false,
     "isRead": false,
     "description": "User-centric background Graphic Interface",
     "company_Name": "Gigashots",
@@ -5072,6 +5533,7 @@
   },
   {
     "id": 462,
+    "isStarred": false,
     "isRead": false,
     "description": "Reduced modular instruction set",
     "company_Name": "Realblab",
@@ -5083,6 +5545,7 @@
   },
   {
     "id": 463,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse optimizing structure",
     "company_Name": "Brainverse",
@@ -5094,6 +5557,7 @@
   },
   {
     "id": 464,
+    "isStarred": false,
     "isRead": false,
     "description": "Public-key exuding open architecture",
     "company_Name": "Feedfire",
@@ -5105,6 +5569,7 @@
   },
   {
     "id": 465,
+    "isStarred": false,
     "isRead": false,
     "description": "Team-oriented needs-based approach",
     "company_Name": "Photofeed",
@@ -5116,6 +5581,7 @@
   },
   {
     "id": 466,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-engineered leading edge policy",
     "company_Name": "Jetpulse",
@@ -5127,6 +5593,7 @@
   },
   {
     "id": 467,
+    "isStarred": false,
     "isRead": false,
     "description": "Object-based hybrid concept",
     "company_Name": "Skyble",
@@ -5138,6 +5605,7 @@
   },
   {
     "id": 468,
+    "isStarred": false,
     "isRead": false,
     "description": "Team-oriented static attitude",
     "company_Name": "Thoughtbeat",
@@ -5149,6 +5617,7 @@
   },
   {
     "id": 469,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent intermediate conglomeration",
     "company_Name": "Midel",
@@ -5160,6 +5629,7 @@
   },
   {
     "id": 470,
+    "isStarred": false,
     "isRead": false,
     "description": "Centralized empowering solution",
     "company_Name": "Feedspan",
@@ -5171,6 +5641,7 @@
   },
   {
     "id": 471,
+    "isStarred": false,
     "isRead": false,
     "description": "Adaptive system-worthy success",
     "company_Name": "Brainverse",
@@ -5182,6 +5653,7 @@
   },
   {
     "id": 472,
+    "isStarred": false,
     "isRead": false,
     "description": "Assimilated stable array",
     "company_Name": "Lazz",
@@ -5193,6 +5665,7 @@
   },
   {
     "id": 473,
+    "isStarred": false,
     "isRead": false,
     "description": "Pre-emptive coherent methodology",
     "company_Name": "Trudeo",
@@ -5204,6 +5677,7 @@
   },
   {
     "id": 474,
+    "isStarred": false,
     "isRead": false,
     "description": "Distributed non-volatile task-force",
     "company_Name": "Avamba",
@@ -5215,6 +5689,7 @@
   },
   {
     "id": 475,
+    "isStarred": false,
     "isRead": false,
     "description": "Quality-focused reciprocal algorithm",
     "company_Name": "LiveZ",
@@ -5226,6 +5701,7 @@
   },
   {
     "id": 476,
+    "isStarred": false,
     "isRead": false,
     "description": "Reduced discrete implementation",
     "company_Name": "Roodel",
@@ -5237,6 +5713,7 @@
   },
   {
     "id": 477,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent foreground budgetary management",
     "company_Name": "Realfire",
@@ -5248,6 +5725,7 @@
   },
   {
     "id": 478,
+    "isStarred": false,
     "isRead": false,
     "description": "Pre-emptive heuristic circuit",
     "company_Name": "Meevee",
@@ -5259,6 +5737,7 @@
   },
   {
     "id": 479,
+    "isStarred": false,
     "isRead": false,
     "description": "Self-enabling bottom-line moderator",
     "company_Name": "Yata",
@@ -5270,6 +5749,7 @@
   },
   {
     "id": 480,
+    "isStarred": false,
     "isRead": false,
     "description": "Monitored bifurcated benchmark",
     "company_Name": "Zoovu",
@@ -5281,6 +5761,7 @@
   },
   {
     "id": 481,
+    "isStarred": false,
     "isRead": false,
     "description": "Reduced intangible methodology",
     "company_Name": "Plajo",
@@ -5292,6 +5773,7 @@
   },
   {
     "id": 482,
+    "isStarred": false,
     "isRead": false,
     "description": "Proactive well-modulated circuit",
     "company_Name": "Myworks",
@@ -5303,6 +5785,7 @@
   },
   {
     "id": 483,
+    "isStarred": false,
     "isRead": false,
     "description": "Stand-alone static firmware",
     "company_Name": "Mynte",
@@ -5314,6 +5797,7 @@
   },
   {
     "id": 484,
+    "isStarred": false,
     "isRead": false,
     "description": "Horizontal reciprocal open system",
     "company_Name": "Roomm",
@@ -5325,6 +5809,7 @@
   },
   {
     "id": 485,
+    "isStarred": false,
     "isRead": false,
     "description": "Managed 6th generation portal",
     "company_Name": "Youspan",
@@ -5336,6 +5821,7 @@
   },
   {
     "id": 486,
+    "isStarred": false,
     "isRead": false,
     "description": "Advanced human-resource moratorium",
     "company_Name": "Roomm",
@@ -5347,6 +5833,7 @@
   },
   {
     "id": 487,
+    "isStarred": false,
     "isRead": false,
     "description": "Extended value-added open architecture",
     "company_Name": "Feednation",
@@ -5358,6 +5845,7 @@
   },
   {
     "id": 488,
+    "isStarred": false,
     "isRead": false,
     "description": "Diverse static circuit",
     "company_Name": "Tagopia",
@@ -5369,6 +5857,7 @@
   },
   {
     "id": 489,
+    "isStarred": false,
     "isRead": false,
     "description": "Secured coherent projection",
     "company_Name": "Blognation",
@@ -5380,6 +5869,7 @@
   },
   {
     "id": 490,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-engineered context-sensitive info-mediaries",
     "company_Name": "Trudeo",
@@ -5391,6 +5881,7 @@
   },
   {
     "id": 491,
+    "isStarred": false,
     "isRead": false,
     "description": "Upgradable system-worthy concept",
     "company_Name": "Trudeo",
@@ -5402,6 +5893,7 @@
   },
   {
     "id": 492,
+    "isStarred": false,
     "isRead": false,
     "description": "Re-engineered demand-driven project",
     "company_Name": "Youspan",
@@ -5413,6 +5905,7 @@
   },
   {
     "id": 493,
+    "isStarred": false,
     "isRead": false,
     "description": "Switchable bi-directional attitude",
     "company_Name": "Yakitri",
@@ -5424,6 +5917,7 @@
   },
   {
     "id": 494,
+    "isStarred": false,
     "isRead": false,
     "description": "Business-focused context-sensitive contingency",
     "company_Name": "Skippad",
@@ -5435,6 +5929,7 @@
   },
   {
     "id": 495,
+    "isStarred": false,
     "isRead": false,
     "description": "Secured human-resource approach",
     "company_Name": "Skinder",
@@ -5446,6 +5941,7 @@
   },
   {
     "id": 496,
+    "isStarred": false,
     "isRead": false,
     "description": "Persistent 24/7 function",
     "company_Name": "Quire",
@@ -5457,6 +5953,7 @@
   },
   {
     "id": 497,
+    "isStarred": false,
     "isRead": false,
     "description": "Visionary homogeneous complexity",
     "company_Name": "Podcat",
@@ -5468,6 +5965,7 @@
   },
   {
     "id": 498,
+    "isStarred": false,
     "isRead": false,
     "description": "Up-sized transitional middleware",
     "company_Name": "Brightdog",
@@ -5479,6 +5977,7 @@
   },
   {
     "id": 499,
+    "isStarred": false,
     "isRead": false,
     "description": "Versatile modular software",
     "company_Name": "Quatz",
@@ -5490,6 +5989,7 @@
   },
   {
     "id": 500,
+    "isStarred": false,
     "isRead": false,
     "description": "Assimilated clear-thinking definition",
     "company_Name": "Bluejam",

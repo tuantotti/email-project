@@ -1,49 +1,57 @@
 import classNames from "classnames";
-import React, { useState } from "react";
-import { BiAlarmSnooze, BiSend } from "react-icons/bi";
-import { GrStar } from "react-icons/gr";
-import { HiOutlineMail } from "react-icons/hi";
-import { RiDraftLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import React from "react";
+import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
+import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
+import { Link, useParams } from "react-router-dom";
 import classes from "./ListItem.module.css";
+import { useDispatch } from "react-redux";
+import { setPage } from "../../../redux/slices/getMailsSlice";
 
 const listItem = [
   {
-    icon: <HiOutlineMail className={classes.svg} />,
+    icon: <InboxOutlinedIcon className={classes.svg} />,
     pathTo: "/inbox",
-    text: "Hộp thư đến"
+    text: "Inbox"
   },
   {
-    icon: <BiSend className={classes.svg} />,
+    icon: <SendOutlinedIcon className={classes.svg} />,
     pathTo: "/sent",
-    text: "Đã gửi"
+    text: "Sent"
   },
   {
-    icon: <GrStar className={classes.svg} />,
+    icon: <StarBorderOutlinedIcon className={classes.svg} />,
     pathTo: "/starred",
     text: "Starred"
   },
   {
-    icon: <BiAlarmSnooze className={classes.svg} />,
-    pathTo: "/snoozed",
-    text: "Snoozed"
+    icon: <ReportOutlinedIcon className={classes.svg} />,
+    pathTo: "/spam",
+    text: "Spam"
   },
   {
-    icon: <RiDraftLine className={classes.svg} />,
-    pathTo: "/drafts",
-    text: "Drafts"
-  }
+    icon: <DeleteForeverOutlinedIcon className={classes.svg} />,
+    pathTo: "/trash",
+    text: "Trash"
+  },
 ]
 
 function ListItems() {
-  const [indexSelected, setIndexSelected] = useState(0);
+  const path = useParams()['*']
+  const dispatch = useDispatch();
 
+  const handleRefreshPage = () => {
+    dispatch(setPage(1))
+  }
+  
   return (
     <div className={classes.listItem}>
       <ul className={classes.ul}>
         {listItem.map((item, idx) => (
-          <Link key={idx} className={classes.sidebarContainer} to={item.pathTo} onClick={() => setIndexSelected(idx)}>
-            <li className={classNames(classes.li, {[classes.isSelected]: idx === indexSelected})}>
+          <Link key={idx} className={classes.sidebarContainer} to={item.pathTo} onClick={handleRefreshPage}>
+            <li className={classNames(classes.li, { [classes.isSelected]: path.includes(item.text.toLowerCase()) })}>
               {item.icon}{item.text}
             </li>
           </Link>
