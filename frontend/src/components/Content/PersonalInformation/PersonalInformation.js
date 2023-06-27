@@ -61,17 +61,14 @@ const ModalProfilePicture = ({ setShowModalPicture, setSelectedFile, previewImag
 }
 const ModalChangePassword = ({ setShowModalPassword }) => {
     const dispatch = useDispatch();
+    const { user } = useSelector(state => state.userInfoSlice)
     const [showOldPassword, setOldShowPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
     const validationSchema = Yup.object({
         oldPassword: Yup.string()
-            .required('Please enter your old password')
-            .matches(
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/,
-                'Password must be stronger'
-            ),
+            .required('Please enter your old password'),
         newPassword: Yup.string()
             .required('Please enter your new password')
             .matches(
@@ -92,12 +89,13 @@ const ModalChangePassword = ({ setShowModalPassword }) => {
         validationSchema,
         onSubmit: (values) => {
             const formValues = {
+                email: user.email,
                 oldPassword: values.oldPassword,
                 newPassword: values.newPassword,
                 confirmPassword: values.confirmNewPassword,
             };
 
-            dispatch(changePassword({formValues}))
+            dispatch(changePassword(formValues)).then(res => setShowModalPassword(false))
         },
     });
 
