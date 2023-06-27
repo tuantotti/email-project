@@ -3,7 +3,6 @@ package com.email.project.backend.service;
 import com.email.project.backend.dto.CredentialDto;
 import com.email.project.backend.dto.JwtView;
 import com.email.project.backend.dto.UserCreateDto;
-import com.email.project.backend.dto.CredentialEditDto;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.Credential;
@@ -27,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -56,10 +56,32 @@ public class UserService {
         return res;
     }
 
-    public User update(int id, UserEdit userEdit) throws Exception {
-        var user = _userRepository.getReferenceById(id);
-        userEdit.applyToUser(user);
-        return _userRepository.save(user);
+    public UserView getUserInfoByEmail(String email) {
+        try {
+            var user = _userRepository.getUserByEmail(email);
+            var res = new UserView();
+            res.loadFromUser(user.get());
+            return res;
+        } catch(NoSuchElementException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found in system");
+        } catch(Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+
+
+    public User update(String email, UserEdit userEdit) {
+        try {
+            var user = _userRepository.getUserByEmail(email);
+            var currentUser = user.get();
+            userEdit.applyToUser(currentUser);
+            return _userRepository.save(currentUser);
+        } catch(NoSuchElementException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found in system");
+        } catch(Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     public User create(User user) {

@@ -2,8 +2,7 @@ import React from "react";
 import classes from "./SearchBar.module.css";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import search from "../Images/search.png";
-import { dataReset, searchResult } from "../../../redux/action/search";
+import search from "../../../assets/img/search.png";
 
 function SearchBar() {
   const [searchText, setSearchText] = useState("");
@@ -15,9 +14,7 @@ function SearchBar() {
   const handlingSearch = (e) => {
     e.preventDefault();
     if (searchText.length === 0) {
-      dispatch(dataReset());
     } else {
-      dispatch(searchResult(searchText));
     }
   };
   return (

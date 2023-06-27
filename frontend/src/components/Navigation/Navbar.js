@@ -1,14 +1,13 @@
 import React from "react";
 import classes from "./Navbar.module.css";
-import glogo from "./Images/gmail_logo.png";
-import menu from "./Images/menu.png";
+import glogo from "../../assets/img/gmail_logo.png";
+import menu from "../../assets/img/menu.png";
 import SearchBar from "./SearchBar/SearchBar";
 import IconButton from "./IconButton/IconButton";
-import doubt from "./Images/doubts-button.png";
-import dot from "./Images/dots-menu.png";
-import man from "./Images/man.png";
-
-import setting from "./Images/settings.png";
+import doubt from "../../assets/img/doubts-button.png";
+import dot from "../../assets/img/dots-menu.png";
+import man from "../../assets/img/man.png";
+import setting from "../../assets/img/settings.png";
 
 function Navbar() {
   return (
