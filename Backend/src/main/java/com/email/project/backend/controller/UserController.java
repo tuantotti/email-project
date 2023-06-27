@@ -8,6 +8,8 @@ import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
 import com.email.project.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -72,8 +74,7 @@ public class UserController {
     }
 
     @PostMapping("/edit/password")
-    public ResponseEntity<Credential> changePassword(@RequestBody CredentialEditDto credentialEditDto) {
-        Credential credential = _userService.changePassword(credentialEditDto);
-        return ResponseEntity.ok(credential);
+    public void changePassword(@RequestBody CredentialEditDto credentialEditDto) {
+       _userService.changePassword(credentialEditDto);
     }
 }
