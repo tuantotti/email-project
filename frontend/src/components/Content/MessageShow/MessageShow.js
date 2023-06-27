@@ -10,7 +10,7 @@ import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 import moment from "moment";
 import { React, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import avatarDefault from "../../../assets/img/avatar_default.png";
 import IconArchive from "../../../assets/img/icon_archive.png";
@@ -20,25 +20,14 @@ import IconScript from "../../../assets/img/icon_script.png";
 import IconText from "../../../assets/img/icon_text.png";
 import IconVideo from "../../../assets/img/icon_video.png";
 import "./MessageShow.css";
+import { downloadFileThunk } from "../../../redux/slices/viewMailSlice";
 
 
 export default function Message(props) {
   const navigate = useNavigate();
   const [path, mailId] = useParams()['*'].split('/');
-  const mailData = useSelector((state) => state.getMailsSlice.mails.find(item => item.id === parseInt(mailId)));
-  const listFile = [
-    { name: 'report.txt' },
-    { name: 'Cambridge Ielts 11 mù tạt cà phê mi nhon loăng quăng.zip' },
-    { name: 'Cambridge Ielts 17.pdf' },
-    { name: 'Speaking Part II.mp4' },
-    { name: 'abcdefghbcaed.png' },
-    { name: 'report.txt' },
-    { name: 'Cambridge Ielts 11.zip' },
-    { name: 'Cambridge Ielts 17.pdf' },
-    { name: 'Speaking Part II.mp4' },
-    { name: 'abcdefghbcaed.png' },
-  ];
-
+  const { mailDetail } = useSelector(state => state.viewMailSlice)
+  const dispatch = useDispatch();
   const navigateBack = () => {
     navigate(`/${path}`);
   }
@@ -47,8 +36,8 @@ export default function Message(props) {
       <button onClick={navigateBack}>
         <ArrowBackIcon className="navigate_back" />
       </button>
-      <ReportOutlinedIcon className="pointer"/>
-      <DeleteOutlinedIcon className="pointer"/>
+      <ReportOutlinedIcon className="pointer" />
+      <DeleteOutlinedIcon className="pointer" />
       <ArchiveOutlinedIcon className="pointer" />
       <MarkEmailReadOutlinedIcon className="pointer" />
       <WatchLaterOutlinedIcon className="pointer" />
@@ -109,34 +98,61 @@ export default function Message(props) {
 
     return formattedTime;
   }
-  useEffect(() => {
-    console.log("🚀 ~ file: MessageShow.js:56 ~ useEffect ~ useEffect ~ mailId:", mailId)
-  }, [])
+
+  const handleLongFileName = (name) => {
+    let NAME = ''
+    const list = name.split(" ")
+    const handle = (fileName) => {
+      if (!fileName.includes(" ") && fileName.length > 19) {
+        fileName = fileName.slice(0, 19) + " " + handleLongFileName(fileName.slice(19));
+      }
+
+      return fileName;
+    }
+    list.forEach(str => {
+      NAME += handle(str) + " "
+    })
+    return NAME;
+  }
+
+  const bytesToKB = (bytes) => {
+    return (bytes / 1024).toFixed(2);
+  }
+
+  const bytesToMB = (bytes) => {
+    return (bytes / (1024 * 1024)).toFixed(2);
+  }
+
+  const handleDownloadFile = (fileName) => {
+    dispatch(downloadFileThunk(fileName))
+  }
+
   return (
     <div className="mailDetailContainer">
       {Navigate}
-      <h2 className="mailTitle">{mailData?.description}</h2>
+      <h2 className="mailTitle">{mailDetail?.subject}</h2>
       <div className="mailAddressContainer">
         <img alt="mailAvatar" className="mailAvatar" src={avatarDefault} />
         <div>
-          <span className="mailAuthor">{mailData?.company_Name}</span>
+          <span className="mailAuthor">{mailDetail?.fromName}</span>
           <span>{" "}</span>
-          <span className="mailAddress">{"<"}{mailData?.email_address}{">"}</span>
-          <h3 className="mailAddressDestination">to {true ? "Me" : "<test@gmail.com>"}</h3>
-          <h3 className="mailTime">{handleTime(mailData?.time)}</h3>
+          <span className="mailAddress">{"<"}{mailDetail?.fromAddress}{">"}</span>
+          <h3 className="mailAddressDestination">to {false ? "Me" : mailDetail?.toAddress}</h3>
+          <h3 className="mailTime">{handleTime(mailDetail?.sendDate)}</h3>
         </div>
       </div>
       <br />
       <br />
-      <p className="description">{mailData?.subject}</p>
+      <div dangerouslySetInnerHTML={{ __html: mailDetail?.body }} className="description"></div>
+
       <br />
       <br />
       <br />
-      {listFile.length ? <div className="fileGroup">
+      {mailDetail.fileDataList?.length ? <div className="fileGroup">
         <div className="dash"></div>
-        <span className="fileQuantity">{listFile.length} tệp đính kèm</span>
+        <span className="fileQuantity">{mailDetail.fileDataList?.length} attachment</span>
         <div className="fileItemBlock">
-          {listFile.map(item => <div className="fileItem">
+          {mailDetail.fileDataList?.map(item => <div className="fileItem">
             <div className="fileItemUpper">
               <div style={{ backgroundPosition: `${handlePositionIcon(handleFileType(item.name, 'type'))}` }}></div>
             </div>
@@ -151,10 +167,10 @@ export default function Message(props) {
               <img src={handleFileType(item.name)} className="fileIcon" />
               <div className="fileInfor">
                 <div className="fileInforDetail">
-                  <div className="fileNameFull">{item.name}</div>
-                  <span className="fileCapacity">177 KB</span>
+                  <div className="fileNameFull">{handleLongFileName(item.name)}</div>
+                  <span className="fileCapacity">{bytesToKB(item.size) < 1024 ? bytesToKB(item.size) : bytesToMB(item.size)} {bytesToKB(item.size) < 1024 ? 'KB' : 'MB'}</span>
                 </div>
-                <div className="downloadFile">
+                <div className="downloadFile" onClick={() => handleDownloadFile(item.name)}>
                   <div className='downloadIcon'></div>
                 </div>
               </div>

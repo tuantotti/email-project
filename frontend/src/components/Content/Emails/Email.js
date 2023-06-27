@@ -15,6 +15,7 @@ import IconText from "../../../assets/img/icon_text.png"
 import IconVideo from "../../../assets/img/icon_video.png"
 import { getMailsThunk, handleChildCheckboxChange } from "../../../redux/slices/getMailsSlice";
 import { starMailThunk } from "../../../redux/slices/starMailSlice";
+import { setMailDetail } from "../../../redux/slices/viewMailSlice";
 
 function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }) {
   const isStarred = status.includes("STARRED")
@@ -40,7 +41,9 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
 
   function showMail(e) {
     if (!e.target.classList.contains('check')) {
+      const mailDetail = { id, subject, body, fromAddress, fromName, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }
       navigate(`/${path}/` + id);
+      dispatch(setMailDetail(mailDetail))
     }
   }
 

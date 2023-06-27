@@ -83,7 +83,7 @@
 }
 
 .fileItem {
-  width: 178px;
+  width: 190px;
   border: solid 1px #E5E5E5;
   cursor: pointer;
   position: relative;
@@ -92,7 +92,7 @@
 }
 
 .fileItemUpper {
-  height: 85px;
+  height: 95px;
   display: flex;
   align-items: center;
   justify-content: center;
