@@ -20,7 +20,7 @@ import headerImg from "../../../assets/img/personal-infor-header.png";
 import personalInformationTheme from "../../../theme/PersonalInformation.theme";
 import "./PersonalInformation.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { editUserInformation, getUserInformation } from '../../../redux/slices/getUserInfoSlice';
+import { changePassword, editUserInformation, getUserInformation } from '../../../redux/slices/userInfoSlice';
 
 const ModalProfilePicture = ({ setShowModalPicture, setSelectedFile, previewImage, setPreviewImage }) => {
     const inputRef = useRef(null);
@@ -60,6 +60,7 @@ const ModalProfilePicture = ({ setShowModalPicture, setSelectedFile, previewImag
     </div>
 }
 const ModalChangePassword = ({ setShowModalPassword }) => {
+    const dispatch = useDispatch();
     const [showOldPassword, setOldShowPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
@@ -93,10 +94,10 @@ const ModalChangePassword = ({ setShowModalPassword }) => {
             const formValues = {
                 oldPassword: values.oldPassword,
                 newPassword: values.newPassword,
-                confirmNewPassword: values.confirmNewPassword,
+                confirmPassword: values.confirmNewPassword,
             };
 
-            console.log("🚀 ~ file: PersonalInformation.js:107 ~ PersonalInformation ~ formValues:", formValues)
+            dispatch(changePassword({formValues}))
         },
     });
 
@@ -198,7 +199,7 @@ const ModalChangePassword = ({ setShowModalPassword }) => {
                 </FormControl>
                 {formik.touched.confirmNewPassword && formik.errors.confirmNewPassword ? <span className="error-validation">{formik.errors.confirmNewPassword}</span> : <span className="error-validation"></span>}
             </div>
-            <div className="personal-info__save-info">
+            <div className="change-pass__save">
                 <Button
                     variant="contained"
                     sx={{ bgcolor: "#1A73E8" }}
@@ -218,7 +219,7 @@ const ModalChangePassword = ({ setShowModalPassword }) => {
 }
 function PersonalInformation() {
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.getUserInfoSlice)
+    const { user } = useSelector(state => state.userInfoSlice)
     const [showModalPicture, setShowModalPicture] = useState(false)
     const [showModalPassword, setShowModalPassword] = useState(false)
     const [showExtentName, setShowExtentName] = useState(false);

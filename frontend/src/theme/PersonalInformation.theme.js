@@ -19,6 +19,15 @@ const personalInformationTheme = createTheme({
                 },
             },
         },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                notchedOutline: {
+                    '& > legend': {
+                        width: '133px'
+                    }
+                },
+            },
+        },
     },
 });
 

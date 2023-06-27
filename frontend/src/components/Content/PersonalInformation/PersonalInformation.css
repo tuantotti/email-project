@@ -218,3 +218,7 @@
     margin: 0 24px;
     text-align: right;
 }
+
+.change-pass__save {
+    text-align: right;
+}

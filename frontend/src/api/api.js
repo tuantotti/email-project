@@ -8,6 +8,7 @@ const API = {
     DOWNLOAD_FILE: '/api/mail/file',
     GET_USER_INFO: '/api/user',
     EDIT_USER_INFO: '/api/user/edit',
+    CHANGE_PASSWORD: '/api/user/edit/password',
 }
 
 export default API

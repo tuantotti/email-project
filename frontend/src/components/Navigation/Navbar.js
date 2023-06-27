@@ -11,7 +11,7 @@ import glogo from "../../assets/img/gmail_logo.png";
 import man from "../../assets/img/man.png";
 import useClickOutSide from "../../hooks/useClickOutside";
 import { logout } from '../../redux/slices/authenticationSlice';
-import { getUserInformation } from '../../redux/slices/getUserInfoSlice';
+import { getUserInformation } from '../../redux/slices/userInfoSlice';
 import navbarTheme from "../../theme/Navbar.theme";
 import classes from "./Navbar.module.css";
 import SearchBar from "./SearchBar/SearchBar";
@@ -20,7 +20,7 @@ import SearchBar from "./SearchBar/SearchBar";
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state.getUserInfoSlice)
+  const { user } = useSelector(state => state.userInfoSlice)
   const { show, setShow, nodeRef } = useClickOutSide();
 
   const handleLogout = () => {

@@ -4,7 +4,7 @@ import getMailsSlice from './slices/getMailsSlice'
 import starMailSlice from './slices/starMailSlice'
 import sendMailSlice from './slices/sendMailSlice'
 import viewMailSlice from './slices/viewMailSlice'
-import getUserInfoSlice from './slices/getUserInfoSlice'
+import userInfoSlice from './slices/userInfoSlice'
 
 const reducer = {
     authenticationSlice,
@@ -12,7 +12,7 @@ const reducer = {
     starMailSlice,
     sendMailSlice,
     viewMailSlice,
-    getUserInfoSlice,
+    userInfoSlice,
 };
 
 export const store = configureStore({ reducer })

@@ -40,7 +40,7 @@ function Content() {
     <div className="body">
       <SideBar />
       <div style={{ marginRight: '20px' }}>
-        {!mailId || path !== 'personal-information' && <HeadChecker />}
+        {!(mailId && path) ? <HeadChecker /> : <></>}
         <hr />
         <Routes>
           <Route index element={<Navigate to="inbox" />} />
