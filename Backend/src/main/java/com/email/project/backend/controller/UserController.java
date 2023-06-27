@@ -1,10 +1,13 @@
 package com.email.project.backend.controller;
 
+import com.email.project.backend.dto.CredentialEditDto;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
+import com.email.project.backend.entity.Credential;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -68,5 +71,11 @@ public class UserController {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @PostMapping("/edit/password")
+    public ResponseEntity<Credential> changePassword(@RequestBody CredentialEditDto credentialEditDto) {
+        Credential credential = _userService.changePassword(credentialEditDto);
+        return ResponseEntity.ok(credential);
     }
 }
