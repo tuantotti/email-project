@@ -1,19 +1,19 @@
 package com.email.project.backend.service;
 
-import com.email.project.backend.dto.CredentialDto;
-import com.email.project.backend.dto.CredentialEditDto;
-import com.email.project.backend.dto.JwtView;
-import com.email.project.backend.dto.UserCreateDto;
+import com.email.project.backend.dto.*;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.Credential;
+import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
 import com.email.project.backend.exception.UserAlreadyExistException;
 import com.email.project.backend.repository.CredentialRepository;
+import com.email.project.backend.repository.FileDataRepository;
 import com.email.project.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
@@ -41,13 +42,16 @@ public class UserService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    private final StorageService _storageService;
+
     @Autowired
-    public UserService(UserRepository _userRepository, PasswordEncoder passwordEncoder, CredentialRepository credentialRepository, JwtService jwtService, AuthenticationManager authenticationManager) {
+    public UserService(UserRepository _userRepository, PasswordEncoder passwordEncoder, CredentialRepository credentialRepository, JwtService jwtService, AuthenticationManager authenticationManager, StorageService storageService) {
         this._userRepository = _userRepository;
         this.passwordEncoder = passwordEncoder;
         this.credentialRepository = credentialRepository;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
+        this._storageService = storageService;
     }
 
     public UserView getUserInfo(int id) {
@@ -59,9 +63,12 @@ public class UserService {
 
     public UserView getUserInfoByEmail(String email) {
         try {
-            var user = _userRepository.getUserByEmail(email);
+            var user = _userRepository.getUserByEmail(email).get();
+
             var res = new UserView();
-            res.loadFromUser(user.get());
+            res.loadFromUser(user);
+            Resource file = _storageService.loadFileAsResourceTest(user.getAvatarPath());
+            res.setAvatar(file.getFile());
             return res;
         } catch(NoSuchElementException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found in system");
@@ -69,8 +76,6 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
-
-
 
     public User update(String email, UserEdit userEdit) {
         try {
@@ -83,6 +88,27 @@ public class UserService {
         } catch(Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+
+    public void editAvatar(MultipartFile avatar) {
+        // Get user from database
+        String email = UserService.getCurrentUsername();
+        User user = _userRepository.getUserByEmail(email).get();
+
+        // Edit file name to store
+        String fileName = avatar.getOriginalFilename();
+        int extensionIndex = fileName.lastIndexOf(".");
+        String extensionFile = fileName.substring(extensionIndex);
+        String name = fileName.substring(0, extensionIndex);
+
+        String storeFileName = _storageService.getFolderPath() + "\\" + name + "_" + System.currentTimeMillis() + extensionFile;
+
+        // Save avatarPath to User database
+        user.setAvatarPath(storeFileName);
+        _userRepository.save(user);
+
+        // Save avatar to file system
+        _storageService.uploadFileToSystem(avatar, storeFileName);
     }
 
     public User create(User user) {
@@ -172,6 +198,8 @@ public class UserService {
             throw new RuntimeException("New password and confirm password is not equals!");
         }
     }
+
+
 
     public JwtView authenticate(CredentialDto credentialDto) {
         try {
