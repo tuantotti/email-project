@@ -4,12 +4,13 @@ import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.dto.SendMailDto;
 import com.email.project.backend.dto.UpdateMail;
-import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.repository.FileDataRepository;
 import com.email.project.backend.repository.MailRepository;
 import com.email.project.backend.repository.UserRepository;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -80,61 +81,25 @@ public class MailService {
 
     public void sendMail(SendMailDto sendMailDto) {
         try {
-            String currentUsername = UserService.getCurrentUsername();
-            String fromAddress = sendMailDto.getFromAddress();
-            String toAddress = sendMailDto.getToAddress();
-            String ccAddress = sendMailDto.getCcAddress();
-            String bccAddress = sendMailDto.getBccAddress();
-            sendMailDto.setSendDate(new Date());
+            MimeMessage comingMail = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(comingMail, true);
+            helper.setFrom(sendMailDto.getFromAddress());
+            helper.setTo(sendMailDto.getToAddress());
+            helper.setText(sendMailDto.getBody());
+            helper.setSubject(sendMailDto.getSubject());
+            helper.setSentDate(new Date());
 
-            // check mail is exist
-            if (!currentUsername.equals(fromAddress)) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Current email and from email must be the same");
+            for (MultipartFile file : sendMailDto.getFiles()) {
+                helper.addAttachment(file.getOriginalFilename(), file);
             }
 
-            if (!userRepository.getUserByEmail(toAddress).isPresent()) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "toAddress is not exist");
-            }
+            javaMailSender.send(helper.getMimeMessage());
 
-            Mail mail = sendMailDto.toEntity(storageService.getFolderPath());
-            mail.setStatus(MailStatus.INBOX);
-
-            // save mail to database
-            mailRepository.save(mail);
-
-            // save file to filesystem
-            int numberOfFile = mail.getFileDataList().size();
-            for (int i = 0; i < numberOfFile; i++) {
-                MultipartFile file = sendMailDto.getFiles().get(i);
-                FileData fileData = mail.getFileDataList().get(i);
-
-                storageService.uploadFileToSystem(file, fileData.getFilePath());
-            }
-        } catch (DataAccessException e) {
-            log.error(e.getMessage());
+        } catch (MessagingException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         } catch (Exception e) {
-            log.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
-    }
-
-    public MailDto sendSimpleMail(MailDto details) {
-        SimpleMailMessage mailMessage
-                = new SimpleMailMessage();
-
-        mailMessage.setFrom(details.getFromAddress());
-        mailMessage.setTo(details.getToAddress());
-        mailMessage.setText(details.getBody());
-        mailMessage.setSubject(details.getSubject());
-
-        javaMailSender.send(mailMessage);
-
-        return details;
-    }
-
-    public MailDto sendMailWithAttachment(MailDto details) {
-        return details;
     }
 
     public void deleteMail(int mailId) {
