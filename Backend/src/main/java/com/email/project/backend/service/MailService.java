@@ -11,6 +11,7 @@ import com.email.project.backend.repository.MailRepository;
 import com.email.project.backend.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeUtility;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,7 +84,7 @@ public class MailService {
     public void sendMail(SendMailDto sendMailDto) {
         try {
             MimeMessage comingMail = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(comingMail, true);
+            MimeMessageHelper helper = new MimeMessageHelper(comingMail, true, String.valueOf(StandardCharsets.UTF_8));
             helper.setFrom(sendMailDto.getFromAddress());
             helper.setTo(sendMailDto.getToAddress());
             helper.setText(sendMailDto.getBody());
@@ -90,7 +92,7 @@ public class MailService {
             helper.setSentDate(new Date());
 
             for (MultipartFile file : sendMailDto.getFiles()) {
-                helper.addAttachment(file.getOriginalFilename(), file);
+                helper.addAttachment(MimeUtility.encodeWord(file.getOriginalFilename(), String.valueOf(StandardCharsets.UTF_8), "Q"), file);
             }
 
             javaMailSender.send(helper.getMimeMessage());
