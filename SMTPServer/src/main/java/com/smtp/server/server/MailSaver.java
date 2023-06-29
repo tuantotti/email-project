@@ -14,10 +14,9 @@ import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.mail.internet.MimeUtility;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public final class MailSaver extends Observable {
 
     public void saveEmailAndNotify(String from, String to, InputStream data) {
         Mail emailModel;
-
         try {
             MimeMessage mimeMessage = toMimeMessage(data);
             emailModel = convertToMail(from, to, mimeMessage);
@@ -49,6 +47,7 @@ public final class MailSaver extends Observable {
     private MimeMessage toMimeMessage(InputStream inputStream) {
         try {
             Session session = Session.getDefaultInstance(System.getProperties());
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
             byte[] inputByte = inputStream.readAllBytes();
 
             MimeMessage mimeMessage = new MimeMessage(session, new ByteArrayInputStream(inputByte));
@@ -106,7 +105,7 @@ public final class MailSaver extends Observable {
                 // get base64 decode of file and save to file system
                 if (bp.getContent() instanceof BASE64DecoderStream) {
                     InputStream is = (InputStream) bp.getContent();
-                    String fileName = bp.getFileName();
+                    String fileName = MimeUtility.decodeText(bp.getFileName());
                     int extensionIndex = fileName.lastIndexOf('.');
                     String name = fileName.substring(0, extensionIndex) + "_" + System.currentTimeMillis() + fileName.substring(extensionIndex);
                     String filePath = MailService.getFolderPath() + File.separator + name;

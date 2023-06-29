@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 @EnableJpaRepositories
 public class SmtpServerApplication {
     public static void main(final String[] args) {
+        SpringApplication.run(SmtpServerApplication.class, args);
         SMTPServerHandler smtpServer = new SMTPServerHandler();
         try{
             smtpServer.startServer(getPort(), getBindAddress());
