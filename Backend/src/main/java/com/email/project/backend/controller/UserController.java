@@ -3,14 +3,15 @@ package com.email.project.backend.controller;
 import com.email.project.backend.dto.CredentialEditDto;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
-import com.email.project.backend.entity.Credential;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
 import com.email.project.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/user")
@@ -38,6 +39,20 @@ public class UserController {
         var userView = new UserView();
         userView.loadFromUser(user);
         return ResponseEntity.ok(userView);
+    }
+
+    @PostMapping("/edit/password")
+    public ResponseEntity<Void> changePassword(@RequestBody CredentialEditDto credentialEditDto) {
+        _userService.changePassword(credentialEditDto);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/edit/avatar")
+    public ResponseEntity<Void> editAvatar(@ModelAttribute MultipartFile avatar) {
+        _userService.editAvatar(avatar);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/create")
@@ -73,8 +88,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/edit/password")
-    public void changePassword(@RequestBody CredentialEditDto credentialEditDto) {
-       _userService.changePassword(credentialEditDto);
-    }
+
+
+
 }

@@ -78,4 +78,17 @@ public class StorageService {
             throw new RuntimeException("File not found " + fileName, e);
         }
     }
+
+    public Resource loadFileAsResourceTest(String fileName) {
+        try {
+            Path filePath = Paths.get(fileName);
+            Resource resource = new UrlResource(filePath.toUri());
+            if (resource.exists())
+                return resource;
+            else
+                throw new RuntimeException("File not found " + fileName);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("File not found " + fileName, e);
+        }
+    }
 }

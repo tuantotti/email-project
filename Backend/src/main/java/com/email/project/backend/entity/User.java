@@ -4,8 +4,10 @@ import com.email.project.backend.dto.user.UserView;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,6 +40,9 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Credential credential;
+
+    @Column(name = "avatar_path")
+    private String avatarPath;
 
     public UserView toUserView(){
         UserView userView = new UserView();
