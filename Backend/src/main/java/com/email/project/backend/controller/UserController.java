@@ -1,26 +1,37 @@
 package com.email.project.backend.controller;
 
 import com.email.project.backend.dto.CredentialEditDto;
+import com.email.project.backend.dto.FileDto;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
+import com.email.project.backend.service.StorageService;
 import com.email.project.backend.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService _userService;
+    private final StorageService _storageService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, StorageService storageService) {
         this._userService = userService;
+        _storageService = storageService;
     }
 
     @GetMapping
@@ -41,6 +52,31 @@ public class UserController {
         return ResponseEntity.ok(userView);
     }
 
+    @GetMapping("/avatar")
+    @ResponseBody
+    public ResponseEntity<?> getAvatar() {
+        String avatar = null;
+        Resource resource = null;
+        try {
+            avatar = _userService.getCurrentAvatar();
+            resource = _storageService.getAvatar(avatar);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+
+        if (avatar == null || resource == null) {
+            return new ResponseEntity<>("Current user don't have avatar", HttpStatus.NOT_FOUND);
+        }
+
+        String contentType = "application/octet-stream";
+        String headerValue = "attachment; filename=\"" + resource.getFilename() + "\"";
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
+                .body(resource);
+    }
+
     @PostMapping("/edit/password")
     public ResponseEntity<Void> changePassword(@RequestBody CredentialEditDto credentialEditDto) {
         _userService.changePassword(credentialEditDto);
@@ -49,10 +85,10 @@ public class UserController {
     }
 
     @PostMapping("/edit/avatar")
-    public ResponseEntity<Void> editAvatar(@ModelAttribute MultipartFile avatar) {
-        _userService.editAvatar(avatar);
+    public ResponseEntity<FileDto> editAvatar(@ModelAttribute MultipartFile avatar) {
+        FileDto fileDto = _userService.editAvatar(avatar);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(fileDto, HttpStatus.OK);
     }
 
     @PostMapping("/create")

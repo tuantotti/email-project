@@ -64,11 +64,8 @@ public class UserService {
     public UserView getUserInfoByEmail(String email) {
         try {
             var user = _userRepository.getUserByEmail(email).get();
-
             var res = new UserView();
             res.loadFromUser(user);
-            Resource file = _storageService.loadFileAsResourceTest(user.getAvatarPath());
-            res.setAvatar(file.getFile());
             return res;
         } catch(NoSuchElementException e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found in system");
@@ -90,7 +87,7 @@ public class UserService {
         }
     }
 
-    public void editAvatar(MultipartFile avatar) {
+    public FileDto editAvatar(MultipartFile avatar) {
         // Get user from database
         String email = UserService.getCurrentUsername();
         User user = _userRepository.getUserByEmail(email).get();
@@ -101,14 +98,19 @@ public class UserService {
         String extensionFile = fileName.substring(extensionIndex);
         String name = fileName.substring(0, extensionIndex);
 
-        String storeFileName = _storageService.getFolderPath() + "\\" + name + "_" + System.currentTimeMillis() + extensionFile;
+        String storeFileName = name + "_" + System.currentTimeMillis() + extensionFile;
+        long size = avatar.getSize();
 
         // Save avatarPath to User database
         user.setAvatarPath(storeFileName);
         _userRepository.save(user);
 
+        String folderPath = _storageService.getFolderPath() + "\\" + storeFileName;
+
         // Save avatar to file system
-        _storageService.uploadFileToSystem(avatar, storeFileName);
+        _storageService.uploadFileToSystem(avatar, folderPath);
+
+        return new FileDto(storeFileName, size);
     }
 
     public User create(User user) {
@@ -248,5 +250,18 @@ public class UserService {
         }
 
         return email;
+    }
+
+    public String getCurrentAvatar() {
+        String email = UserService.getCurrentUsername();
+        Optional<User> userOptional = _userRepository.getUserByEmail(email);
+        User user = null;
+        if (userOptional.isPresent()) user = userOptional.get();
+
+        if (user == null) return null;
+
+        if (user.getAvatarPath() == null) return null;
+
+        return user.getAvatarPath();
     }
 }

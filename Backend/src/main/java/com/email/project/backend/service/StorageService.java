@@ -20,6 +20,7 @@ public class StorageService {
 
     @Value("${folder.path}")
     private String folderPath;
+    private Path foundFile;
 
     public StorageService() {
     }
@@ -66,22 +67,26 @@ public class StorageService {
         return folderPath;
     }
 
+
+    public Resource getAvatar(String fileName) throws IOException {
+        Path filePath = Paths.get(folderPath);
+        Files.list(filePath).forEach(file -> {
+            if (file.getFileName().toString().startsWith(fileName)) {
+                foundFile = file;
+                return;
+            }
+        });
+
+        if(foundFile != null) {
+            return new UrlResource(foundFile.toUri());
+        }
+
+        return null;
+    }
+
     public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = Paths.get(folderPath + "\\" + fileName);
-            Resource resource = new UrlResource(filePath.toUri());
-            if (resource.exists())
-                return resource;
-            else
-                throw new RuntimeException("File not found " + fileName);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("File not found " + fileName, e);
-        }
-    }
-
-    public Resource loadFileAsResourceTest(String fileName) {
-        try {
-            Path filePath = Paths.get(fileName);
             Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists())
                 return resource;

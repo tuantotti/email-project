@@ -29,8 +29,6 @@ public class UserView {
 
     private boolean active;
 
-    private File avatar;
-
 
     public void loadFromUser(User user) {
         this.id = user.getId();
