@@ -4,16 +4,13 @@ import com.email.project.backend.dto.*;
 import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.Credential;
-import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
 import com.email.project.backend.exception.UserAlreadyExistException;
 import com.email.project.backend.repository.CredentialRepository;
-import com.email.project.backend.repository.FileDataRepository;
 import com.email.project.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -67,9 +64,9 @@ public class UserService {
             var res = new UserView();
             res.loadFromUser(user);
             return res;
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found in system");
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
@@ -80,9 +77,9 @@ public class UserService {
             var currentUser = user.get();
             userEdit.applyToUser(currentUser);
             return _userRepository.save(currentUser);
-        } catch(NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found in system");
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
@@ -90,26 +87,34 @@ public class UserService {
     public FileDto editAvatar(MultipartFile avatar) {
         // Get user from database
         String email = UserService.getCurrentUsername();
-        User user = _userRepository.getUserByEmail(email).get();
+        Optional<User> userOptional = _userRepository.getUserByEmail(email);
+        User user = null;
+        if (userOptional.isPresent()) user = userOptional.get();
 
         // Edit file name to store
         String fileName = avatar.getOriginalFilename();
-        int extensionIndex = fileName.lastIndexOf(".");
-        String extensionFile = fileName.substring(extensionIndex);
-        String name = fileName.substring(0, extensionIndex);
+        String storeFileName = null;
+        long size = 0;
+        if (fileName != null) {
+            int extensionIndex = fileName.lastIndexOf(".");
+            String extensionFile = fileName.substring(extensionIndex);
+            String name = fileName.substring(0, extensionIndex);
 
-        String storeFileName = name + "_" + System.currentTimeMillis() + extensionFile;
-        long size = avatar.getSize();
+            storeFileName = name + "_" + System.currentTimeMillis() + extensionFile;
+            size = avatar.getSize();
 
-        // Save avatarPath to User database
-        user.setAvatarPath(storeFileName);
-        _userRepository.save(user);
+            // Save avatarPath to User database
+            if (user != null) {
+                user.setAvatarPath(storeFileName);
+                _userRepository.save(user);
+            }
 
-        String folderPath = _storageService.getFolderPath() + "\\" + storeFileName;
+            String folderPath = _storageService.getFolderPath() + "\\" + storeFileName;
 
-        // Save avatar to file system
-        _storageService.uploadFileToSystem(avatar, folderPath);
+            // Save avatar to file system
+            _storageService.uploadFileToSystem(avatar, folderPath);
 
+        }
         return new FileDto(storeFileName, size);
     }
 
@@ -181,26 +186,30 @@ public class UserService {
         return user;
     }
 
-    public Credential changePassword(CredentialEditDto c) {
-        Optional <Credential> credentialOptional = credentialRepository.findByEmail(c.getEmail());
-        Credential credential = credentialOptional.get();
+    public void changePassword(CredentialEditDto c) {
+        Optional<Credential> credentialOptional = credentialRepository.findByEmail(c.getEmail());
+        Credential credential = null;
+
+        if (credentialOptional.isPresent()) credential = credentialOptional.get();
+
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(c.getEmail(), c.getOldPassword())
             );
 
-            if (c.getConfirmPassword().equals(c.getNewPassword())) {
-                String encodedPassword = passwordEncoder.encode(c.getNewPassword());
-                credential.setPassword(encodedPassword);
+            if (credential != null) {
+                if (c.getConfirmPassword().equals(c.getNewPassword())) {
+                    String encodedPassword = passwordEncoder.encode(c.getNewPassword());
+                    credential.setPassword(encodedPassword);
+                }
+                credentialRepository.save(credential);
             }
-            return credentialRepository.save(credential);
         } catch (AuthenticationException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password!");
         } catch (Exception e) {
-            throw new RuntimeException("New password and confirm password is not equals!");
+            throw new RuntimeException("New password and confirm password are not equals!");
         }
     }
-
 
 
     public JwtView authenticate(CredentialDto credentialDto) {

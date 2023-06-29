@@ -77,7 +77,7 @@ public class StorageService {
             }
         });
 
-        if(foundFile != null) {
+        if (foundFile != null) {
             return new UrlResource(foundFile.toUri());
         }
 

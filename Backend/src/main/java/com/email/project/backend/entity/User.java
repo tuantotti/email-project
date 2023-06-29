@@ -44,7 +44,7 @@ public class User {
     @Column(name = "avatar_path")
     private String avatarPath;
 
-    public UserView toUserView(){
+    public UserView toUserView() {
         UserView userView = new UserView();
         userView.loadFromUser(this);
         return userView;
