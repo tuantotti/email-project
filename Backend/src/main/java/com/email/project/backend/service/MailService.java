@@ -83,6 +83,10 @@ public class MailService {
 
     public void sendMail(SendMailDto sendMailDto) {
         try {
+            String currentUsername = UserService.getCurrentUsername();
+            if (!currentUsername.equals(sendMailDto.getFromAddress())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "From email and email in jwt is not equal");
+            }
             MimeMessage comingMail = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(comingMail, true, String.valueOf(StandardCharsets.UTF_8));
             helper.setFrom(sendMailDto.getFromAddress());
