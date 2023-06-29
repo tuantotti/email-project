@@ -9,7 +9,7 @@ import MarkEmailReadOutlinedIcon from '@mui/icons-material/MarkEmailReadOutlined
 import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 import moment from "moment";
-import { React, useEffect } from "react";
+import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import avatarDefault from "../../../assets/img/avatar_default.png";
@@ -19,9 +19,8 @@ import IconPdf from "../../../assets/img/icon_pdf.png";
 import IconScript from "../../../assets/img/icon_script.png";
 import IconText from "../../../assets/img/icon_text.png";
 import IconVideo from "../../../assets/img/icon_video.png";
-import "./MessageShow.css";
 import { downloadFileThunk } from "../../../redux/slices/viewMailSlice";
-
+import "./MessageShow.css";
 
 export default function Message(props) {
   const navigate = useNavigate();
@@ -124,9 +123,17 @@ export default function Message(props) {
     return (bytes / (1024 * 1024)).toFixed(2);
   }
 
-  const handleDownloadFile = (fileName) => {
-    dispatch(downloadFileThunk(fileName))
-  }
+  const handleDownloadFile = async (fileName) => {
+
+    try {
+      dispatch(downloadFileThunk(fileName)).then(response => {
+        if (response.type === "downloadFile/fulfilled") {
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="mailDetailContainer">

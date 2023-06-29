@@ -37,14 +37,12 @@ export const viewMailSlice = createSlice({
             .addCase(downloadFileThunk.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
-                console.log(action.payload)
-
                 toast.error('Something wrong! Please try again!', {
                     position: "bottom-right",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: "light",
@@ -57,7 +55,7 @@ export const viewMailSlice = createSlice({
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: "light",
