@@ -1,5 +1,6 @@
 package com.email.project.backend.service;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -20,9 +21,22 @@ public class StorageService {
 
     @Value("${folder.path}")
     private String folderPath;
-    private Path foundFile;
+    private final String AVATAR_FOLDER = "avatar";
+    private final String EMAIL = "email-file";
 
     public StorageService() {
+    }
+
+    @PostConstruct
+    public void init() {
+        try {
+            Path avatarPath = Path.of(folderPath + File.separator + AVATAR_FOLDER);
+            Path emailPath = Path.of(folderPath + File.separator + EMAIL);
+            Files.createDirectories(avatarPath);
+            Files.createDirectories(emailPath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -67,33 +81,24 @@ public class StorageService {
         return folderPath;
     }
 
-
-    public Resource getAvatar(String fileName) throws IOException {
-        Path filePath = Paths.get(folderPath);
-        Files.list(filePath).forEach(file -> {
-            if (file.getFileName().toString().startsWith(fileName)) {
-                foundFile = file;
-                return;
-            }
-        });
-
-        if (foundFile != null) {
-            return new UrlResource(foundFile.toUri());
-        }
-
-        return null;
+    public String getAvatarFolder() {
+        return folderPath + File.separator + AVATAR_FOLDER;
     }
 
-    public Resource loadFileAsResource(String fileName) {
+    public String getEmailFolder() {
+        return folderPath + File.separator + EMAIL;
+    }
+
+    public Resource loadFileAsResource(String fileAbsolutePathString) {
         try {
-            Path filePath = Paths.get(folderPath + "\\" + fileName);
+            Path filePath = Paths.get(fileAbsolutePathString);
             Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists())
                 return resource;
             else
-                throw new RuntimeException("File not found " + fileName);
+                throw new RuntimeException("File not found " + filePath);
         } catch (MalformedURLException e) {
-            throw new RuntimeException("File not found " + fileName, e);
+            throw new RuntimeException("File not found " + fileAbsolutePathString, e);
         }
     }
 }

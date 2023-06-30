@@ -11,6 +11,7 @@ import com.email.project.backend.repository.CredentialRepository;
 import com.email.project.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.File;
 import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -93,29 +95,29 @@ public class UserService {
 
         // Edit file name to store
         String fileName = avatar.getOriginalFilename();
-        String storeFileName = null;
+        String avatarFileName = null;
         long size = 0;
         if (fileName != null) {
             int extensionIndex = fileName.lastIndexOf(".");
             String extensionFile = fileName.substring(extensionIndex);
             String name = fileName.substring(0, extensionIndex);
 
-            storeFileName = name + "_" + System.currentTimeMillis() + extensionFile;
+            avatarFileName = name + "_" + System.currentTimeMillis() + extensionFile;
             size = avatar.getSize();
 
             // Save avatarPath to User database
             if (user != null) {
-                user.setAvatarPath(storeFileName);
+                user.setAvatarFileName(avatarFileName);
                 _userRepository.save(user);
             }
 
-            String folderPath = _storageService.getFolderPath() + "\\" + storeFileName;
+            String avatarPath = _storageService.getAvatarFolder() + File.separator + avatarFileName;
 
             // Save avatar to file system
-            _storageService.uploadFileToSystem(avatar, folderPath);
+            _storageService.uploadFileToSystem(avatar, avatarPath);
 
         }
-        return new FileDto(storeFileName, size);
+        return new FileDto(avatarFileName, size);
     }
 
     public User create(User user) {
@@ -264,13 +266,29 @@ public class UserService {
     public String getCurrentAvatar() {
         String email = UserService.getCurrentUsername();
         Optional<User> userOptional = _userRepository.getUserByEmail(email);
-        User user = null;
-        if (userOptional.isPresent()) user = userOptional.get();
+        String avatarFileName = null;
 
-        if (user == null) return null;
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
 
-        if (user.getAvatarPath() == null) return null;
+            avatarFileName = user.getAvatarFileName();
+        }
 
-        return user.getAvatarPath();
+        return avatarFileName;
+    }
+
+    public Resource getAvatar() {
+        Resource avatar = null;
+        try {
+            String avatarFileName = getCurrentAvatar();
+            if (avatarFileName != null) {
+                String avatarPath = _storageService.getAvatarFolder() + File.separator + avatarFileName;
+                avatar = _storageService.loadFileAsResource(avatarPath);
+            }
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+
+        return avatar;
     }
 }

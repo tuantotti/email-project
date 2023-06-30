@@ -6,8 +6,8 @@ import com.email.project.backend.dto.user.UserEdit;
 import com.email.project.backend.dto.user.UserView;
 import com.email.project.backend.entity.User;
 import com.email.project.backend.entity.security.UserDetailsImpl;
-import com.email.project.backend.service.StorageService;
 import com.email.project.backend.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -24,12 +24,10 @@ import java.io.IOException;
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService _userService;
-    private final StorageService _storageService;
 
     @Autowired
-    public UserController(UserService userService, StorageService storageService) {
+    public UserController(UserService userService) {
         this._userService = userService;
-        _storageService = storageService;
     }
 
     @GetMapping
@@ -52,27 +50,22 @@ public class UserController {
 
     @GetMapping("/avatar")
     @ResponseBody
-    public ResponseEntity<?> getAvatar() {
-        String avatar = null;
-        Resource resource = null;
-        try {
-            avatar = _userService.getCurrentAvatar();
-            resource = _storageService.getAvatar(avatar);
-        } catch (IOException e) {
-            return ResponseEntity.internalServerError().build();
-        }
-
-        if (avatar == null || resource == null) {
-            return new ResponseEntity<>("Current user don't have avatar", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> getAvatar(HttpServletRequest request) {
+        Resource avatar = _userService.getAvatar();
 
         String contentType = "application/octet-stream";
-        String headerValue = "attachment; filename=\"" + resource.getFilename() + "\"";
+        String headerValue = "attachment; filename=\"" + avatar.getFilename() + "\"";
+
+        try {
+            contentType = request.getServletContext().getMimeType(avatar.getFile().getAbsolutePath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
-                .body(resource);
+                .body(avatar);
     }
 
     @PostMapping("/edit/password")
