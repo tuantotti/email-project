@@ -25,20 +25,10 @@ public class StorageService {
     }
 
 
-    public byte[] getFileFromSystem(String fileName) {
-
-        try {
-            byte[] file = Files.readAllBytes(Path.of(folderPath + fileName));
-            return file;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public boolean deleteFileFromFileSystem(String fileName) {
         boolean isDeleted = false;
         try {
-            Files.delete(Path.of(folderPath + fileName));
+            Files.delete(Path.of(folderPath + File.separator + fileName));
             isDeleted = true;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -47,7 +37,8 @@ public class StorageService {
         }
     }
 
-    public boolean uploadFileToSystem(MultipartFile file, String filePath) {
+    public boolean uploadFileToSystem(MultipartFile file, String fileName) {
+        String filePath = folderPath + File.separator + fileName;
 
         boolean isSaveToFileSystem = false;
 
@@ -68,7 +59,7 @@ public class StorageService {
 
     public Resource loadFileAsResource(String fileName) {
         try {
-            Path filePath = Paths.get(folderPath + "\\" + fileName);
+            Path filePath = Paths.get(folderPath + File.separator + fileName);
             Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists())
                 return resource;

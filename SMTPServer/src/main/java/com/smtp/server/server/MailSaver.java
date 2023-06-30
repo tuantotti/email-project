@@ -47,7 +47,6 @@ public final class MailSaver extends Observable {
     private MimeMessage toMimeMessage(InputStream inputStream) {
         try {
             Session session = Session.getDefaultInstance(System.getProperties());
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
             byte[] inputByte = inputStream.readAllBytes();
 
             MimeMessage mimeMessage = new MimeMessage(session, new ByteArrayInputStream(inputByte));

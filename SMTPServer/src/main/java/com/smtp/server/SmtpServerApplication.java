@@ -14,19 +14,10 @@ public class SmtpServerApplication {
     public static void main(final String[] args) {
         SpringApplication.run(SmtpServerApplication.class, args);
         SMTPServerHandler smtpServer = new SMTPServerHandler();
-        try{
-            smtpServer.startServer(getPort(), getBindAddress());
-        }
-        catch (Exception e){
+        try {
+            smtpServer.startServer(Config.getPort(), InetAddress.getByName(Config.getHost()));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static int getPort() {
-        return 6525;
-    }
-
-    private static InetAddress getBindAddress() throws UnknownHostException {
-        return InetAddress.getByName("127.0.0.1");
     }
 }
