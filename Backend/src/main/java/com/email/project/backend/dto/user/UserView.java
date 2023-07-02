@@ -1,15 +1,11 @@
 package com.email.project.backend.dto.user;
 
 import com.email.project.backend.entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.util.Date;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 public class UserView {
     private int id;
@@ -25,6 +21,7 @@ public class UserView {
     private Date createAt;
 
     private boolean active;
+
 
     public void loadFromUser(User user) {
         this.id = user.getId();

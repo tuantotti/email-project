@@ -13,7 +13,12 @@ export const downloadFileThunk = createAsyncThunk(
     "downloadFile",
     async (name) => {
         try {
-            const response = await axiosInstance.get(`${API.DOWNLOAD_FILE}/${name}`);
+            const response = await axiosInstance.get(`${API.DOWNLOAD_FILE}/${name}`, {
+                responseType: 'arraybuffer',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
             return response.data;
         } catch (err) {
             throw new Error("Error!");
@@ -37,14 +42,12 @@ export const viewMailSlice = createSlice({
             .addCase(downloadFileThunk.rejected, (state, action) => {
                 state.loading = false;
                 state.error = true;
-                console.log(action.payload)
-
                 toast.error('Something wrong! Please try again!', {
                     position: "bottom-right",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: "light",
@@ -57,7 +60,7 @@ export const viewMailSlice = createSlice({
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: "light",

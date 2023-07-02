@@ -13,6 +13,7 @@ import IconPdf from "../../../assets/img/icon_pdf.png"
 import IconScript from "../../../assets/img/icon_script.png"
 import IconText from "../../../assets/img/icon_text.png"
 import IconVideo from "../../../assets/img/icon_video.png"
+import IconOctetStream from "../../../assets/img/icon_octet-stream.png"
 import { getMailsThunk, handleChildCheckboxChange } from "../../../redux/slices/getMailsSlice";
 import { starMailThunk } from "../../../redux/slices/starMailSlice";
 import { setMailDetail } from "../../../redux/slices/viewMailSlice";
@@ -72,7 +73,7 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
     } else if (['mp4', 'mov', 'avi', 'mkv'].includes(extension)) {
       return IconVideo;
     } else {
-      return null;
+      return IconOctetStream;
     }
   }
 
