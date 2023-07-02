@@ -113,10 +113,13 @@ public final class MailSaver extends Observable {
                     // save file to
                     Files.copy(is, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
+                    int separatorIndex = bp.getContentType().indexOf(File.pathSeparator);
+                    String contentType = bp.getContentType().substring(0, separatorIndex);
+
                     // store file properties in db
                     FileData fileData = FileData.builder()
                             .name(name)
-                            .type(bp.getContentType())
+                            .type(contentType)
                             .size(file.length())
                             .filePath(filePath)
                             .build();

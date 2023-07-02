@@ -14,19 +14,19 @@ public class UserEdit {
     private String phoneNumber;
 
     public void applyToUser(User user) throws Exception {
-        if (firstName != null){
+        if (firstName != null) {
             user.setFirstName(firstName);
         }
 
-        if (lastName != null){
+        if (lastName != null) {
             user.setLastName(lastName);
         }
 
-        if (user.getFirstName().isEmpty() && user.getLastName().isEmpty()){
+        if (user.getFirstName().isEmpty() && user.getLastName().isEmpty()) {
             throw new Exception("Both firstname and lastname is empty!");
         }
 
-        if (phoneNumber != null){
+        if (phoneNumber != null) {
             // TODO: validate phone number
             user.setPhoneNumber(phoneNumber);
         }
