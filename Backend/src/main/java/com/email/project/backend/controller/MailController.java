@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.nio.file.Files;
 import java.io.File;
 import java.io.IOException;
 
@@ -54,14 +54,16 @@ public class MailController {
         Resource resource = storageService.loadFileAsResource(filePath);
         String contentType = "application/octet-stream";
         try {
+            byte[] bytes = Files.readAllBytes(resource.getFile().toPath());
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(bytes);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                .body(resource);
     }
 
     @PutMapping("/status")

@@ -20,14 +20,22 @@ import headerImg from "../../../assets/img/personal-infor-header.png";
 import personalInformationTheme from "../../../theme/PersonalInformation.theme";
 import "./PersonalInformation.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { changePassword, editUserInformation, getUserInformation } from '../../../redux/slices/userInfoSlice';
+import { changeAvatar, changePassword, editUserInformation, getUserInformation, getAvatar } from '../../../redux/slices/userInfoSlice';
 
 const ModalProfilePicture = ({ setShowModalPicture, setSelectedFile, previewImage, setPreviewImage }) => {
     const inputRef = useRef(null);
+    const dispatch = useDispatch()
+    const { userAvatar } = useSelector(state => state.userInfoSlice)
 
     const handleFileChange = (event) => {
+        const formData = new FormData();
         const file = event.target.files[0];
+        formData.append("avatar", file);
+
         setSelectedFile(file);
+        dispatch(changeAvatar(formData)).then(() => {
+            dispatch(getAvatar())
+        })
 
         const reader = new FileReader();
         reader.onload = () => {
@@ -44,7 +52,7 @@ const ModalProfilePicture = ({ setShowModalPicture, setSelectedFile, previewImag
             <p className="profile-picture__desc">A picture helps people recognize you and lets you know when you’re signed in to your account</p>
 
             <div className="profile-picture__avatar">
-                <img src={previewImage} alt="Avatar" className="profile-picture__img" />
+                <img src={previewImage || userAvatar} alt="Avatar" className="profile-picture__img" />
             </div>
             <div className="profile-picture__bottom" onClick={() => { inputRef.current.click() }}>
                 <input type="file" hidden accept="image/*" ref={inputRef} onChange={handleFileChange} />
@@ -217,7 +225,7 @@ const ModalChangePassword = ({ setShowModalPassword }) => {
 }
 function PersonalInformation() {
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.userInfoSlice)
+    const { user, userAvatar } = useSelector(state => state.userInfoSlice)
     const [showModalPicture, setShowModalPicture] = useState(false)
     const [showModalPassword, setShowModalPassword] = useState(false)
     const [showExtentName, setShowExtentName] = useState(false);
@@ -244,7 +252,6 @@ function PersonalInformation() {
         onSubmit: (values) => {
             const { firstName, lastName, phoneNumber } = values
             const newInfo = { ...user, firstName, lastName, phoneNumber };
-            console.log("🚀 ~ file: PersonalInformation.js:259 ~ PersonalInformation ~ newInfo:", newInfo)
 
             dispatch(editUserInformation(newInfo))
         },
@@ -261,6 +268,7 @@ function PersonalInformation() {
 
     useEffect(() => {
         dispatch(getUserInformation())
+        dispatch(getAvatar())
     }, [])
 
     return (
@@ -290,7 +298,7 @@ function PersonalInformation() {
                                 Add a profile picture to personalize your account
                             </span>
                             <div className="personal-info__block-avatar">
-                                <Avatar alt="avt" src={previewImage} />
+                                <Avatar alt="avt" src={userAvatar} />
                                 <div className="personal-info__block-avatar-icon">
                                     <div className="personal-info__block-avatar-icon-camera"></div>
                                 </div>

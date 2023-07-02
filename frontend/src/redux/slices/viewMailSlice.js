@@ -13,7 +13,12 @@ export const downloadFileThunk = createAsyncThunk(
     "downloadFile",
     async (name) => {
         try {
-            const response = await axiosInstance.get(`${API.DOWNLOAD_FILE}/${name}`);
+            const response = await axiosInstance.get(`${API.DOWNLOAD_FILE}/${name}`, {
+                responseType: 'arraybuffer',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
             return response.data;
         } catch (err) {
             throw new Error("Error!");

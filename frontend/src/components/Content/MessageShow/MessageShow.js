@@ -19,6 +19,7 @@ import IconPdf from "../../../assets/img/icon_pdf.png";
 import IconScript from "../../../assets/img/icon_script.png";
 import IconText from "../../../assets/img/icon_text.png";
 import IconVideo from "../../../assets/img/icon_video.png";
+import IconOctetStream from "../../../assets/img/icon_octet-stream.png"
 import { downloadFileThunk } from "../../../redux/slices/viewMailSlice";
 import "./MessageShow.css";
 
@@ -64,7 +65,7 @@ export default function Message(props) {
     } else if (['mp4', 'mov', 'avi', 'mkv'].includes(extension)) {
       return returnType === 'icon' ? IconVideo : 'video';
     } else {
-      return null;
+      return IconOctetStream;
     }
   }
 
@@ -82,7 +83,7 @@ export default function Message(props) {
     } else if (fileType === 'video') {
       return '-262px -107px'
     } else {
-      return null;
+      return '-219px -88px';
     }
   }
 
@@ -124,10 +125,22 @@ export default function Message(props) {
   }
 
   const handleDownloadFile = async (fileName) => {
-
+    function downloadFile(url, fileName) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName);
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
     try {
       dispatch(downloadFileThunk(fileName)).then(response => {
         if (response.type === "downloadFile/fulfilled") {
+          const fileData = response.payload; 
+          const blob = new Blob([fileData]);
+          const fileUrl = URL.createObjectURL(blob);
+          downloadFile(fileUrl, fileName);
         }
       })
     } catch (error) {
