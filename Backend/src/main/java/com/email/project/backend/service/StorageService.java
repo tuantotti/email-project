@@ -1,5 +1,6 @@
 package com.email.project.backend.service;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -20,15 +21,39 @@ public class StorageService {
 
     @Value("${folder.path}")
     private String folderPath;
+    private final String AVATAR_FOLDER = "avatar";
+    private final String EMAIL = "email-file";
 
     public StorageService() {
     }
 
+    @PostConstruct
+    public void init() {
+        try {
+            Path avatarPath = Path.of(folderPath + File.separator + AVATAR_FOLDER);
+            Path emailPath = Path.of(folderPath + File.separator + EMAIL);
+            Files.createDirectories(avatarPath);
+            Files.createDirectories(emailPath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public byte[] getFileFromSystem(String fileName) {
+
+        try {
+            byte[] file = Files.readAllBytes(Path.of(folderPath + fileName));
+            return file;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public boolean deleteFileFromFileSystem(String fileName) {
         boolean isDeleted = false;
         try {
-            Files.delete(Path.of(folderPath + File.separator + fileName));
+            Files.delete(Path.of(folderPath + fileName));
             isDeleted = true;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -37,8 +62,7 @@ public class StorageService {
         }
     }
 
-    public boolean uploadFileToSystem(MultipartFile file, String fileName) {
-        String filePath = folderPath + File.separator + fileName;
+    public boolean uploadFileToSystem(MultipartFile file, String filePath) {
 
         boolean isSaveToFileSystem = false;
 
@@ -57,6 +81,14 @@ public class StorageService {
         return folderPath;
     }
 
+    public String getAvatarFolder() {
+        return folderPath + File.separator + AVATAR_FOLDER;
+    }
+
+    public String getEmailFolder() {
+        return folderPath + File.separator + EMAIL;
+    }
+
     public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = Paths.get(folderPath + File.separator + fileName);
@@ -64,7 +96,7 @@ public class StorageService {
             if (resource.exists())
                 return resource;
             else
-                throw new RuntimeException("File not found " + fileName);
+                throw new RuntimeException("File not found " + filePath);
         } catch (MalformedURLException e) {
             throw new RuntimeException("File not found " + fileName, e);
         }

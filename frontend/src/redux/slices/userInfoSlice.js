@@ -38,6 +38,50 @@ export const changePassword = createAsyncThunk(
         }
     }
 );
+export const changeAvatar = createAsyncThunk(
+    "userInfor/edit/avatar",
+    async (formData) => {
+        try {
+            const response = await axiosInstance.post(API.CHANGE_AVATAR, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            return response.data;
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
+);
+
+export const getAvatar = createAsyncThunk(
+    "userInfor/get/avatar",
+    async () => {
+        try {
+            const response = await axiosInstance.get(API.GET_AVATAR, {
+                responseType: 'blob',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const blobData = response.data;
+            const reader = new FileReader();
+            reader.readAsDataURL(blobData);
+
+            return new Promise((resolve, reject) => {
+                reader.onloadend = () => {
+                    resolve(reader.result);
+                };
+
+                reader.onerror = (error) => {
+                    reject(error);
+                };
+            });
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
+);
 
 
 export const getUserInformationSlice = createSlice({
@@ -52,8 +96,9 @@ export const getUserInformationSlice = createSlice({
             email: "",
             phoneNumber: "",
             createAt: "",
-            active: true
-        }
+            active: true,
+        },
+        userAvatar: null,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -79,7 +124,7 @@ export const getUserInformationSlice = createSlice({
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: "light",
@@ -93,7 +138,7 @@ export const getUserInformationSlice = createSlice({
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: "light",
@@ -109,7 +154,7 @@ export const getUserInformationSlice = createSlice({
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: "light",
@@ -123,11 +168,52 @@ export const getUserInformationSlice = createSlice({
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
-                    pauseOnHover: true,
+                    pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
                     theme: "light",
                 });
+            })
+            .addCase(changeAvatar.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(changeAvatar.fulfilled, (state) => {
+                state.loading = false;
+                toast.success('Change avatar successfully!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            })
+            .addCase(changeAvatar.rejected, (state) => {
+                state.loading = false;
+                state.error = true;
+                toast.error('Change avatar error. Please try again!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            })
+            .addCase(getAvatar.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getAvatar.fulfilled, (state, action) => {
+                state.loading = false;
+                state.userAvatar = action.payload;
+            })
+            .addCase(getAvatar.rejected, (state) => {
+                state.loading = false;
+                state.error = true;
             })
     },
 });

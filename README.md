@@ -39,3 +39,24 @@ To shutdown:
 ```bash
 docker-compose down
 ```
+
+### Run without docker
+#### Run backend
+cd to Backend folder
+```bash
+./gradlew bootJar
+```
+#### Run SMTPServer
+cd to SMTPServer folder
+```bash
+./gradlew bootJar
+```
+
+#### Run Frontend
+cd to frontend folder
+```bash
+npm install --force
+npm start
+```
+
+

@@ -4,7 +4,6 @@ import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.dto.SendMailDto;
 import com.email.project.backend.dto.UpdateMail;
-import com.email.project.backend.entity.Mail;
 import com.email.project.backend.service.MailService;
 import com.email.project.backend.service.StorageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,7 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.nio.file.Files;
+import java.io.File;
 import java.io.IOException;
 
 @Tag(name = "Mail API", description = "The api for mail operation")
@@ -50,17 +50,20 @@ public class MailController {
 
     @GetMapping("/file/{fileName:.+}")
     public ResponseEntity<?> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-        Resource resource = storageService.loadFileAsResource(fileName);
+        String filePath = storageService.getEmailFolder() + File.separator + fileName;
+        Resource resource = storageService.loadFileAsResource(filePath);
         String contentType = "application/octet-stream";
         try {
+            byte[] bytes = Files.readAllBytes(resource.getFile().toPath());
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(bytes);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                .body(resource);
     }
 
     @PutMapping("/status")

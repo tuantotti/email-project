@@ -9,7 +9,7 @@ import MarkEmailReadOutlinedIcon from '@mui/icons-material/MarkEmailReadOutlined
 import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
 import moment from "moment";
-import { React, useEffect } from "react";
+import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import avatarDefault from "../../../assets/img/avatar_default.png";
@@ -19,9 +19,9 @@ import IconPdf from "../../../assets/img/icon_pdf.png";
 import IconScript from "../../../assets/img/icon_script.png";
 import IconText from "../../../assets/img/icon_text.png";
 import IconVideo from "../../../assets/img/icon_video.png";
-import "./MessageShow.css";
+import IconOctetStream from "../../../assets/img/icon_octet-stream.png"
 import { downloadFileThunk } from "../../../redux/slices/viewMailSlice";
-
+import "./MessageShow.css";
 
 export default function Message(props) {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ export default function Message(props) {
     } else if (['mp4', 'mov', 'avi', 'mkv'].includes(extension)) {
       return returnType === 'icon' ? IconVideo : 'video';
     } else {
-      return null;
+      return IconOctetStream;
     }
   }
 
@@ -83,7 +83,7 @@ export default function Message(props) {
     } else if (fileType === 'video') {
       return '-262px -107px'
     } else {
-      return null;
+      return '-219px -88px';
     }
   }
 
@@ -124,9 +124,29 @@ export default function Message(props) {
     return (bytes / (1024 * 1024)).toFixed(2);
   }
 
-  const handleDownloadFile = (fileName) => {
-    dispatch(downloadFileThunk(fileName))
-  }
+  const handleDownloadFile = async (fileName) => {
+    function downloadFile(url, fileName) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName);
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    try {
+      dispatch(downloadFileThunk(fileName)).then(response => {
+        if (response.type === "downloadFile/fulfilled") {
+          const fileData = response.payload; 
+          const blob = new Blob([fileData]);
+          const fileUrl = URL.createObjectURL(blob);
+          downloadFile(fileUrl, fileName);
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="mailDetailContainer">

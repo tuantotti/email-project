@@ -39,7 +39,10 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Credential credential;
 
-    public UserView toUserView(){
+    @Column(name = "avatar_file_name")
+    private String avatarFileName;
+
+    public UserView toUserView() {
         UserView userView = new UserView();
         userView.loadFromUser(this);
         return userView;
