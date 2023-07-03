@@ -39,9 +39,13 @@ public class Mail {
     @Column(name = "received_date")
     private Date receivedDate;
 
-    @Column(name = "status")
+    @Column(name = "sender_status")
     @Enumerated(EnumType.STRING)
-    private MailStatus status;
+    private MailStatus senderStatus;
+
+    @Column(name = "receiver_status")
+    @Enumerated(EnumType.STRING)
+    private MailStatus receiverStatus;
 
     @Column(name = "is_read")
     private boolean isRead;
@@ -62,7 +66,8 @@ public class Mail {
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
                 .isRead(isRead)
-                .status(status)
+                .senderStatus(senderStatus)
+                .receiverStatus(receiverStatus)
                 .build();
     }
 }
