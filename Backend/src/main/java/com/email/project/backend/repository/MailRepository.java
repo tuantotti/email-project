@@ -17,9 +17,16 @@ import java.util.Optional;
 @Repository
 public interface MailRepository extends JpaRepository<Mail, Integer> {
 
-    Optional<Page<Mail>> getMailByToAddressAndStatus(String toAddress, MailStatus status, Pageable pageable);
+    Optional<Page<Mail>> getMailByToAddressAndReceiverStatusIn(String toAddress, MailStatus[] statuses, Pageable pageable);
+    Optional<Page<Mail>> getMailByFromAddressAndSenderStatusIn(String fromAddress, MailStatus[] statuses, Pageable pageable);
+
+    Mail[] getMailByToAddressAndReceiverStatus(String toAddress, MailStatus status);
+    Mail[] getMailByFromAddressAndSenderStatus(String fromAddress, MailStatus status);
+    @Modifying
+    @Query("update Mail m set m.receiverStatus = :status where m.id = :id")
+    void updateReceiverStatusById(@Param("id") int id, @Param("status") MailStatus status);
 
     @Modifying
-    @Query("update Mail m set m.status = :status where m.id = :id")
-    void updateStatusById(@Param("id") int id, @Param("status") MailStatus status);
+    @Query("update Mail m set m.senderStatus = :status where m.id = :id")
+    void updateSenderStatusById(@Param("id") int id, @Param("status") MailStatus status);
 }

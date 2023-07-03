@@ -14,6 +14,7 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeUtility;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -58,7 +59,31 @@ public class MailService {
     public Page<MailDto> getMail(MailStatus mailStatus, Pageable pageable) {
         try {
             String email = UserService.getCurrentUsername();
-            Optional<Page<Mail>> mailPage = mailRepository.getMailByToAddressAndStatus(email, mailStatus, pageable);
+            Optional<Page<Mail>> mailPage = null;
+            MailStatus[] statuses;
+            switch (mailStatus){
+                case SENT:
+                    statuses = new MailStatus[]{MailStatus.SENT, MailStatus.STARRED};
+                    mailPage = mailRepository.getMailByFromAddressAndSenderStatusIn(email, statuses, pageable);
+                    break;
+                case INBOX:
+                    statuses = new MailStatus[]{MailStatus.INBOX, MailStatus.STARRED};
+                    mailPage = mailRepository.getMailByToAddressAndReceiverStatusIn(email, statuses, pageable);
+                    break;
+                case TRASH:
+                    break;
+                case SPAM:
+                    break;
+                case DELETED:
+                    break;
+                case STARRED:
+//                    Mail[] fromStar = mailRepository.getMailByFromAddressAndSenderStatus(email, MailStatus.STARRED);
+//                    Mail[] toStar = mailRepository.getMailByFromAddressAndSenderStatus(email, MailStatus.STARRED);
+//                    mailPage = new Optional<ArrayUtils.addAll(fromStar, toStar)>;
+                    break;
+            }
+
+
             if (mailPage.isPresent()) {
                 Page<MailDto> mailDtos = mailPage.get().map(mail -> mail.toDto());
                 mailDtos.forEach(mailDto -> {
