@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Service
 @Slf4j
@@ -77,10 +76,6 @@ public class StorageService {
         }
     }
 
-    public String getFolderPath() {
-        return folderPath;
-    }
-
     public String getAvatarFolder() {
         return folderPath + File.separator + AVATAR_FOLDER;
     }
@@ -89,16 +84,15 @@ public class StorageService {
         return folderPath + File.separator + EMAIL;
     }
 
-    public Resource loadFileAsResource(String fileName) {
+    public Resource loadFileAsResource(String filePath) {
         try {
-            Path filePath = Paths.get(folderPath + File.separator + fileName);
-            Resource resource = new UrlResource(filePath.toUri());
+            Resource resource = new UrlResource(filePath);
             if (resource.exists())
                 return resource;
             else
                 throw new RuntimeException("File not found " + filePath);
         } catch (MalformedURLException e) {
-            throw new RuntimeException("File not found " + fileName, e);
+            throw new RuntimeException("File not found " + filePath, e);
         }
     }
 }
