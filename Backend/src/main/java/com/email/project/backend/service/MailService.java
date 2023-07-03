@@ -159,8 +159,11 @@ public class MailService {
         try {
             Optional<Mail> mailOptional = mailRepository.findById(mail.getId());
             if (mailOptional.get().getToAddress().equals(ownerEmail)) {
-                mailRepository.updateStatusById(mail.getId(), mail.getStatus());
-            } else {
+                mailRepository.updateReceiverStatusById(mail.getId(), mail.getStatus());
+            } else if (mailOptional.get().getFromAddress().equals(ownerEmail)) {
+                mailRepository.updateSenderStatusById(mail.getId(), mail.getStatus());
+            }
+            else {
                 String msg = "user with " + ownerEmail + " is not the owner of mail with id " + mail.getId();
                 log.error(msg);
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, msg);
