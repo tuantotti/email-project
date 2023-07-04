@@ -86,7 +86,8 @@ public final class MailSaver extends Observable {
             emailModel.setSubject(mimeMessage.getSubject());
             emailModel.setSendDate(mimeMessage.getSentDate());
             emailModel.setReceivedDate(mimeMessage.getReceivedDate());
-            emailModel.setStatus(MailStatus.INBOX);
+            emailModel.setSenderStatus(MailStatus.SENT);
+            emailModel.setReceiverStatus(MailStatus.INBOX);
 
             List<FileData> fileDataList = new ArrayList<>();
 

@@ -4,6 +4,9 @@ import com.email.project.backend.constant.MailStatus;
 import com.email.project.backend.entity.FileData;
 import com.email.project.backend.entity.Mail;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +30,8 @@ public class MailDto {
     private String bccAddress;
     private Date sendDate;
     private Date receivedDate;
-    private MailStatus status;
+    private MailStatus senderStatus;
+    private MailStatus receiverStatus;
     private List<FileData> fileDataList;
     private boolean isRead;
 
@@ -44,7 +48,8 @@ public class MailDto {
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
                 .isRead(isRead)
-                .status(status)
+                .senderStatus(senderStatus)
+                .receiverStatus(receiverStatus)
                 .build();
     }
 
