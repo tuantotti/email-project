@@ -46,8 +46,8 @@ function HeadChecker() {
     console.log("🚀 ~ file: HeadChecker.js:76 ~ handleSpamEmail ~ mailSelected:", mailSelected.map((i) => i.id))
   }
 
-  const handleDeleteEmails = () => {
-    console.log("🚀 ~ file: HeadChecker.js:76 ~ handleDeleteEmails ~ mailSelected:", mailSelected.map((i) => i.id))
+  const handleTrashEmails = () => {
+    console.log("🚀 ~ file: HeadChecker.js:76 ~ handleTrashEmails ~ mailSelected:", mailSelected.map((i) => i.id))
   }
 
   const handleRefreshMail = (page, size) => {
@@ -66,7 +66,7 @@ function HeadChecker() {
         />
         {masterChecked || mailSelected.length ? <div className="navigate">
           <ReportOutlinedIcon className={classes.pointer} onClick={handleSpamEmail} />
-          <DeleteOutlinedIcon className={classes.pointer} onClick={handleDeleteEmails} />
+          <DeleteOutlinedIcon className={classes.pointer} onClick={handleTrashEmails} />
           <ArchiveOutlinedIcon className={classes.pointer} />
           <MarkEmailReadOutlinedIcon className={classes.pointer} />
           <WatchLaterOutlinedIcon className={classes.pointer} />

@@ -28,17 +28,22 @@ function Pagination() {
             fromAddress={d.fromAddress}
             fromName={d.fromName}
             toAddress={d.toAddress}
+            toName={d.toName}
             ccAddress={d.ccAddress}
             bccAddress={d.bccAddress}
             sendDate={d.sendDate}
             receivedDate={d.receivedDate}
-            status={d.status}
+            receiverStatus={d.receiverStatus}
+            senderStatus={d.senderStatus}
             fileDataList={d.fileDataList}
             isRead={d.isRead}
             isStarred={d.isStarred}
           />
         );
       })}
+      {!mails.length ? <div className={classes.noEmail}>
+        <span className="signup-subtext-password-condition" style={{fontSize: 20}}>No email here!</span>  
+      </div> : <></>}
     </div>
   );
 }

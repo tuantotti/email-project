@@ -15,19 +15,27 @@ import IconText from "../../../assets/img/icon_text.png"
 import IconVideo from "../../../assets/img/icon_video.png"
 import IconOctetStream from "../../../assets/img/icon_octet-stream.png"
 import { getMailsThunk, handleChildCheckboxChange } from "../../../redux/slices/getMailsSlice";
-import { starMailThunk } from "../../../redux/slices/starMailSlice";
+import { changeMailStatusThunk } from "../../../redux/slices/changeMailStatusSlice";
 import { setMailDetail } from "../../../redux/slices/viewMailSlice";
 
-function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }) {
-  const isStarred = status.includes("STARRED")
+function Email({ index, id, subject, body, fromAddress, fromName, toAddress, toName, ccAddress, bccAddress, sendDate, receivedDate, receiverStatus, senderStatus, fileDataList, isRead }) {
   const statusPath = useParams()['*'].toUpperCase();
   const navigate = useNavigate();
   const checkBoxRef = useRef();
   const dispatch = useDispatch();
   const { childChecked, page, size, } = useSelector((state) => state.getMailsSlice);
+  const { user } = useSelector(state => state.userInfoSlice)
   const path = useParams()['*']
   const [showOnHover, setShowOnHover] = useState(false);
-  const [starred, setStarred] = useState(() => isStarred && 1)
+  const [starred, setStarred] = useState(() => {
+    if (statusPath === 'INBOX') {
+      return receiverStatus?.includes("STARRED") && 1
+    } else if (statusPath === 'SENT') {
+      return senderStatus?.includes("STARRED") && 1
+    } else if (statusPath === 'STARRED') {
+      return (receiverStatus?.includes("STARRED") && 1) || (senderStatus?.includes("STARRED") && 1)
+    }
+  })
 
   const handlingShowOnOver = (e) => {
     e.stopPropagation();
@@ -42,15 +50,10 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
 
   function showMail(e) {
     if (!e.target.classList.contains('check')) {
-      const mailDetail = { id, subject, body, fromAddress, fromName, toAddress, ccAddress, bccAddress, sendDate, receivedDate, status, fileDataList, isRead }
+      const mailDetail = { id, subject, body, fromAddress, fromName, toAddress, ccAddress, bccAddress, sendDate, receivedDate, receiverStatus, fileDataList, isRead }
       navigate(`/${path}/` + id);
       dispatch(setMailDetail(mailDetail))
     }
-  }
-
-  function handleDelete(e) {
-    e.stopPropagation();
-    e.preventDefault()
   }
 
   function handleSelectMail(e) {
@@ -93,9 +96,28 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
 
   }
 
+  const checkName = () => {
+    return fromAddress === user.email ? `To: ${toName}` : fromName
+  }
+
   function handleStarMail(mailId, newValue) {
+    const checkOriginalStatus = () => {
+      if (receiverStatus === "STARRED") {
+        return "INBOX"
+      } else if (senderStatus === "STARRED") {
+        return "SENT"
+      }
+    }
     setStarred(newValue)
-    dispatch(starMailThunk({id: mailId, status: newValue ? "STARRED" : "INBOX"})).then(res => {
+    dispatch(changeMailStatusThunk({ id: mailId, status: newValue ? "STARRED" : checkOriginalStatus() })).then(res => {
+      dispatch(getMailsThunk({ status: statusPath, page, size }))
+    })
+  }
+
+  function handleDelete(e, mailId) {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(changeMailStatusThunk({ id: mailId, status: statusPath === "TRASH" ? "DELETED" : "TRASH" })).then(res => {
       dispatch(getMailsThunk({ status: statusPath, page, size }))
     })
   }
@@ -108,24 +130,24 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
         onMouseOver={handlingShowOnOver}
         className={classNames(classes.list, { [classes.isRead]: isRead, [classes.containFile]: fileDataList.length, [classes.flexStart]: fileDataList.length })}
       >
-        <div className={classes.check} style={fileDataList.length ? {} : {marginTop: 0}}>
+        <div className={classes.check} style={fileDataList.length ? {} : { marginTop: 0 }}>
           <Checkbox
             ref={checkBoxRef}
             onChange={handleSelectMail}
             checked={childChecked[index]}
           />
-          <Rating
+          {(statusPath !== "TRASH" && statusPath !== "SPAM") && <Rating
             className={classes.starred}
             max={1}
             value={starred}
             onChange={(event, newValue) => handleStarMail(id, newValue)}
-          />
+          />}
         </div>
         <div
           onClick={showMail}
           className={classes.company} >
           <div className={classNames(classes.mailLineContainer, { [classes.flexStart]: fileDataList.length })} >
-            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead })}>{fromName}</h3>
+            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead })}>{checkName()}</h3>
             <div className={classes.groupContainFile}>
               <div className={classes.flexItem}>
                 <h3 className={classNames(classes.mailTitle, { [classes.fontWeightLight]: isRead })}>{subject}</h3>
@@ -150,7 +172,7 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, ccA
             </div>
             {showOnHover && (
               <div className={classes.hideIcons}>
-                <button onClick={handleDelete}  >
+                <button onClick={(e) => handleDelete(e, id)}  >
                   <DeleteOutlinedIcon className={classes.btnLeft} />
                 </button>
               </div>

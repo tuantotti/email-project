@@ -15,11 +15,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import avatarDefault from "../../../assets/img/avatar_default.png";
 import IconArchive from "../../../assets/img/icon_archive.png";
 import IconImage from "../../../assets/img/icon_image.png";
+import IconOctetStream from "../../../assets/img/icon_octet-stream.png";
 import IconPdf from "../../../assets/img/icon_pdf.png";
 import IconScript from "../../../assets/img/icon_script.png";
 import IconText from "../../../assets/img/icon_text.png";
 import IconVideo from "../../../assets/img/icon_video.png";
-import IconOctetStream from "../../../assets/img/icon_octet-stream.png"
+import { changeMailStatusThunk } from "../../../redux/slices/changeMailStatusSlice";
 import { downloadFileThunk } from "../../../redux/slices/viewMailSlice";
 import "./MessageShow.css";
 
@@ -32,14 +33,26 @@ export default function Message(props) {
   const navigateBack = () => {
     navigate(`/${path}`);
   }
+
+  const handleChangeStatusSpam = () => {
+    dispatch(changeMailStatusThunk({ id: mailDetail.id, status: "SPAM" }))
+  }
+
+  const handleChangeStatusTrash = () => {
+    if (mailDetail.receiverStatus === "TRASH") {
+      dispatch(changeMailStatusThunk({ id: mailDetail.id, status: "DELETED" }))
+    }
+    dispatch(changeMailStatusThunk({ id: mailDetail.id, status: "TRASH" }))
+  }
+
   const Navigate = (
     <div className="navigate">
       <button onClick={navigateBack}>
         <ArrowBackIcon className="navigate_back" />
       </button>
-      <ReportOutlinedIcon className="pointer" />
-      <DeleteOutlinedIcon className="pointer" />
-      <ArchiveOutlinedIcon className="pointer" />
+      <ReportOutlinedIcon className="pointer" onClick={handleChangeStatusSpam}/>
+      <DeleteOutlinedIcon className="pointer"  onClick={handleChangeStatusTrash}/>
+      <ArchiveOutlinedIcon className="pointer" disabled/>
       <MarkEmailReadOutlinedIcon className="pointer" />
       <WatchLaterOutlinedIcon className="pointer" />
       <AssignmentTurnedInOutlinedIcon className="pointer" />
