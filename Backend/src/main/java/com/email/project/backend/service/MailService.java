@@ -1,6 +1,7 @@
 package com.email.project.backend.service;
 
 import com.email.project.backend.constant.MailStatus;
+import com.email.project.backend.dto.BulkUpdateMail;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.dto.SendMailDto;
 import com.email.project.backend.dto.UpdateMail;
@@ -28,10 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -174,6 +172,28 @@ public class MailService {
                 String msg = "user with " + ownerEmail + " is not the owner of mail with id " + mail.getId();
                 log.error(msg);
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, msg);
+            }
+        } catch (DataAccessException e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+
+    @Transactional
+    public void bulkUpdateMailStatus(BulkUpdateMail mail) {
+        String ownerEmail = UserService.getCurrentUsername();
+        try {
+            List<Mail> mails = mailRepository.findByIdIn(mail.getIds());
+
+            for (Mail m : mails){
+                if (m.getToAddress().equals(ownerEmail)) {
+                    mailRepository.updateReceiverStatusById(m.getId(), mail.getStatus());
+                } else if (m.getFromAddress().equals(ownerEmail)) {
+                    mailRepository.updateSenderStatusById(m.getId(), mail.getStatus());
+                }
             }
         } catch (DataAccessException e) {
             log.error(e.getMessage());

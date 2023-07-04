@@ -32,4 +32,6 @@ public interface MailRepository extends JpaRepository<Mail, Integer> {
     @Modifying
     @Query("update Mail m set m.senderStatus = :status where m.id = :id")
     void updateSenderStatusById(@Param("id") int id, @Param("status") MailStatus status);
+
+    List<Mail> findByIdIn(int[] ids);
 }
