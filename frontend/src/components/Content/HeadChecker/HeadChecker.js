@@ -17,6 +17,7 @@ import more from "../../../assets/img/more.png";
 import refresh from "../../../assets/img/refresh.png";
 import { getMailsThunk, handleMasterCheckboxChange, nextPage, prevPage } from "../../../redux/slices/getMailsSlice";
 import classes from "./HeadChecker.module.css";
+import { changeMailStatusBulkThunk } from '../../../redux/slices/changeMailStatusSlice';
 
 function HeadChecker() {
   const [path, mailId] = useParams()['*'].split('/');
@@ -43,11 +44,13 @@ function HeadChecker() {
   }
 
   const handleSpamEmail = () => {
-    console.log("🚀 ~ file: HeadChecker.js:76 ~ handleSpamEmail ~ mailSelected:", mailSelected.map((i) => i.id))
+    const ids = mailSelected.map((i) => i.id)
+    dispatch(changeMailStatusBulkThunk({ ids, status: "SPAM" })).then(() => { dispatch(getMailsThunk({ status: path.toUpperCase(), page, size })) })
   }
 
   const handleTrashEmails = () => {
-    console.log("🚀 ~ file: HeadChecker.js:76 ~ handleTrashEmails ~ mailSelected:", mailSelected.map((i) => i.id))
+    const ids = mailSelected.map((i) => i.id)
+    dispatch(changeMailStatusBulkThunk({ ids, status: "TRASH" })).then(() => { dispatch(getMailsThunk({ status: path.toUpperCase(), page, size })) })
   }
 
   const handleRefreshMail = (page, size) => {
