@@ -91,8 +91,12 @@ public class MailService {
                 Page<MailDto> mailDtos = mailPage.get().map(mail -> mail.toDto());
                 mailDtos.forEach(mailDto -> {
                     Optional<User> fromUserOptional = userRepository.getUserByEmail(mailDto.getFromAddress());
+                    Optional<User> toUserOptional = userRepository.getUserByEmail(mailDto.getToAddress());
                     if (fromUserOptional.isPresent()) {
                         mailDto.setFromName(fromUserOptional.get().getFirstName() + " " + fromUserOptional.get().getLastName());
+                    }
+                    if (toUserOptional.isPresent()){
+                        mailDto.setToName(toUserOptional.get().getFirstName() + " " + toUserOptional.get().getLastName());
                     }
                 });
 

@@ -26,6 +26,7 @@ public class MailDto {
     private String fromAddress;
     private String fromName;
     private String toAddress;
+    private String toName;
     private String ccAddress;
     private String bccAddress;
     private Date sendDate;
@@ -55,6 +56,9 @@ public class MailDto {
 
     public void setFromName(String fromName) {
         this.fromName = fromName;
+    }
+    public void setToName(String toName) {
+        this.toName = toName;
     }
 
     @JsonProperty("isRead")
