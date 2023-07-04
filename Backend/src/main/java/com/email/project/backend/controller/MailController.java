@@ -1,6 +1,7 @@
 package com.email.project.backend.controller;
 
 import com.email.project.backend.constant.MailStatus;
+import com.email.project.backend.dto.BulkUpdateMail;
 import com.email.project.backend.dto.MailDto;
 import com.email.project.backend.dto.SendMailDto;
 import com.email.project.backend.dto.UpdateMail;
@@ -69,6 +70,12 @@ public class MailController {
     @PutMapping("/status")
     public ResponseEntity<?> updateMailStatus(@RequestBody UpdateMail mail) {
         mailService.updateMailStatus(mail);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/status/bulk")
+    public ResponseEntity<?> bulkUpdateMailStatus(@RequestBody BulkUpdateMail mail) {
+        mailService.bulkUpdateMailStatus(mail);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
