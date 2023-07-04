@@ -20,8 +20,11 @@ public interface MailRepository extends JpaRepository<Mail, Integer> {
     Optional<Page<Mail>> getMailByToAddressAndReceiverStatusIn(String toAddress, MailStatus[] statuses, Pageable pageable);
     Optional<Page<Mail>> getMailByFromAddressAndSenderStatusIn(String fromAddress, MailStatus[] statuses, Pageable pageable);
 
-    Mail[] getMailByToAddressAndReceiverStatus(String toAddress, MailStatus status);
-    Mail[] getMailByFromAddressAndSenderStatus(String fromAddress, MailStatus status);
+    @Query("SELECT m FROM Mail m WHERE " +
+            "(m.fromAddress = :address and m.senderStatus = :status) " +
+            "or (m.toAddress = :address and m.receiverStatus = :status)")
+    Optional<Page<Mail>> getMailBySpecifyStatus(String address, MailStatus status, Pageable pageable);
+
     @Modifying
     @Query("update Mail m set m.receiverStatus = :status where m.id = :id")
     void updateReceiverStatusById(@Param("id") int id, @Param("status") MailStatus status);

@@ -71,15 +71,16 @@ public class MailService {
                     mailPage = mailRepository.getMailByToAddressAndReceiverStatusIn(email, statuses, pageable);
                     break;
                 case TRASH:
+                    mailPage = mailRepository.getMailBySpecifyStatus(email, MailStatus.TRASH, pageable);
                     break;
                 case SPAM:
+                    mailPage = mailRepository.getMailBySpecifyStatus(email, MailStatus.SPAM, pageable);
                     break;
                 case DELETED:
+                    mailPage = mailRepository.getMailBySpecifyStatus(email, MailStatus.DELETED, pageable);
                     break;
                 case STARRED:
-//                    Mail[] fromStar = mailRepository.getMailByFromAddressAndSenderStatus(email, MailStatus.STARRED);
-//                    Mail[] toStar = mailRepository.getMailByFromAddressAndSenderStatus(email, MailStatus.STARRED);
-//                    mailPage = new Optional<ArrayUtils.addAll(fromStar, toStar)>;
+                    mailPage = mailRepository.getMailBySpecifyStatus(email, MailStatus.STARRED, pageable);
                     break;
             }
 
