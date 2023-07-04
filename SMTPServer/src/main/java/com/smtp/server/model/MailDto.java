@@ -23,7 +23,8 @@ public class MailDto {
     private String bccAddress;
     private Date sendDate;
     private Date receivedDate;
-    private MailStatus status;
+    private MailStatus senderStatus;
+    private MailStatus receiverStatus;
     private List<FileData> fileDataList;
     private boolean isRead;
 
@@ -40,7 +41,8 @@ public class MailDto {
                 .receivedDate(receivedDate)
                 .sendDate(sendDate)
                 .isRead(isRead)
-                .status(status)
+                .senderStatus(senderStatus)
+                .receiverStatus(receiverStatus)
                 .build();
     }
 
