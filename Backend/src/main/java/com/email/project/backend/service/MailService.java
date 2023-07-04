@@ -76,12 +76,14 @@ public class MailService {
                 case SPAM:
                     mailPage = mailRepository.getMailBySpecifyStatus(email, MailStatus.SPAM, pageable);
                     break;
-                case DELETED:
-                    mailPage = mailRepository.getMailBySpecifyStatus(email, MailStatus.DELETED, pageable);
-                    break;
+//                case DELETED:
+//                    mailPage = mailRepository.getMailBySpecifyStatus(email, MailStatus.DELETED, pageable);
+//                    break;
                 case STARRED:
                     mailPage = mailRepository.getMailBySpecifyStatus(email, MailStatus.STARRED, pageable);
                     break;
+                default:
+                    return new PageImpl<>(new ArrayList<>());
             }
 
 
