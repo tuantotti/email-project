@@ -128,7 +128,7 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, toN
         onMouseEnter={handlingShowOnOver}
         onMouseLeave={handlingShowOnOut}
         onMouseOver={handlingShowOnOver}
-        className={classNames(classes.list, { [classes.isRead]: isRead, [classes.containFile]: fileDataList.length, [classes.flexStart]: fileDataList.length })}
+        className={classNames(classes.list, { [classes.isRead]: isRead || statusPath === "SENT", [classes.containFile]: fileDataList.length, [classes.flexStart]: fileDataList.length })}
       >
         <div className={classes.check} style={fileDataList.length ? {} : { marginTop: 0 }}>
           <Checkbox
@@ -147,12 +147,12 @@ function Email({ index, id, subject, body, fromAddress, fromName, toAddress, toN
           onClick={showMail}
           className={classes.company} >
           <div className={classNames(classes.mailLineContainer, { [classes.flexStart]: fileDataList.length })} >
-            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead })}>{checkName()}</h3>
+            <h3 className={classNames(classes.mailAuthor, { [classes.fontWeightLight]: isRead || statusPath === "SENT" })}>{checkName()}</h3>
             <div className={classes.groupContainFile}>
               <div className={classes.flexItem}>
-                <h3 className={classNames(classes.mailTitle, { [classes.fontWeightLight]: isRead })}>{subject}</h3>
+                <h3 className={classNames(classes.mailTitle, { [classes.fontWeightLight]: isRead || statusPath === "SENT" })}>{subject}</h3>
                 {!showOnHover && (
-                  <p className={classNames(classes.mailTime, { [classes.fontWeightLight]: isRead })}>{handleTime(sendDate)}</p>
+                  <p className={classNames(classes.mailTime, { [classes.fontWeightLight]: isRead || statusPath === "SENT" })}>{handleTime(sendDate)}</p>
                 )}
               </div>
 

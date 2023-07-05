@@ -82,6 +82,34 @@ export const getAvatar = createAsyncThunk(
         }
     }
 );
+export const getSenderAvatar = createAsyncThunk(
+    "userInfor/get/avatar/sender",
+    async (email) => {
+        try {
+            const response = await axiosInstance.get(`${API.GET_AVATAR}/${email}`, {
+                responseType: 'blob',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const blobData = response.data;
+            const reader = new FileReader();
+            reader.readAsDataURL(blobData);
+
+            return new Promise((resolve, reject) => {
+                reader.onloadend = () => {
+                    resolve(reader.result);
+                };
+
+                reader.onerror = (error) => {
+                    reject(error);
+                };
+            });
+        } catch (err) {
+            throw new Error(err)
+        }
+    }
+);
 
 
 export const getUserInformationSlice = createSlice({
@@ -99,6 +127,7 @@ export const getUserInformationSlice = createSlice({
             active: true,
         },
         userAvatar: null,
+        senderAvatar: null,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -212,6 +241,17 @@ export const getUserInformationSlice = createSlice({
                 state.userAvatar = action.payload;
             })
             .addCase(getAvatar.rejected, (state) => {
+                state.loading = false;
+                state.error = true;
+            })
+            .addCase(getSenderAvatar.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getSenderAvatar.fulfilled, (state, action) => {
+                state.loading = false;
+                state.senderAvatar = action.payload;
+            })
+            .addCase(getSenderAvatar.rejected, (state) => {
                 state.loading = false;
                 state.error = true;
             })

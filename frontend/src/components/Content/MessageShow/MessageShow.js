@@ -8,8 +8,9 @@ import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
 import MarkEmailReadOutlinedIcon from '@mui/icons-material/MarkEmailReadOutlined';
 import ReportOutlinedIcon from '@mui/icons-material/ReportOutlined';
 import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import Avatar from '@mui/material/Avatar';
 import moment from "moment";
-import { React } from "react";
+import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import avatarDefault from "../../../assets/img/avatar_default.png";
@@ -23,12 +24,14 @@ import IconVideo from "../../../assets/img/icon_video.png";
 import { changeMailStatusThunk } from "../../../redux/slices/changeMailStatusSlice";
 import { downloadFileThunk } from "../../../redux/slices/viewMailSlice";
 import "./MessageShow.css";
+import { readMailThunk } from "../../../redux/slices/getMailsSlice";
+import { getSenderAvatar } from "../../../redux/slices/userInfoSlice";
 
 export default function Message(props) {
   const navigate = useNavigate();
   const [path, mailId] = useParams()['*'].split('/');
   const { mailDetail } = useSelector(state => state.viewMailSlice)
-  const { user } = useSelector(state => state.userInfoSlice)
+  const { user, userAvatar, senderAvatar } = useSelector(state => state.userInfoSlice)
   const dispatch = useDispatch();
   const navigateBack = () => {
     navigate(`/${path}`);
@@ -50,9 +53,9 @@ export default function Message(props) {
       <button onClick={navigateBack}>
         <ArrowBackIcon className="navigate_back" />
       </button>
-      <ReportOutlinedIcon className="pointer" onClick={handleChangeStatusSpam}/>
-      <DeleteOutlinedIcon className="pointer"  onClick={handleChangeStatusTrash}/>
-      <ArchiveOutlinedIcon className="pointer" disabled/>
+      <ReportOutlinedIcon className="pointer" onClick={handleChangeStatusSpam} />
+      <DeleteOutlinedIcon className="pointer" onClick={handleChangeStatusTrash} />
+      <ArchiveOutlinedIcon className="pointer" disabled />
       <MarkEmailReadOutlinedIcon className="pointer" />
       <WatchLaterOutlinedIcon className="pointer" />
       <AssignmentTurnedInOutlinedIcon className="pointer" />
@@ -150,7 +153,7 @@ export default function Message(props) {
     try {
       dispatch(downloadFileThunk(fileName)).then(response => {
         if (response.type === "downloadFile/fulfilled") {
-          const fileData = response.payload; 
+          const fileData = response.payload;
           const blob = new Blob([fileData]);
           const fileUrl = URL.createObjectURL(blob);
           downloadFile(fileUrl, fileName);
@@ -161,13 +164,25 @@ export default function Message(props) {
     }
   };
 
+  useEffect(() => {
+    if (Object.keys(mailDetail).length && !mailDetail.isRead && mailDetail.id) {
+      dispatch(readMailThunk({ id: mailDetail.id }))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (Object.keys(mailDetail).length && mailDetail.fromAddress) {
+      dispatch(getSenderAvatar(mailDetail.fromAddress))
+    }
+  }, [])
+
   return (
     <div className="mailDetailContainer">
       {Navigate}
       <h2 className="mailTitle">{mailDetail?.subject}</h2>
       <div className="mailAddressContainer">
-        <img alt="mailAvatar" className="mailAvatar" src={avatarDefault} />
-        <div>
+        <Avatar alt="avt" src={user?.email === mailDetail?.toAddress ? senderAvatar || avatarDefault : userAvatar} />
+        <div className="mailInfo">
           <span className="mailAuthor">{mailDetail?.fromName}</span>
           <span>{" "}</span>
           <span className="mailAddress">{"<"}{mailDetail?.fromAddress}{">"}</span>
@@ -184,7 +199,7 @@ export default function Message(props) {
       <br />
       {mailDetail.fileDataList?.length ? <div className="fileGroup">
         <div className="dash"></div>
-        <span className="fileQuantity">{mailDetail.fileDataList?.length} attachment</span>
+        <span className="fileQuantity">{mailDetail.fileDataList?.length} attachment{mailDetail.fileDataList?.length > 1 && 's'}</span>
         <div className="fileItemBlock">
           {mailDetail.fileDataList?.map(item => <div className="fileItem">
             <div className="fileItemUpper">

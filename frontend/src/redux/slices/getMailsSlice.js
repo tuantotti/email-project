@@ -28,6 +28,18 @@ export const getMailsThunk = createAsyncThunk(
     }
 );
 
+export const readMailThunk = createAsyncThunk(
+    "readMail",
+    async ({ id }) => {
+        try {
+            const response = await axiosInstance.put(`${API.READ_MAIL}/${id}`);
+            return response.data;
+        } catch (err) {
+            throw new Error("Error!");
+        }
+    }
+);
+
 export const getMailsSlice = createSlice({
     name: "getMails",
     initialState,

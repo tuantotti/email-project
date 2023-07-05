@@ -3,6 +3,7 @@ const API = {
     LOGIN: '/api/login',
     SIGN_UP: '/api/signup',
     GET_MAIL: '/api/mail',
+    READ_MAIL: '/api/mail/read',
     CHANGE_MAIL_STATUS: '/api/mail/status',
     CHANGE_MAIL_STATUS_BULK: '/api/mail/status/bulk',
     SEND_MAIL: '/api/mail/send',
