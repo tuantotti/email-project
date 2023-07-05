@@ -277,6 +277,19 @@ public class UserService {
         return avatarFileName;
     }
 
+
+    public Resource getAvatarByEmail(String email) {
+        Resource avatar = null;
+        var user = _userRepository.getUserByEmail(email);
+        String avatarFileName = user.get().getAvatarFileName();
+        if (avatarFileName != null) {
+            String avatarPath = _storageService.getAvatarFolder() + File.separator + avatarFileName;
+            avatar = _storageService.loadFileAsResource(avatarPath);
+        }
+
+        return avatar;
+    }
+
     public Resource getAvatar() {
         Resource avatar = null;
         try {
@@ -286,7 +299,7 @@ public class UserService {
                 avatar = _storageService.loadFileAsResource(avatarPath);
             }
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
 
         return avatar;

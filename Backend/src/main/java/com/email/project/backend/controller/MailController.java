@@ -73,6 +73,12 @@ public class MailController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping("/read/{id}")
+    public ResponseEntity<?> readMail(@PathVariable int id) {
+        mailService.readMail(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping("/status/bulk")
     public ResponseEntity<?> bulkUpdateMailStatus(@RequestBody BulkUpdateMail mail) {
         mailService.bulkUpdateMailStatus(mail);

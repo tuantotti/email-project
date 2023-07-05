@@ -15,7 +15,6 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeUtility;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -29,7 +28,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,7 +61,7 @@ public class MailService {
             String email = UserService.getCurrentUsername();
             Optional<Page<Mail>> mailPage = null;
             MailStatus[] statuses;
-            switch (mailStatus){
+            switch (mailStatus) {
                 case SENT:
                     statuses = new MailStatus[]{MailStatus.SENT, MailStatus.STARRED};
                     mailPage = mailRepository.getMailByFromAddressAndSenderStatusIn(email, statuses, pageable);
@@ -93,7 +95,7 @@ public class MailService {
                     if (fromUserOptional.isPresent()) {
                         mailDto.setFromName(fromUserOptional.get().getFirstName() + " " + fromUserOptional.get().getLastName());
                     }
-                    if (toUserOptional.isPresent()){
+                    if (toUserOptional.isPresent()) {
                         mailDto.setToName(toUserOptional.get().getFirstName() + " " + toUserOptional.get().getLastName());
                     }
                 });
@@ -159,6 +161,22 @@ public class MailService {
     }
 
     @Transactional
+    public void readMail(int id) {
+        try {
+            if (!mailRepository.findById(id).isPresent()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The mail with id " + id + " is not exist");
+            }
+            mailRepository.updateReadById(id, true);
+        } catch (DataAccessException e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
+    }
+
+    @Transactional
     public void updateMailStatus(UpdateMail mail) {
         String ownerEmail = UserService.getCurrentUsername();
         try {
@@ -167,8 +185,7 @@ public class MailService {
                 mailRepository.updateReceiverStatusById(mail.getId(), mail.getStatus());
             } else if (mailOptional.get().getFromAddress().equals(ownerEmail)) {
                 mailRepository.updateSenderStatusById(mail.getId(), mail.getStatus());
-            }
-            else {
+            } else {
                 String msg = "user with " + ownerEmail + " is not the owner of mail with id " + mail.getId();
                 log.error(msg);
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, msg);
@@ -188,7 +205,7 @@ public class MailService {
         try {
             List<Mail> mails = mailRepository.findByIdIn(mail.getIds());
 
-            for (Mail m : mails){
+            for (Mail m : mails) {
                 if (m.getToAddress().equals(ownerEmail)) {
                     mailRepository.updateReceiverStatusById(m.getId(), mail.getStatus());
                 } else if (m.getFromAddress().equals(ownerEmail)) {
