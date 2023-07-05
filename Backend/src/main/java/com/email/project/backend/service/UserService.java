@@ -299,7 +299,7 @@ public class UserService {
                 avatar = _storageService.loadFileAsResource(avatarPath);
             }
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
 
         return avatar;
