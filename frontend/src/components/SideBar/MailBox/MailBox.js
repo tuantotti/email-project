@@ -2,7 +2,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import React, { useRef, useState } from "react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sendMailThunk } from "../../../redux/slices/sendMailSlice";
 import attachIcon from "../Images/attach_icon.png";
 import classes from "./MailBox.module.css";
@@ -27,6 +27,7 @@ const modules = {
 
 function MailBox({ hide }) {
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.userInfoSlice)
   const fileInputRef = useRef(null);
   const [toAddress, setToAddress] = useState("")
   const [subject, setSubject] = useState("")
@@ -58,7 +59,7 @@ function MailBox({ hide }) {
   const handleSendMail = () => {
     if (toAddress) {
       const formData = new FormData();
-      formData.append('fromAddress', "dungnd@gmail.com")
+      formData.append('fromAddress', user.email)
       formData.append('toAddress', toAddress)
       formData.append('subject', subject)
       formData.append('body', body)
