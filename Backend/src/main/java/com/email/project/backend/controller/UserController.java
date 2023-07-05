@@ -68,6 +68,27 @@ public class UserController {
                 .body(avatar);
     }
 
+
+    @GetMapping("/avatar/{email}")
+    @ResponseBody
+    public ResponseEntity<?> getAvatarByEmail(@PathVariable String email, HttpServletRequest request) {
+        Resource avatar = _userService.getAvatarByEmail(email);
+
+        String contentType = "application/octet-stream";
+        String headerValue = "attachment; filename=\"" + avatar.getFilename() + "\"";
+
+        try {
+            contentType = request.getServletContext().getMimeType(avatar.getFile().getAbsolutePath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
+                .body(avatar);
+    }
+
     @PostMapping("/edit/password")
     public ResponseEntity<Void> changePassword(@RequestBody CredentialEditDto credentialEditDto) {
         _userService.changePassword(credentialEditDto);
