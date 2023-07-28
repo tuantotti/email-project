@@ -42,18 +42,18 @@ docker-compose down
 
 ### Run without docker
 #### Run backend
-cd to Backend folder
+cd to Backend folder (run on port 8080)
 ```bash
 ./gradlew bootJar
 ```
 #### Run SMTPServer
-cd to SMTPServer folder
+cd to SMTPServer folder (run on port 6525)
 ```bash
 ./gradlew bootJar
 ```
 
 #### Run Frontend
-cd to frontend folder
+cd to frontend folder (run on port 3000)
 ```bash
 npm install --force
 npm start
